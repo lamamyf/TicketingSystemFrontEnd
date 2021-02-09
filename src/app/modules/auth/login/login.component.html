@@ -29,7 +29,7 @@
 
     <!--begin::Form group-->
     <div class="form-group">
-      <label class="font-size-h6 font-weight-bolder text-dark">البريد الإلكتروني</label>
+      <label class="font-size-h6 font-weight-bolder text-dark">اسم المستخدم</label>
       <input
         class="form-control form-control-solid h-auto py-7 px-6 rounded-lg"
         type="email"
@@ -42,19 +42,11 @@
         [ngTemplateOutlet]="formError"
         [ngTemplateOutletContext]="{
           validation: 'required',
-          message: 'حقل البدية الإلكتروني مطلوب',
+          message: 'حقل اسم المستخدم مطلوب',
           control: loginForm.controls['email']
         }"
       ></ng-container>      
-      <ng-container
-        [ngTemplateOutlet]="formError"
-        [ngTemplateOutletContext]="{
-          validation: 'email',
-          message: 'يرجى إدخال بريد صحيح',
-          control: loginForm.controls['email']
-        }"
-      ></ng-container>
-     
+
     </div>
     <!--end::Form group-->
 
@@ -64,13 +56,6 @@
         <label class="font-size-h6 font-weight-bolder text-dark pt-5"
           >كلمة المرور</label
         >
-        <a
-          routerLink="/auth/forgot-password"
-          class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5"
-          id="kt_login_forgot"
-        >
-          نسيت كلمة المرور؟
-        </a>
       </div>
 
       <input

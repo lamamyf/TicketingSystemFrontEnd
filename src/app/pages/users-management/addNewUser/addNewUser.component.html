@@ -1,0 +1,33 @@
+<div class="card card-custom gutter-b">
+    <div class="card-header border-0 py-5 ">
+        <h3 class="card-title align-items-start flex-column">
+            <span class="card-label font-weight-bolder text-dark">إضافة مستخدم جديد</span>
+        </h3>
+    </div>
+    <hr class="mt-0"/>
+    <div class="col-xl-6 ">
+        <form [formGroup] = "formData" (ngSubmit) = "addUser(formData.value)">
+            <div class="container card border-0 pb-6 pt-3" >
+                <mat-form-field>
+                    <input matInput placeholder="اسم المستخدم" formControlName="username">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="كلمة المرور" [type]="hide ? 'password' : 'text'" formControlName="password">
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-select formControlName="roles" placeholder="صلاحية المستخدم ">
+                        <mat-option value="Admin">Admin</mat-option></mat-select>
+                </mat-form-field>
+                <div class="form-element pr-6 pt-2">
+                    <button mat-raised-button
+                            class="confirmBtn btn btn-success font-weight-bolder font-size-sm"
+                            type = "submit">إضافة</button>
+                    <button mat-raised-button
+                            class="btn btn-success font-weight-bolder font-size-sm mr-2 cancelBtn"
+                            routerLink="/usersManagement">إلغاء</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

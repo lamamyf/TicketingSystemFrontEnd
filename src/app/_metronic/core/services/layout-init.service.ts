@@ -49,12 +49,8 @@ export class LayoutInitService {
   }
 
   private initLayout() {
-    const selfBodyBackgroundImage = this.layout.getProp(
-      'self.backgroundImage'
-    );
-    if (selfBodyBackgroundImage) {
-      document.body.style.backgroundImage = `url("./assets/media/${selfBodyBackgroundImage}")`;
-    }
+
+    document.body.style.backgroundImage = `linear-gradient(to right, rgba(28,59,160), rgba(10,27,96))`;
 
     const selfBodyClass = (
       this.layout.getProp('self.body.class') || ''

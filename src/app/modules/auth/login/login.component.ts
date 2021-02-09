@@ -55,9 +55,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.defaultAuth.email,
         Validators.compose([
           Validators.required,
-          Validators.email,
-          Validators.minLength(3),
-          Validators.maxLength(320), // https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
         ]),
       ],
       password: [
@@ -76,12 +73,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     const loginSubscr = this.authService
       .login(this.f.email.value, this.f.password.value)
       .pipe(first())
-      .subscribe((user: UserModel) => {
-        if (user) {
-          this.router.navigate([this.  returnUrl]);
-        } else {
-          this.hasError = true;
-        }
+      .subscribe( data => {
+        this.router.navigate([this.returnUrl]);
       });
     this.unsubscribe.push(loginSubscr);
   }

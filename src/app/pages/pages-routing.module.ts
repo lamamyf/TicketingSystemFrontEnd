@@ -13,15 +13,22 @@ const routes: Routes = [
           import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
       {
-        path: 'builder',
+        path: 'results',
         loadChildren: () =>
-          import('./builder/builder.module').then((m) => m.BuilderModule),
+            import('./results/results.module').then((m) => m.ResultsModule),
       },
       {
-        path: 'user-management',
+        path: 'usersManagement',
         loadChildren: () =>
-          import('../modules/user-management/user-management.module').then(
-            (m) => m.UserManagementModule
+          import('./users-management/usersmanagement.module').then(
+            (m) => m.UsersmanagementModule
+          ),
+      },
+      {
+        path: 'usersManagement/addNewUser',
+        loadChildren: () =>
+          import('./users-management/addNewUser/addNewUser.module').then(
+            (m) => m.AddNewUserModule
           ),
       },
       {
@@ -29,13 +36,6 @@ const routes: Routes = [
         loadChildren: () =>
           import('../modules/user-profile/user-profile.module').then(
             (m) => m.UserProfileModule
-          ),
-      },
-      {
-        path: 'material',
-        loadChildren: () =>
-          import('../modules/material/material.module').then(
-            (m) => m.MaterialModule
           ),
       },
       {

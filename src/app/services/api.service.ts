@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_ENDPOINT, DOMAIN_NAME } from '../providers/providers';
-import 'rxjs/add/operator/map';
+import {AuthService, UserModel} from '../modules/auth';
 
 
 /**
@@ -14,7 +14,7 @@ import 'rxjs/add/operator/map';
 export class ApiService {
   url: string = API_ENDPOINT;
   domain: string = DOMAIN_NAME;
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, private authService: AuthService) {
   }
 
   protectedGet(endpoint: string, token: any, params?: any,){
@@ -22,6 +22,20 @@ export class ApiService {
       headers: new HttpHeaders().set('Authorization', "Bearer " +token),
     });
   }
+
+  getAllUsers(){
+    return this.http.get(this.url + 'admin/' + 'getAllUsers');
+  }
+  getAllResults(){
+    return this.http.get(this.url + 'dash/' + 'getAllResults');
+  }
+  deleteUser(body: any){
+    return this.http.post(this.url + 'admin/' + 'deleteUser', body);
+  }
+  addUser(body: any){
+    return this.http.post(this.url + 'admin/' + 'createUser', body);
+  }
+
   protectedPost(endpoint: string, body: any, token: any){
     return this.http.post(this.url + endpoint, body, {
       headers: new HttpHeaders().set('Authorization', "Bearer " +token),

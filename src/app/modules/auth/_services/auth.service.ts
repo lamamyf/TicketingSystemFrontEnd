@@ -26,6 +26,9 @@ export class AuthService implements OnDestroy {
   get currentUserValue(): UserModel {
     return this.currentUserSubject.value;
   }
+  get currentToken(): AuthModel {
+    return this.getAuthFromLocalStorage();
+  }
 
   set currentUserValue(user: UserModel) {
     this.currentUserSubject.next(user);
@@ -62,33 +65,21 @@ export class AuthService implements OnDestroy {
 
   logout() {
     localStorage.removeItem(this.authLocalStorageToken);
-    this.router.navigate(['/auth/login'], {
-      queryParams: {},
-    });
-    // Invalidate token from backend
-    var user = this.getAuthFromLocalStorage();
-    this.authHttpService.logout(user.accessToken).subscribe((data) => {
-      console.log(data);
-    })
+    this.router.navigate(['/auth/login']);
   }
 
   getUserByToken(): Observable<UserModel> {
     const auth = this.getAuthFromLocalStorage();
-    if (!auth || !auth.accessToken) {
+    if (auth == null) {
       return of(undefined);
     }
-
     this.isLoadingSubject.next(true);
-    return this.authHttpService.getUserByToken(auth.accessToken).pipe(
-      map((user: UserModel) => {
-        if (user) {
+    return this.authHttpService.getUserByToken(auth).pipe(
+        map((user: UserModel) => {
           this.currentUserSubject = new BehaviorSubject<UserModel>(user);
-        } else {
-          this.logout();
-        }
-        return user;
-      }),
-      finalize(() => this.isLoadingSubject.next(false))
+          return user;
+        }),
+        finalize(() => this.isLoadingSubject.next(false))
     );
   }
 
@@ -118,11 +109,8 @@ export class AuthService implements OnDestroy {
   // private methods
   private setAuthFromLocalStorage(auth: AuthModel): boolean {
     // store auth accessToken/refreshToken/epiresIn in local storage to keep user logged in between page refreshes
-    if (auth && auth.accessToken) {
-      localStorage.setItem(this.authLocalStorageToken, JSON.stringify(auth));
-      return true;
-    }
-    return false;
+    localStorage.setItem(this.authLocalStorageToken, JSON.stringify(auth.jwt));
+    return true;
   }
 
   private getAuthFromLocalStorage(): AuthModel {

@@ -63,7 +63,7 @@ export const DefaultLayoutConfig = {
   // Base Settins
   self: {
     layout: 'default', // blank/default page mode
-    backgroundImage: 'bg/bg-10.jpg'
+  //  backgroundImage: 'bg/bg-10.jpg'
   },
 
   // Page loader
@@ -113,9 +113,9 @@ export const DefaultLayoutConfig = {
   subheader: {
     display: true,
     displayDesc: false,
-    displayDaterangepicker: true,
+    displayDaterangepicker: false,
     breadcrumb: {
-      display: true
+      display: false
     },
     layoutVersion: 'v7', // [1..7]
     fixed: false,
@@ -169,7 +169,7 @@ export const DefaultLayoutConfig = {
   extras: {
     // Search
     search: {
-      display: true,
+      display: false,
       layout: 'dropdown', // offcanvas, dropdown,
       offcanvas: {
         direction: 'right',
@@ -178,7 +178,7 @@ export const DefaultLayoutConfig = {
 
     // Notifications
     notifications: {
-      display: true,
+      display: false,
       layout: 'dropdown', // offcanvas, dropdown,
       dropdown: {
         style: 'dark', // light|dark
@@ -190,7 +190,7 @@ export const DefaultLayoutConfig = {
 
     // Quick Actionss
     quickActions: {
-      display: true,
+      display: false,
       layout: 'dropdown', // offcanvas, dropdown,
       dropdown: {
         style: 'dark', // light|dark
@@ -214,29 +214,29 @@ export const DefaultLayoutConfig = {
 
     // Languages
     languages: {
-      display: true,
+      display: false,
     },
 
     // Cart
     cart: {
-      display: true,
+      display: false,
       layout: 'dropdown', // offcanvas, dropdown,
       offcanvas: {
         direction: 'right',
       },
       dropdown: {
-        style: 'dark', // light|dark
+        style: 'light', // light|dark
       },
     },
 
     // Chat
     chat: {
-      display: true,
+      display: false,
     },
 
     // Quick Panel
     quickPanel: {
-      display: true,
+      display: false,
       offcanvas: {
         direction: 'right',
       },

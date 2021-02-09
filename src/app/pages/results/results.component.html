@@ -1,0 +1,47 @@
+<div class="card card-custom gutter-b ">
+  <div class="example-header p-10">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="بحث">
+    </mat-form-field>
+  </div>
+  <div class="example-container mat-elevation-z8">
+    <mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> رقم السجل </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="deviceName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> نوع الجهاز </mat-header-cell>
+        <mat-cell *matCellDef="let row">  {{row.deviceName}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="systemStatus">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> نوع النظام </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.systemStatus}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="compromised">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> حالة النظام </mat-header-cell>
+        <mat-cell *matCellDef="let row" >
+          <i *ngIf="row.compromised" class="fas fa-check-circle text-success"></i>
+          <i *ngIf="!row.compromised" class="fa fa-times-circle text-danger"></i>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="currentSystemVersion">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> إصدار نظام التشغيل الحالي </mat-header-cell>
+        <mat-cell *matCellDef="let row">  {{row.currentSystemVersion}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="appVersion">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> إصدار تطبيق كاشف الحالي </mat-header-cell>
+        <mat-cell *matCellDef="let row">  {{row.appVersion}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+  </div>
+</div>

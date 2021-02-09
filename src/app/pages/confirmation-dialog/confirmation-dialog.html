@@ -1,0 +1,10 @@
+<h3 md-dialog-title>تنبيه</h3>
+<mat-dialog-content class="mt-4 font-size-h6">
+    {{confirmMessage}}
+</mat-dialog-content>
+<mat-dialog-actions  class="btnActions pl-0 mt-5" >
+    <button md-button class="confirmBtn btn btn-success font-weight-bolder font-size-sm pr-4"
+            (click)="dialogRef.close(true)">تآكيد </button>
+    <button md-button class="cancelBtn btn btn-success font-weight-bolder font-size-sm mr-2"
+            (click)="dialogRef.close(false)">إلغاء</button>
+</mat-dialog-actions>

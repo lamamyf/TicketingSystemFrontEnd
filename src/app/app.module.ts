@@ -1,7 +1,7 @@
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { ClipboardModule } from 'ngx-clipboard';
 import { TranslateModule } from '@ngx-translate/core';
 import { InlineSVGModule } from 'ng-inline-svg';
@@ -11,6 +11,11 @@ import { AuthService } from './modules/auth/_services/auth.service';
 // Highlight JS
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { SplashScreenModule } from './_metronic/partials/layout/splash-screen/splash-screen.module';
+import {AuthInterceptor} from './services/auth.interceptor';
+import {ConfirmationDialogComponent} from './pages/confirmation-dialog/confirmation-dialog';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatTableModule} from '@angular/material/table';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -21,7 +26,7 @@ function appInitializer(authService: AuthService) {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ConfirmationDialogComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -32,8 +37,16 @@ function appInitializer(authService: AuthService) {
     ClipboardModule,
     AppRoutingModule,
     InlineSVGModule.forRoot(),
+    MatDialogModule,
+    MatTableModule,
+    MatSnackBarModule
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
     {
       provide: APP_INITIALIZER,
       useFactory: appInitializer,
@@ -54,5 +67,7 @@ function appInitializer(authService: AuthService) {
     },
   ],
   bootstrap: [AppComponent],
+  entryComponents: [ConfirmationDialogComponent]
+
 })
 export class AppModule { }

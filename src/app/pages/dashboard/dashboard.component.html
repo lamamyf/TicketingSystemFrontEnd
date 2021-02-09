@@ -1,1 +1,41 @@
-<app-dashboard-wrapper></app-dashboard-wrapper>
+<div class="card card-custom gutter-b p-6">
+    <div class="row pt-6 col-xl-12">
+        <div class="col-xl-6" >
+            <div  class="col-xl-4">
+                <div class="card card-custom text-white"
+                     [ngStyle]="{ height: widgetHeight, width:widgetWidth}" style="background-color: #7686c0 !important;">
+                    <div class="card-body">
+                        <span [inlineSVG]="'./assets/media/svg/icons/Communication/Group.svg'"
+                              class="svg-icon svg-icon-3x svg-icon-white"
+                        ></span>
+                        <div class="font-weight-bolder font-size-h2 mt-3" >8,600</div>
+                        <span class="font-weight-bold font-size-lg mt-1"
+                            >إجمالي المستخدمين</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 mt-6">
+                <div class="card card-custom text-white"
+                     [ngStyle]="{ height: widgetHeight, width:widgetWidth }" style="background-color: #bcbcbc; !important;">
+                    <div class="card-body">
+                        <span [inlineSVG]="'./assets/media/svg/icons/Layout/Layout-4-blocks.svg'"
+                              class="svg-icon svg-icon-3x svg-icon-white ml-n2"></span>
+                        <div class="font-weight-bolder font-size-h2 mt-3">
+                            790
+                        </div>
+                        <span class="font-weight-bold font-size-lg mt-1"
+                        >إجمالي النتائج</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="chart" class=" col-xl-6" >
+            <apx-chart
+                    [series]="chartOptions.series"
+                    [chart]="chartOptions.chart"
+                    [labels]="chartOptions.labels"
+            ></apx-chart>
+        </div>
+
+    </div>
+</div>

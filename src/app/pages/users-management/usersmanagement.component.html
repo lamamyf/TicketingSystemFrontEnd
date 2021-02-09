@@ -1,0 +1,43 @@
+<div class="card card-custom gutter-b">
+
+  <div class="example-header p-10">
+      <div class="card-toolbar">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="بحث">
+        </mat-form-field>
+        <button routerLink="/usersManagement/addNewUser" class="btn btn-success font-weight-bolder confirmBtn " style="float: left">
+          <span [inlineSVG]="'./assets/media/svg/icons/Communication/Add-user.svg'"
+                class="svg-icon svg-icon-md svg-icon-white"
+          ></span>إضافة مستخدم جديد</button>
+      </div>
+  </div>
+
+  <div class="example-container mat-elevation-z8">
+    <mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="username">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> اسم المستخدم </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.username}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="roles">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> الصلاحية </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.roles}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> الإجراءات </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <span   (click)="deleteUser(row)"
+                  class="btn btn-icon btn-light btn-hover-primary btn-sm">
+            <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'"
+                  class="svg-icon svg-icon-md svg-icon-primary"></span>
+          </span>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+  </div>
+</div>
