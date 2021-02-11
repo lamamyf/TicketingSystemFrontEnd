@@ -32,20 +32,28 @@
       <label class="font-size-h6 font-weight-bolder text-dark">اسم المستخدم</label>
       <input
         class="form-control form-control-solid h-auto py-7 px-6 rounded-lg"
-        type="email"
-        name="email"
-        formControlName="email"
-        autocomplete="off"
-        [ngClass]="{ 'is-invalid': loginForm.controls['email'].invalid }"
+        type="text"
+        name="username"
+        formControlName="username"
+        pattern="[a-zA-Z0-9-]+"
+        [ngClass]="{ 'is-invalid': loginForm.controls['username'].invalid }"
       />
       <ng-container
         [ngTemplateOutlet]="formError"
         [ngTemplateOutletContext]="{
           validation: 'required',
           message: 'حقل اسم المستخدم مطلوب',
-          control: loginForm.controls['email']
+          control: loginForm.controls['username']
         }"
       ></ng-container>      
+      <ng-container
+        [ngTemplateOutlet]="formError"
+        [ngTemplateOutletContext]="{
+          validation: 'pattern',
+          message: 'خطأ في اسم المستخدم',
+          control: loginForm.controls['username']
+        }"
+      ></ng-container>
 
     </div>
     <!--end::Form group-->
@@ -62,7 +70,6 @@
         class="form-control form-control-solid h-auto py-7 px-6 rounded-lg"
         type="password"
         name="password"
-        autocomplete="off"
         formControlName="password"
         [ngClass]="{ 'is-invalid': loginForm.controls['password'].invalid }"
       />
@@ -74,6 +81,15 @@
           control: loginForm.controls['password']
         }"
       ></ng-container>
+      <ng-container
+              [ngTemplateOutlet]="formError"
+              [ngTemplateOutletContext]="{
+          validation: 'minlength',
+          message: 'كلمة المرور أقل من 8 خانات',
+          control: loginForm.controls['password']
+        }"
+      ></ng-container>
+
     </div>
     <!--end::Form group-->
 
@@ -90,6 +106,9 @@
 
       <ng-container *ngIf="isLoading$ | async">
         <span class="spinner spinner-primary ml-5"></span>
+      </ng-container>
+      <ng-container *ngIf="isWrong">
+        <span class="text-danger"> {{errorMessage}}</span>
       </ng-container>
     </div>
     <!--end::Action-->

@@ -15,7 +15,12 @@ export class AuthHTTPService {
 
   // public methods
   login(username: string, password: string): Observable<any> {
-    return this.http.post<AuthModel>(`${API_URL}/authenticate`,   { username, password });
+    const httpHeaders = new HttpHeaders({
+      'Accept-Language': `ar`,
+    });
+    return this.http.post<AuthModel>(`${API_URL}/authenticate`,   { username, password },  {
+      headers: httpHeaders,
+    });
   }
 
   // CREATE =>  POST: add a new user to the server

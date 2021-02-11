@@ -20,6 +20,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   hasError: boolean;
   returnUrl: string;
   isLoading$: Observable<boolean>;
+  isWrong: boolean;
+  errorMessage: any;
 
   // private fields
   private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
@@ -32,6 +34,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) {
     this.isLoading$ = this.authService.isLoading$;
     // redirect to home if already logged in
+    this.isWrong = false;
     if (this.authService.currentUserValue) {
       this.router.navigate(['/']);
     }
@@ -51,17 +54,18 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   initForm() {
     this.loginForm = this.fb.group({
-      email: [
-        this.defaultAuth.email,
+      username: [
+        this.defaultAuth.username,
         Validators.compose([
           Validators.required,
+            Validators.pattern('^[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ ]+$')
         ]),
       ],
       password: [
         this.defaultAuth.password,
         Validators.compose([
           Validators.required,
-          Validators.minLength(3),
+          Validators.minLength(8),
           Validators.maxLength(100),
         ]),
       ],
@@ -69,12 +73,25 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   submit() {
+    this.errorMessage = '';
+    this.isWrong = false;
     this.hasError = false;
     const loginSubscr = this.authService
-      .login(this.f.email.value, this.f.password.value)
+      .login(this.f.username.value, this.f.password.value)
       .pipe(first())
-      .subscribe( data => {
-        this.router.navigate([this.returnUrl]);
+      .subscribe( data  => {
+        if (data === undefined){
+          this.hasError = true;
+        } else if (typeof(data) === 'string'){
+          this.errorMessage = data;
+          this.isWrong = true;
+        }
+        else {
+          this.router.navigate([this.returnUrl]);
+        }
+
+
+
       });
     this.unsubscribe.push(loginSubscr);
   }
