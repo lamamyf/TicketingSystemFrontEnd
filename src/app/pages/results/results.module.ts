@@ -12,6 +12,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSortModule} from '@angular/material/sort';
 import {MatInputModule} from '@angular/material/input';
+import {InlineSVGModule} from "ng-inline-svg";
 
 @NgModule({
   declarations: [ResultsComponent],
@@ -34,6 +35,7 @@ import {MatInputModule} from '@angular/material/input';
     MatFormFieldModule,
     MatSortModule,
     MatInputModule,
+    InlineSVGModule,
   ],
 })
 export class ResultsModule {}

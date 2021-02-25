@@ -19,10 +19,11 @@ import {ResultModel} from '../../models/result.model';
   styleUrls: ['./results.component.scss'],
 })
 export class ResultsComponent implements OnInit {
-  displayedColumns = ['id', 'deviceName', 'systemStatus', 'compromised', 'currentSystemVersion', 'appVersion'];
+  displayedColumns = ['id', 'deviceName', 'systemStatus', 'compromised', 'currentSystemVersion', 'appVersion', 'actions'];
   dataSource: MatTableDataSource<ResultModel>;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild('TABLE') table: ElementRef;
 
   constructor(private layout: LayoutService, private el: ElementRef,
               private apiService: ApiService) {
@@ -46,5 +47,15 @@ export class ResultsComponent implements OnInit {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.dataSource.filter = filterValue;
+  }
+
+  download(row){
+    const file = new window.Blob([JSON.stringify(row)], { type: 'text/plain' });
+    const downloadAncher = document.createElement('a');
+    downloadAncher.style.display = 'none';
+    const fileURL = URL.createObjectURL(file);
+    downloadAncher.href = fileURL;
+    downloadAncher.download = row.id;
+    downloadAncher.click();
   }
 }

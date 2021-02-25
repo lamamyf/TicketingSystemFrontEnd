@@ -32,10 +32,10 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'user-profile',
+        path: 'change-password',
         loadChildren: () =>
-          import('../modules/user-profile/user-profile.module').then(
-            (m) => m.UserProfileModule
+            import('./users-management/changePassword/change-password.module').then(
+            (m) => m.ChangePasswordModule
           ),
       },
       {

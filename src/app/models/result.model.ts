@@ -3,6 +3,7 @@ export class ResultModel  {
   systemStatus: boolean;
   isCompromised: boolean;
   isUpdated: boolean;
+  currentSystemVersion: string;
 
 
   setResult(result: any) {
@@ -10,5 +11,6 @@ export class ResultModel  {
     this.systemStatus = result.systemStatus || '';
     this.isCompromised = result.isCompromised || '';
     this.isUpdated = result.isUpdated || '';
+    this.currentSystemVersion = result.currentSystemVersion || '';
   }
 }

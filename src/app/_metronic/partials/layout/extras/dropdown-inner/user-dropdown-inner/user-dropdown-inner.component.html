@@ -1,41 +1,44 @@
 <ng-container *ngIf="user$ | async as _user">
-
-  <ng-container *ngIf="extrasUserDropdownStyle === 'dark'">
+  <ng-container *ngIf="extrasUserDropdownStyle === 'light'">
     <!--begin::Header-->
-    <div
-      class="d-flex align-items-center justify-content-between flex-wrap p-8 bgi-size-cover bgi-no-repeat rounded-top"
-      style="background-image: url('./assets/media/misc/bg-1.jpg');"
-    >
-      <div class="d-flex align-items-center mr-2">
-        <!--begin::Symbol-->
-        <div class="symbol bg-white-o-15 mr-3">
-          <span
-            class="symbol-label text-success font-weight-bold font-size-h4"
-            >{{ _user.username | firstLetter }}</span
-          >
-        </div>
-        <!--end::Symbol-->
+    <div class="d-flex align-items-center p-6 rounded-top">
+      <!--begin::Symbol-->
+              <span
+                    class="userIcon text-uppercase">{{ _user.username[0] }}</span>
+       <!--end::Symbol-->
 
-        <!--begin::Text-->
-        <div class="text-white m-0 flex-grow-1 mr-3 font-size-h5">
-          {{ _user.username }} {{ _user.lastname }}
-        </div>
-        <!--end::Text-->
+      <!--begin::Text-->
+      <div class="text-dark m-2 flex-grow-1 font-size-h5">
+        {{ _user.username }}
       </div>
+      <!--end::Text-->
     </div>
+    <div class="separator separator-solid"></div>
     <!--end::Header-->
   </ng-container>
 
   <!--begin::Nav-->
   <div class="navi navi-spacer-x-0 pt-5">
+    <!--begin::Item-->
+    <a class="navi-item px-8 cursor-pointer" routerLink="/change-password">
+      <div class="navi-link">
+        <div class="navi-icon mr-2">
+          <i class="flaticon2-calendar-3 text-success"></i>
+        </div>
+        <div class="navi-text">
+          <div class="font-weight-bold">
+            تغيير كلمة المرور
+          </div>
+        </div>
+      </div>
+    </a>
 
-    <!--begin::Footer-->
     <div class="navi-separator mt-3"></div>
     <div class="navi-footer px-8 py-5">
       <a
-        class="btn btn-light-primary font-weight-bold cursor-pointer"
-        (click)="logout()"
-        >تسجيل خروج</a
+              class="btn btn-light-primary font-weight-bold cursor-pointer"
+              (click)="logout()"
+      >تسجيل خروج</a
       >
      </div>
     <!--end::Footer-->

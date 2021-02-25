@@ -18,7 +18,7 @@ export class AuthHTTPService {
     const httpHeaders = new HttpHeaders({
       'Accept-Language': `ar`,
     });
-    return this.http.post<AuthModel>(`${API_URL}/authenticate`,   { username, password },  {
+    return this.http.post<AuthModel>(`${environment.apiUrl}/authenticate`,   { username, password },  {
       headers: httpHeaders,
     });
   }

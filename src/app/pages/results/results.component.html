@@ -3,9 +3,10 @@
     <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="بحث">
     </mat-form-field>
+
   </div>
   <div class="example-container mat-elevation-z8">
-    <mat-table [dataSource]="dataSource" matSort>
+    <mat-table [dataSource]="dataSource" #table matSort>
       <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef mat-sort-header> رقم السجل </mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
@@ -37,6 +38,18 @@
       <ng-container matColumnDef="appVersion">
         <mat-header-cell *matHeaderCellDef mat-sort-header> إصدار تطبيق كاشف الحالي </mat-header-cell>
         <mat-cell *matCellDef="let row">  {{row.appVersion}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> الاجراءات </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <span   (click)="download(row)"
+                  class="btn btn-icon btn-light btn-hover-primary btn-sm">
+            <span [inlineSVG]="'./assets/media/svg/icons/Files/Download.svg'"
+                  class="svg-icon svg-icon-md svg-icon-primary"></span>
+          </span>
+
+        </mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

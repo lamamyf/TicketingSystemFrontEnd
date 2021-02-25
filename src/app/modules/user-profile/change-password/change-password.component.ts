@@ -67,6 +67,8 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
   // helpers for View
   isControlValid(controlName: string): boolean {
     const control = this.formGroup.controls[controlName];
+    console.log('hhhiii', control);
+
     return control.valid && (control.dirty || control.touched);
   }
 
