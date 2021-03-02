@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_ENDPOINT, DOMAIN_NAME } from '../providers/providers';
 import {AuthService, UserModel} from '../modules/auth';
+import {catchError, finalize, map, shareReplay, switchMap, tap} from 'rxjs/operators';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 
 
 /**
@@ -14,12 +16,18 @@ import {AuthService, UserModel} from '../modules/auth';
 export class ApiService {
   url: string = API_ENDPOINT;
   domain: string = DOMAIN_NAME;
+  isLoadingSubject: BehaviorSubject<boolean>;
+  changePassSubject: BehaviorSubject<any>;
+
   constructor(public http: HttpClient, private authService: AuthService) {
+    this.isLoadingSubject = new BehaviorSubject<boolean>(false);
+    this.changePassSubject = new BehaviorSubject<any>(false);
+
   }
 
-  protectedGet(endpoint: string, token: any, params?: any,){
+  protectedGet(endpoint: string, token: any, params?: any){
     return this.http.get(this.url + endpoint, {
-      headers: new HttpHeaders().set('Authorization', "Bearer " +token),
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + token),
     });
   }
 
@@ -29,6 +37,9 @@ export class ApiService {
   getAllResults(){
     return this.http.get(this.url + 'dash/' + 'getAllResults');
   }
+  getAllPaths(){
+    return this.http.get(this.url + 'dash/' + 'getAllPaths');
+  }
   deleteUser(body: any){
     return this.http.post(this.url + 'admin/' + 'deleteUser', body);
   }
@@ -36,27 +47,35 @@ export class ApiService {
     return this.http.post(this.url + 'admin/' + 'createUser', body);
   }
 
+  changePassword(body: any){
+     return this.http.post<any>(this.url + 'admin/' + 'changePassword', body);
+  }
+
+  updatePaths(body: any){
+     return this.http.post<any>(this.url + 'dash/' + 'updatePaths', body);
+  }
+
   protectedPost(endpoint: string, body: any, token: any){
     return this.http.post(this.url + endpoint, body, {
-      headers: new HttpHeaders().set('Authorization', "Bearer " +token),
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + token),
     });
   }
 
   protectedPatch(endpoint: string, body: any, token: any){
     return this.http.patch(this.url + endpoint, body, {
-      headers: new HttpHeaders().set('Authorization', "Bearer " +token),
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + token),
     });
   }
 
   protectedPut(endpoint: string, body: any, token: any){
     return this.http.put(this.url + endpoint, body, {
-        headers: new HttpHeaders().set('Authorization', "Bearer " +token),
+        headers: new HttpHeaders().set('Authorization', 'Bearer ' + token),
     });
   }
 
-  protectedDelete(endpoint: string, token: any, params?: any,){
+  protectedDelete(endpoint: string, token: any, params?: any, ){
     return this.http.delete(this.url + endpoint, {
-      headers: new HttpHeaders().set('Authorization', "Bearer " +token),
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + token),
     });
   }
 

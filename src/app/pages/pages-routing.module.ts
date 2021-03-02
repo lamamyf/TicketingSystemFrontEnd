@@ -18,6 +18,11 @@ const routes: Routes = [
             import('./results/results.module').then((m) => m.ResultsModule),
       },
       {
+        path: 'paths',
+        loadChildren: () =>
+            import('./paths/paths.module').then((m) => m.PathsModule),
+      },
+      {
         path: 'usersManagement',
         loadChildren: () =>
           import('./users-management/usersmanagement.module').then(

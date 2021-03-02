@@ -21,6 +21,14 @@
     </a>
   </li>
   <li class="menu-item menu-item-rel" routerLinkActive="menu-item-active">
+    <a class="menu-link" routerLink="/paths" routerLinkActive="active">
+      <span class="menu-text">Paths</span>
+      <ng-container *ngIf="rootArrowEnabled">
+        <i class="menu-arrow"></i>
+      </ng-container>
+    </a>
+  </li>
+  <li class="menu-item menu-item-rel" routerLinkActive="menu-item-active">
     <a class="menu-link" routerLink="/usersManagement" routerLinkActive="active">
       <span class="menu-text">إدارة المستخدمين</span>
       <ng-container *ngIf="rootArrowEnabled">

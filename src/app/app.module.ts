@@ -16,6 +16,12 @@ import {ConfirmationDialogComponent} from './pages/confirmation-dialog/confirmat
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTableModule} from '@angular/material/table';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {EditPathsComponent} from './pages/paths/editPaths/editPaths';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatRadioModule} from '@angular/material/radio';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatButtonModule} from '@angular/material/button';
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -26,7 +32,7 @@ function appInitializer(authService: AuthService) {
 }
 
 @NgModule({
-  declarations: [AppComponent, ConfirmationDialogComponent],
+  declarations: [AppComponent, ConfirmationDialogComponent, EditPathsComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -39,7 +45,12 @@ function appInitializer(authService: AuthService) {
     InlineSVGModule.forRoot(),
     MatDialogModule,
     MatTableModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRadioModule,
+    ReactiveFormsModule,
+    MatButtonModule
   ],
   providers: [
     {
@@ -67,7 +78,7 @@ function appInitializer(authService: AuthService) {
     },
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ConfirmationDialogComponent]
+  entryComponents: [ConfirmationDialogComponent, EditPathsComponent]
 
 })
 export class AppModule { }

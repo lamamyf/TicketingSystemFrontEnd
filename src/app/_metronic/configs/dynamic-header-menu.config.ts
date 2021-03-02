@@ -13,6 +13,12 @@ export const DynamicHeaderMenuConfig = {
       page: '/results',
     },
     {
+      title: 'Paths',
+      root: true,
+      alignment: 'left',
+      page: '/paths',
+    },
+    {
       title: 'إدارة المستخدمين',
       root: true,
       alignment: 'left',

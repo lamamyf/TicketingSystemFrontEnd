@@ -1,0 +1,29 @@
+<h5 md-dialog-title> تعديل Paths {{paths.id}}</h5>
+<div class="separator separator-solid ng-star-inserted"></div>
+<mat-dialog-content class="mt-4 font-size-h6">
+    <form [formGroup]="this.formData" >
+        <mat-form-field formArrayName="paths" *ngFor="let path of paths.paths;  index as i" class="col-xl-12">
+            <div>
+                <div class=" col-xl-12 " [formGroupName]="i">
+                    <input matInput class="inputPath" formControlName="path" value="{{path}}">
+                </div>
+                <button mat-mini-fab class="field-icon"   (click)="deletePath(i)">-</button>
+            </div>
+        </mat-form-field>
+
+        <div class="mr-2 mb-5">
+            <button mat-mini-fab (click)="addScenario()">+</button>
+        </div>
+
+        <mat-radio-group class="col-xl-12 mr-2" formControlName="os">
+            <mat-radio-button value="true"  [checked]="paths.os">IPHONE</mat-radio-button>
+            <mat-radio-button value="false"  [checked]="!paths.os" class="pl-5">Android</mat-radio-button>
+        </mat-radio-group>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions  class="btnActions pl-0 mt-5" >
+    <button md-button class="confirmBtn btn btn-success  font-size-sm pr-4"
+            (click)="submit()">تعديل </button>
+    <button md-button class="cancelBtn btn btn-success  font-size-sm mr-2"
+            (click)="dialogRef.close(false)">إلغاء</button>
+</mat-dialog-actions>
