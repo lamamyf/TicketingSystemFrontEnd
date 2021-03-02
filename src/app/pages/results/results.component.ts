@@ -24,6 +24,7 @@ export class ResultsComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild('TABLE') table: ElementRef;
+  pages: Array<'number'>;
 
   constructor(private layout: LayoutService, private el: ElementRef,
               private apiService: ApiService) {
@@ -36,8 +37,9 @@ export class ResultsComponent implements OnInit {
   loadResults(): void {
     this.apiService
         .getAllResults()
-        .subscribe((results: ResultModel[]) => {
-          this.dataSource = new MatTableDataSource(results);
+        .subscribe((results: any) => {
+          this.dataSource = new MatTableDataSource(results['content']);
+          this.pages = new Array(results['totalpages']);
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
         });

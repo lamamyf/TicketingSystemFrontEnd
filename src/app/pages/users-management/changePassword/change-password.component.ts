@@ -1,8 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
-import { first } from 'rxjs/operators';
+import {first} from 'rxjs/operators';
 import {AuthService, ConfirmPasswordValidator, UserModel} from '../../../modules/auth';
+import {ApiService} from '../../../services/api.service';
+import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-change-password',
@@ -15,12 +18,21 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
   firstUserState: UserModel;
   subscriptions: Subscription[] = [];
   isLoading$: Observable<boolean>;
+  hide = true;
+  hasError: boolean;
 
-  constructor(private userService: AuthService, private fb: FormBuilder) {
+  constructor(private userService: AuthService,
+              private fb: FormBuilder,
+              private apiService: ApiService,
+              private router: Router,
+              private snackBar: MatSnackBar,
+              private cdr: ChangeDetectorRef
+  ) {
     this.isLoading$ = this.userService.isLoadingSubject.asObservable();
   }
 
   ngOnInit(): void {
+    this.hasError = true;
     const sb = this.userService.currentUserSubject.asObservable().pipe(
       first(user => !!user)
     ).subscribe(user => {
@@ -32,56 +44,42 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach(sb => sb.unsubscribe());
+      this.subscriptions.forEach(sb => sb.unsubscribe());
   }
 
   loadForm() {
-    this.formGroup = this.fb.group({
-      currentPassword: [this.user.password, Validators.required],
-      password: ['', Validators.required],
-      cPassword: ['', Validators.required]
-    }, {
+      this.hasError = false;
+      this.formGroup = this.fb.group({
+      id: [this.user.id],
+      currentPassword: ['', Validators.required],
+      password: ['', Validators.compose([
+          Validators.required,
+          Validators.minLength(8),
+          Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&].{3,}')
+      ])],
+      confirmPassword: ['', Validators.required]
+      }, {
       validator: ConfirmPasswordValidator.MatchPassword
-    });
+      });
   }
 
   save() {
-    this.formGroup.markAllAsTouched();
-    if (!this.formGroup.valid) {
-      return;
-    }
-
-    this.user.password = this.formGroup.value.password;
-    this.userService.isLoadingSubject.next(true);
-    setTimeout(() => {
-      this.userService.currentUserSubject.next(Object.assign({}, this.user));
-      this.userService.isLoadingSubject.next(false);
-    }, 2000);
+      const saveSubscr = this.apiService
+        .changePassword(this.formGroup.value).subscribe(res => {
+            if (!res.body) {
+             this.router.navigate(['/']).then(r =>
+                 this.snackBar.open('تم تغيير كلمة المرور بنجاح', '', {
+                     duration: 2000
+                 })
+             );
+            } else {
+                this.hasError = res.body;
+                this.cdr.markForCheck();
+            }
+        });
+      this.subscriptions.push(saveSubscr);
   }
 
-  cancel() {
-    this.user = Object.assign({}, this.firstUserState);
-    this.loadForm();
-  }
-
-  // helpers for View
-  isControlValid(controlName: string): boolean {
-    const control = this.formGroup.controls[controlName];
-    return control.valid && (control.dirty || control.touched);
-  }
-
-  isControlInvalid(controlName: string): boolean {
-    const control = this.formGroup.controls[controlName];
-    return control.invalid && (control.dirty || control.touched);
-  }
-
-  controlHasError(validation, controlName): boolean {
-    const control = this.formGroup.controls[controlName];
-    return control.hasError(validation) && (control.dirty || control.touched);
-  }
-
-  isControlTouched(controlName): boolean {
-    const control = this.formGroup.controls[controlName];
-    return control.dirty || control.touched;
-  }
 }
+
+

@@ -6,31 +6,50 @@
     </div>
     <hr class="mt-0"/>
     <div class="col-xl-6 ">
-        <form [formGroup] = "formData" (ngSubmit) = "addUser(formData.value)">
+        <form [formGroup] = "formData"  >
             <div class="container card border-0 pb-6 pt-3" >
                 <mat-form-field>
-                    <input matInput placeholder="اسم المستخدم" formControlName="username">
+                    <input matInput placeholder="اسم المستخدم" formControlName="username" required>
                 </mat-form-field>
+                <ng-container [ngTemplateOutlet]="formError"
+                              [ngTemplateOutletContext]="{ validation: 'pattern',
+                          message: 'اسم المستخدم يجب ان يحتوي على احرف انجليزية وارقام فقط',
+                          control: formData.controls['username']}">
+                </ng-container>
+
                 <mat-form-field>
-                    <input matInput placeholder="كلمة المرور" [type]="hide ? 'password' : 'text'" formControlName="password">
+                    <input matInput placeholder="كلمة المرور" [type]="hide ? 'password' : 'text'" formControlName="password" required>
                     <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
                 </mat-form-field>
+                <ng-container [ngTemplateOutlet]="formError"
+                              [ngTemplateOutletContext]="{ validation: 'minlength',
+                          message: 'كلمة المرور يجب ان تتكون على الاقل 8 خانات',
+                          control: formData.controls['password']}">
+                </ng-container>
+                <ng-container [ngTemplateOutlet]="formError"
+                              [ngTemplateOutletContext]="{ validation: 'pattern',
+                          message: 'كلمة المرور يجب ان تحتوي على أحرف صغيرة وكبيرة وأرقام ورموز',
+                          control: formData.controls['password']}">
+                </ng-container>
+
                 <mat-form-field>
                     <input matInput placeholder="تأكيد كلمة المرور" formControlName="confirmPassword" [errorStateMatcher]="matcher"
-                           [type]="hide ? 'password' : 'text'">
+                           [type]="hide ? 'password' : 'text'" required>
                     <mat-error *ngIf="formData.hasError('notSame')">
                         كلمة المرور غير متطابقة
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field>
-                    <mat-select formControlName="roles" placeholder="صلاحية المستخدم ">
-                        <mat-option value="ADMIN">Admin</mat-option></mat-select>
+                    <mat-select formControlName="roles" placeholder="صلاحية المستخدم " required>
+                        <mat-option value="ADMIN">Admin</mat-option>
+                        <mat-option value="MOBILE">Mobile</mat-option>
+                    </mat-select>
                 </mat-form-field>
                 <div class="form-element pr-6 pt-2">
-                    <button mat-raised-button
+                        <button   [disabled]="!formData.valid" (click) = "addUser(formData.value)"
                             class="confirmBtn btn btn-success font-weight-bolder font-size-sm"
                             type = "submit">إضافة</button>
-                    <button mat-raised-button
+                    <button mat-raised-button type="button"
                             class="btn btn-success font-weight-bolder font-size-sm mr-2 cancelBtn"
                             routerLink="/usersManagement">إلغاء</button>
                 </div>
@@ -38,3 +57,20 @@
         </form>
     </div>
 </div>
+
+<ng-template
+    #formError
+    let-control="control"
+    let-message="message"
+    let-validation="validation"
+>
+    <ng-container
+            *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
+    >
+        <div class="fv-plugins-message-container">
+            <div class="fv-help-block text-danger">
+                {{ message }}
+            </div>
+        </div>
+    </ng-container>
+</ng-template>

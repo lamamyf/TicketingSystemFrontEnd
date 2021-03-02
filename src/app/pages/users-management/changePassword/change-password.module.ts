@@ -7,9 +7,10 @@ import {NgApexchartsModule} from 'ng-apexcharts';
 import {HttpClientModule} from '@angular/common/http';
 import {CRUDTableModule} from '../../../_metronic/shared/crud-table';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {DropdownMenusModule} from '../../../_metronic/partials/content/dropdown-menus/dropdown-menus.module';
 import {NgbDropdownModule, NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
 import {WidgetsModule} from '../../../_metronic/partials/content/widgets/widgets.module';
+import {MatInputModule} from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [ChangePasswordComponent],
@@ -29,7 +30,9 @@ import {WidgetsModule} from '../../../_metronic/partials/content/widgets/widgets
         ReactiveFormsModule,
         InlineSVGModule,
         NgbTooltipModule,
-        WidgetsModule
+        WidgetsModule,
+        MatInputModule,
+        MatIconModule
     ],
 })
 export class ChangePasswordModule {}

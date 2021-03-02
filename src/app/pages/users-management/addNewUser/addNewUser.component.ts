@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import { LayoutService } from '../../../_metronic/core/';
-import {AuthService} from '../../../modules/auth';
+import {AuthService, ConfirmPasswordValidator} from '../../../modules/auth';
 import {ApiService} from '../../../services/api.service';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -19,8 +19,9 @@ import {ErrorStateMatcher} from '@angular/material/core';
 export class AddNewUserComponent implements OnInit {
     formGroup: FormGroup;
     hide = true;
-    formData;
+    formData: FormGroup;
     matcher = new MyErrorStateMatcher();
+    hasError: boolean;
 
   constructor(private layout: LayoutService, private el: ElementRef,
               private authenticationService: AuthService,
@@ -32,25 +33,19 @@ export class AddNewUserComponent implements OnInit {
   ngOnInit(): void {
       this.formData = new FormGroup({
           username: new FormControl('', Validators.compose([
-              Validators.required])),
-          roles: new FormControl('ADMIN', Validators.compose([
+              Validators.required, Validators.pattern('^[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ ]+$')])),
+          roles: new FormControl('', Validators.compose([
               Validators.required])),
           password: new FormControl('', Validators.compose([
-              Validators.required])),
+              Validators.required,
+              Validators.minLength(8),
+              Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&].{3,}')
+          ])),
           confirmPassword: new FormControl(''),
           active: new FormControl(true)
-      }, { validators: this.checkPasswords });
+      }, { validators: ConfirmPasswordValidator.MatchPassword
+      });
   }
-
-  checkPasswords(group: FormGroup) {
-        const password = group.get('password').value;
-        console.log(password);
-        if(password!==""){
-            console.log("password");
-
-            const confirmPassword = group.get('confirmPassword').value;
-        return password === confirmPassword ? null : { notSame: true };}
-    }
 
   addUser(data: any) {
       this.apiService
@@ -69,13 +64,13 @@ export class AddNewUserComponent implements OnInit {
   }
 }
 export class MyErrorStateMatcher implements ErrorStateMatcher {
-    isErrorState(control: FormControl | null): boolean {
-        console.log(control);
-        const invalidCtrl = !!(control?.invalid && control?.parent?.dirty);
-        const invalidParent = (control?.parent?.invalid && control?.parent?.dirty);
-        console.log(invalidCtrl);
-        console.log(invalidParent);
-
-        return invalidCtrl || invalidParent;
+    isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+        const invalidParent = !!(
+            control
+            && control.parent
+            && control.parent.invalid
+            && control.parent.dirty
+            && control.parent.hasError('notSame'));
+        return (invalidParent);
     }
 }
