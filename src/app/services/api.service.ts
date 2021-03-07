@@ -32,7 +32,7 @@ export class ApiService {
   }
 
   getAllUsers(){
-    return this.http.get(this.url + 'admin/' + 'getAllUsers');
+    return this.http.get(this.url + 'admin/' + 'getAllNotDeletedUsers');
   }
   getAllResults(){
     return this.http.get(this.url + 'dash/' + 'getAllResults');
