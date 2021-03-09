@@ -40,6 +40,9 @@ export class ApiService {
   getAllPaths(){
     return this.http.get(this.url + 'dash/' + 'getAllPaths');
   }
+  getDashboardData(){
+    return this.http.get(this.url + 'dash/' + 'getDashboardData');
+  }
   deleteUser(body: any){
     return this.http.post(this.url + 'admin/' + 'deleteUser', body);
   }
