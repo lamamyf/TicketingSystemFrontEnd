@@ -1,9 +1,10 @@
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_ENDPOINT, DOMAIN_NAME } from '../providers/providers';
 import {AuthService, UserModel} from '../modules/auth';
-import {catchError, finalize, map, shareReplay, switchMap, tap} from 'rxjs/operators';
-import {BehaviorSubject, Observable, of} from 'rxjs';
+import {catchError, retry} from 'rxjs/operators';
+import {BehaviorSubject, Observable, of, throwError} from 'rxjs';
+import {ResultsResponse} from '../pages/results/results.component';
 
 
 /**
@@ -25,11 +26,6 @@ export class ApiService {
 
   }
 
-  protectedGet(endpoint: string, token: any, params?: any){
-    return this.http.get(this.url + endpoint, {
-      headers: new HttpHeaders().set('Authorization', 'Bearer ' + token),
-    });
-  }
 
   getAllUsers(){
     return this.http.get(this.url + 'admin/' + 'getAllNotDeletedUsers');
@@ -37,6 +33,20 @@ export class ApiService {
   getAllResults(){
     return this.http.get(this.url + 'dash/' + 'getAllResults');
   }
+
+  getPagableResults(pageNumber, pageSize): Observable<ResultsResponse> {
+
+    let params = new HttpParams();
+    params = params.append('pageNumber', pageNumber.toString());
+    params = params.append('pageSize', pageSize.toString());
+
+    return this.http.get<ResultsResponse>(this.url + 'dash/' + `getAllResults`, { params: params })
+        .pipe(
+            retry(3),
+            catchError(this.handleError)
+        );
+  }
+
   getAllPaths(){
     return this.http.get(this.url + 'dash/' + 'getAllPaths');
   }
@@ -49,60 +59,27 @@ export class ApiService {
   addUser(body: any){
     return this.http.post(this.url + 'admin/' + 'createUser', body);
   }
-
   changePassword(body: any){
      return this.http.post<any>(this.url + 'admin/' + 'changePassword', body);
   }
-
   updatePaths(body: any){
      return this.http.post<any>(this.url + 'dash/' + 'updatePaths', body);
   }
 
-  protectedPost(endpoint: string, body: any, token: any){
-    return this.http.post(this.url + endpoint, body, {
-      headers: new HttpHeaders().set('Authorization', 'Bearer ' + token),
-    });
-  }
+  private handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error.message);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      console.error(
+          `Backend returned code ${error.status}, ` +
+          `body was: ${error.error}`);
+    }
+    // return an observable with a user-facing error message
+    return throwError(
+        'Something bad happened; please try again later.');
+  };
 
-  protectedPatch(endpoint: string, body: any, token: any){
-    return this.http.patch(this.url + endpoint, body, {
-      headers: new HttpHeaders().set('Authorization', 'Bearer ' + token),
-    });
-  }
-
-  protectedPut(endpoint: string, body: any, token: any){
-    return this.http.put(this.url + endpoint, body, {
-        headers: new HttpHeaders().set('Authorization', 'Bearer ' + token),
-    });
-  }
-
-  protectedDelete(endpoint: string, token: any, params?: any, ){
-    return this.http.delete(this.url + endpoint, {
-      headers: new HttpHeaders().set('Authorization', 'Bearer ' + token),
-    });
-  }
-
-  get(endpoint: string, params?: any, reqOpts?: any) {
-    return this.http.get(this.url + endpoint);
-  }
-
-  getPublic(endpoint: string) {
-    return this.http.get(this.domain + endpoint, {responseType: 'text'});
-  }
-
-  post(endpoint: string, body: any, reqOpts?: any) {
-    return this.http.post(this.url + endpoint, body, reqOpts);
-  }
-
-  put(endpoint: string, body: any, reqOpts?: any) {
-    return this.http.put(this.url + endpoint, body, reqOpts);
-  }
-
-  delete(endpoint: string, reqOpts?: any) {
-    return this.http.delete(this.url + endpoint, reqOpts);
-  }
-
-  patch(endpoint: string, body: any, reqOpts?: any) {
-    return this.http.put(this.url + endpoint, body, reqOpts);
-  }
 }
