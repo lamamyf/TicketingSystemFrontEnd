@@ -1,6 +1,6 @@
 <div class="card card-custom gutter-b p-6">
     <div class="row pt-6 col-xl-12">
-        <div class="col-xl-6" >
+        <div class="col-xl-6"style="margin-top: 60px !important;" >
             <div  class="col-xl-4">
                 <div class="card card-custom text-white"
                      [ngStyle]="{ height: widgetHeight, width:widgetWidth}"
@@ -30,24 +30,24 @@
                 </div>
             </div>
         </div>
-        <div>
-            <div style="margin-top: -20px" >
-                <ul class="nav nav-bold nav-tabs nav-tabs-line nav-tabs-line-3x
+        <div class="border">
+            <div style="margin-top: -20px " >
+                <ul class="nav nav-bold nav-tabs nav-tabs-line nav-tabs-line-3x pt-6 border-bottom
                 nav-tabs-line-transparent-white nav-tabs-line-active-border-success px-8"
                     role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link cursor-pointer text-dark"
-                            data-toggle="tab"
-                            (click)="setActiveTabId('topbar_systemType')"
-                            [ngClass]="getActiveCSSClasses('topbar_systemType')">
-                            نوع النظام</a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link cursor-pointer text-dark"
                             data-toggle="tab"
                             (click)="setActiveTabId('topbar_systemStatus')"
                             [ngClass]="getActiveCSSClasses('topbar_systemStatus')">
                             حالة النظام</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cursor-pointer text-dark"
+                           data-toggle="tab"
+                           (click)="setActiveTabId('topbar_systemType')"
+                           [ngClass]="getActiveCSSClasses('topbar_systemType')">
+                            نوع النظام</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link cursor-pointer text-dark"
@@ -59,39 +59,19 @@
                 </ul>
             </div>
 
-            <div id="chartSystemType" class=" col-xl-6 mt-5 tab-content">
-                <apx-chart class="tab-pane"
+            <div id="chart" class=" col-xl-6 mt-5 tab-content">
+                <apx-chart class="tab-pane active show"
                            id="topbar_systemType"
                            role="tabpanel"
-                           [ngClass]="getActiveCSSClasses('topbar_systemType')"
+                           [chart]="chartOptions.chart"
                            [responsive]="chartOptions.responsive"
                            [series]="chartOptions.series"
-                           [chart]="chartOptions.chart"
-                           [labels]="chartOptions.labels">
+                           [labels]="chartOptions.labels"
+                           [colors]="chartOptions.colors" >
                 </apx-chart>
             </div>
 
-            <div id="chartSystemStatus" class=" col-xl-6 mt-5 tab-content">
-                <apx-chart class="tab-pane "
-                           id="topbar_systemStatus"
-                           role="tabpanel"
-                           [ngClass]="getActiveCSSClasses('topbar_systemStatus')"
-                           [series]="chartOptions.series"
-                           [chart]="chartOptions.chart"
-                           [labels]="chartOptions.labels">
-                </apx-chart>
-            </div>
 
-            <div id="chartLockStatus" class=" col-xl-6 mt-5 tab-content">
-                <apx-chart class="tab-pane "
-                           id="topbar_lockStatus"
-                           role="tabpanel"
-                           [ngClass]="getActiveCSSClasses('topbar_lockStatus')"
-                           [series]="chartOptions.series"
-                           [chart]="chartOptions.chart"
-                           [labels]="chartOptions.labels">
-                </apx-chart>
-            </div>
-        </div>
+         </div>
     </div>
 </div>

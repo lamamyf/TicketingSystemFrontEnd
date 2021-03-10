@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {ChartComponent} from 'ng-apexcharts';
 
 import {
@@ -26,13 +26,13 @@ export type ChartOptions = {
 export class DashboardComponent implements OnInit {
   @Input() widgetHeight = '150px';
   @Input() widgetWidth = '400px';
-  @ViewChild('chart') chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
+  @ViewChild('chart', { static: false }) chart: ChartComponent;
   currentUser: UserModel;
   activeTabId:
-      | 'topbar_systemType'
       | 'topbar_systemStatus'
-      | 'topbar_lockStatus' = 'topbar_systemType';
+      | 'topbar_systemType'
+      | 'topbar_lockStatus' = 'topbar_systemStatus';
   totalUsers;
   totalResults;
   totalAndroid;
@@ -46,17 +46,39 @@ export class DashboardComponent implements OnInit {
       private router: Router,
       private authenticationService: AuthService,
       private apiService: ApiService,
+      private cdr: ChangeDetectorRef,
   ) {
     this.loadData();
 
-    this.authenticationService.currentUser$.subscribe(x => this.currentUser = x);
+    this.chartOptions = {
+      colors: ['#84DCC6', '#FF686B'],
+      series: [],
+      chart: {
+        width: 550,
+        type: 'pie',
+      },
+      labels: [],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            },
+          }
+        }
+      ],
+    };
 
-    // @ts-ignore
-    this.chartOptions = {series: [], chart: {}};
+    this.authenticationService.currentUser$.subscribe(x => this.currentUser = x);
 
   }
 
   ngOnInit(): void {
+
   }
 
   setActiveTabId(tabId) {
@@ -88,11 +110,12 @@ export class DashboardComponent implements OnInit {
           this.totalUsers = results.totalUsers;
           this.totalAndroid = results.totalAndroid;
           this.totalIOS = results.totalIOS;
-          this.chartOpt([this.totalAndroid, this.totalIOS], [' جهاز IOS', ' جهاز Android']);
           this.totalSecured = results.totalSecuredDevice;
           this.totalUnsecured = results.totalUnsecuredDevice;
           this.totalLocked = results.totalLocked;
           this.totalUnlocked = results.totalUnlocked;
+          this.chartOpt([this.totalSecured, this.totalUnsecured], [' آمن', ' غير آمن']);
+          this.cdr.markForCheck();
         });
 
   }
@@ -100,6 +123,7 @@ export class DashboardComponent implements OnInit {
   chartOpt(chartSeries, chartLabels): void {
 
     this.chartOptions = {
+      colors: ['#84DCC6', '#FF686B'],
       series: chartSeries,
       chart: {
         width: 550,
