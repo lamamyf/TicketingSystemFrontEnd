@@ -24,6 +24,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatRadioModule} from '@angular/material/radio';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
+import {RouterExtService} from './services/RouterExtService.service';
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -55,6 +56,9 @@ function appInitializer(authService: AuthService) {
     MatButtonModule
   ],
   providers: [
+    {
+      provide: RouterExtService,
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

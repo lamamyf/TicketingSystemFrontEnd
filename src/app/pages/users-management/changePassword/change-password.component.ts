@@ -1,11 +1,12 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
-import {first} from 'rxjs/operators';
 import {AuthService, ConfirmPasswordValidator, UserModel} from '../../../modules/auth';
 import {ApiService} from '../../../services/api.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Location} from '@angular/common';
+import {RouterExtService} from '../../../services/RouterExtService.service';
 
 @Component({
   selector: 'app-change-password',
@@ -14,33 +15,36 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class ChangePasswordComponent implements OnInit, OnDestroy {
   formGroup: FormGroup;
-  user: UserModel;
+  userID: number;
   firstUserState: UserModel;
   subscriptions: Subscription[] = [];
   isLoading$: Observable<boolean>;
   hide = true;
   hasError: boolean;
+  previousUrl: string;
 
   constructor(private userService: AuthService,
               private fb: FormBuilder,
               private apiService: ApiService,
               private router: Router,
               private snackBar: MatSnackBar,
-              private cdr: ChangeDetectorRef
+              private cdr: ChangeDetectorRef,
+              private location: Location,
+              private routerExtService: RouterExtService,
+              private activatedRoute: ActivatedRoute
   ) {
-    this.isLoading$ = this.userService.isLoadingSubject.asObservable();
+      this.isLoading$ = this.userService.isLoadingSubject.asObservable();
+      this.activatedRoute.queryParams.subscribe(params => {
+          this.userID = params['user'];
+      });
   }
 
-  ngOnInit(): void {
+
+
+
+    ngOnInit(): void {
     this.hasError = true;
-    const sb = this.userService.currentUserSubject.asObservable().pipe(
-      first(user => !!user)
-    ).subscribe(user => {
-      this.user = Object.assign({}, user);
-      this.firstUserState = Object.assign({}, user);
-      this.loadForm();
-    });
-    this.subscriptions.push(sb);
+    this.loadForm();
   }
 
   ngOnDestroy() {
@@ -50,7 +54,7 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
   loadForm() {
       this.hasError = false;
       this.formGroup = this.fb.group({
-      id: [this.user.id],
+      id: [this.userID],
       currentPassword: ['', Validators.required],
       password: ['', Validators.compose([
           Validators.required,
@@ -78,6 +82,17 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
             }
         });
       this.subscriptions.push(saveSubscr);
+  }
+
+  cancel(){
+      this.previousUrl = this.routerExtService.getPreviousUrl();
+      if (this.previousUrl !== '/usersManagement'){
+          this.router.navigate(['/']);
+      }
+      else {
+          this.location.back();
+      }
+
   }
 
 }

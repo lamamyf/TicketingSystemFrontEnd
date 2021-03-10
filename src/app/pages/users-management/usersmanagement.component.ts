@@ -64,7 +64,7 @@ export class UsersmanagementComponent implements OnInit {
       this.dialogRef.afterClosed().subscribe(result => {
           if (result) {
               this.apiService
-                  .deleteUser(user).pipe()
+                  .deleteUser(user.id).pipe()
                   .subscribe((data: Response) => {
                       const resStr = JSON.stringify(data);
                       const resJSON = JSON.parse(resStr);

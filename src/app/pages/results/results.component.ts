@@ -1,16 +1,15 @@
 import {
   Component,
   OnInit,
-  AfterViewInit,
   ViewChild,
-  ElementRef,
+  ElementRef, ChangeDetectorRef,
 } from '@angular/core';
 import { LayoutService } from '../../_metronic/core/';
 import {MatTableDataSource} from '@angular/material/table';
-import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {ApiService} from '../../services/api.service';
 import {ResultModel} from '../../models/result.model';
+const pageSize = 2;
 
 
 @Component({
@@ -21,28 +20,23 @@ import {ResultModel} from '../../models/result.model';
 export class ResultsComponent implements OnInit {
   displayedColumns = ['id', 'deviceName', 'systemStatus', 'compromised', 'currentSystemVersion', 'appVersion', 'actions'];
   dataSource: MatTableDataSource<ResultModel>;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild('TABLE') table: ElementRef;
+  @ViewChild(MatSort) sort: MatSort;
   pages: Array<'number'>;
+  currentSelectedPage = 0;
+  totalPages = 0;
+  pageIndexes: Array<number> = [];
 
   constructor(private layout: LayoutService, private el: ElementRef,
-              private apiService: ApiService) {
-    this.loadResults();
+              private apiService: ApiService, private cdr: ChangeDetectorRef) {
+    this.getPage(0);
   }
 
   ngOnInit(): void {
   }
 
-  loadResults(): void {
-    this.apiService
-        .getAllResults()
-        .subscribe((results: any) => {
-          this.dataSource = new MatTableDataSource(results['content']);
-          this.pages = new Array(results['totalpages']);
-          this.dataSource.sort = this.sort;
-          this.dataSource.paginator = this.paginator;
-        });
+  getPaginationWithIndex(index: number) {
+    this.getPage(index);
   }
 
   applyFilter(filterValue: string) {
@@ -60,4 +54,50 @@ export class ResultsComponent implements OnInit {
     downloadAncher.download = row.id;
     downloadAncher.click();
   }
+
+  getPage(page: number){
+
+    this.apiService.getPagableResults(page, pageSize)
+        .subscribe(
+            (response: ResultsResponse) => {
+              this.dataSource = new MatTableDataSource(response.content);
+              this.totalPages = response.totalPages;
+              this.pageIndexes = Array(this.totalPages).fill(0).map((x, i) => i);
+              this.currentSelectedPage = response.number;
+              this.dataSource.sort = this.sort;
+              this.cdr.markForCheck();
+
+            },
+            (error) => {
+              console.log(error);
+            }
+        );
+  }
+
+  active(index: number) {
+    if (this.currentSelectedPage === index ){
+      return {
+        active: true
+      };
+    }
+  }
+
+  nextClick(){
+    if (this.currentSelectedPage < this.totalPages - 1){
+      this.getPage(++this.currentSelectedPage);
+    }
+  }
+
+  previousClick(){
+    if (this.currentSelectedPage > 0){
+      this.getPage(--this.currentSelectedPage);
+    }
+  }
+}
+
+export interface ResultsResponse {
+  content: ResultModel[];
+  totalPages: number;
+  number: number;
+  pageSize: number;
 }

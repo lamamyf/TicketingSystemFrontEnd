@@ -3,12 +3,13 @@
         <div class="col-xl-6" >
             <div  class="col-xl-4">
                 <div class="card card-custom text-white"
-                     [ngStyle]="{ height: widgetHeight, width:widgetWidth}" style="background-color: #7686c0 !important;">
+                     [ngStyle]="{ height: widgetHeight, width:widgetWidth}"
+                     style="background-color: #7686c0 !important;">
                     <div class="card-body">
                         <span [inlineSVG]="'./assets/media/svg/icons/Communication/Group.svg'"
                               class="svg-icon svg-icon-3x svg-icon-white"
                         ></span>
-                        <div class="font-weight-bolder font-size-h2 mt-3" >8,600</div>
+                        <div class="font-weight-bolder font-size-h2 mt-3" >{{totalUsers}}</div>
                         <span class="font-weight-bold font-size-lg mt-1"
                             >إجمالي المستخدمين</span>
                     </div>
@@ -21,7 +22,7 @@
                         <span [inlineSVG]="'./assets/media/svg/icons/Layout/Layout-4-blocks.svg'"
                               class="svg-icon svg-icon-3x svg-icon-white ml-n2"></span>
                         <div class="font-weight-bolder font-size-h2 mt-3">
-                            790
+                            {{totalResults}}
                         </div>
                         <span class="font-weight-bold font-size-lg mt-1"
                         >إجمالي النتائج</span>
@@ -29,13 +30,68 @@
                 </div>
             </div>
         </div>
-        <div id="chart" class=" col-xl-6" >
-            <apx-chart
-                    [series]="chartOptions.series"
-                    [chart]="chartOptions.chart"
-                    [labels]="chartOptions.labels"
-            ></apx-chart>
-        </div>
+        <div>
+            <div style="margin-top: -20px" >
+                <ul class="nav nav-bold nav-tabs nav-tabs-line nav-tabs-line-3x
+                nav-tabs-line-transparent-white nav-tabs-line-active-border-success px-8"
+                    role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link cursor-pointer text-dark"
+                            data-toggle="tab"
+                            (click)="setActiveTabId('topbar_systemType')"
+                            [ngClass]="getActiveCSSClasses('topbar_systemType')">
+                            نوع النظام</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cursor-pointer text-dark"
+                            data-toggle="tab"
+                            (click)="setActiveTabId('topbar_systemStatus')"
+                            [ngClass]="getActiveCSSClasses('topbar_systemStatus')">
+                            حالة النظام</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cursor-pointer text-dark"
+                            data-toggle="tab"
+                            (click)="setActiveTabId('topbar_lockStatus')"
+                            [ngClass]="getActiveCSSClasses('topbar_lockStatus')">
+                            قفل الهاتف</a>
+                    </li>
+                </ul>
+            </div>
 
+            <div id="chartSystemType" class=" col-xl-6 mt-5 tab-content">
+                <apx-chart class="tab-pane"
+                           id="topbar_systemType"
+                           role="tabpanel"
+                           [ngClass]="getActiveCSSClasses('topbar_systemType')"
+                           [responsive]="chartOptions.responsive"
+                           [series]="chartOptions.series"
+                           [chart]="chartOptions.chart"
+                           [labels]="chartOptions.labels">
+                </apx-chart>
+            </div>
+
+            <div id="chartSystemStatus" class=" col-xl-6 mt-5 tab-content">
+                <apx-chart class="tab-pane "
+                           id="topbar_systemStatus"
+                           role="tabpanel"
+                           [ngClass]="getActiveCSSClasses('topbar_systemStatus')"
+                           [series]="chartOptions.series"
+                           [chart]="chartOptions.chart"
+                           [labels]="chartOptions.labels">
+                </apx-chart>
+            </div>
+
+            <div id="chartLockStatus" class=" col-xl-6 mt-5 tab-content">
+                <apx-chart class="tab-pane "
+                           id="topbar_lockStatus"
+                           role="tabpanel"
+                           [ngClass]="getActiveCSSClasses('topbar_lockStatus')"
+                           [series]="chartOptions.series"
+                           [chart]="chartOptions.chart"
+                           [labels]="chartOptions.labels">
+                </apx-chart>
+            </div>
+        </div>
     </div>
 </div>
