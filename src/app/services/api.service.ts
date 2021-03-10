@@ -34,13 +34,12 @@ export class ApiService {
     return this.http.get(this.url + 'dash/' + 'getAllResults');
   }
 
-  getPagableResults(pageNumber, pageSize): Observable<ResultsResponse> {
+  getPageableResults(pageNumber): Observable<ResultsResponse> {
 
     let params = new HttpParams();
     params = params.append('pageNumber', pageNumber.toString());
-    params = params.append('pageSize', pageSize.toString());
 
-    return this.http.get<ResultsResponse>(this.url + 'dash/' + `getAllResults`, { params: params })
+    return this.http.get<ResultsResponse>(this.url + 'dash/' + `getAllResults`, { params })
         .pipe(
             retry(3),
             catchError(this.handleError)
@@ -80,6 +79,6 @@ export class ApiService {
     // return an observable with a user-facing error message
     return throwError(
         'Something bad happened; please try again later.');
-  };
+  }
 
 }
