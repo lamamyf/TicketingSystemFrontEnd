@@ -8,6 +8,8 @@ import { InlineSVGModule } from 'ng-inline-svg';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthService } from './modules/auth/_services/auth.service';
+import {HashLocationStrategy, LocationStrategy} from '@angular/common';
+
 // Highlight JS
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { SplashScreenModule } from './_metronic/partials/layout/splash-screen/splash-screen.module';
@@ -80,6 +82,8 @@ function appInitializer(authService: AuthService) {
         },
       },
     },
+    {provide: LocationStrategy,
+      useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent],
   entryComponents: [ConfirmationDialogComponent, EditPathsComponent]
