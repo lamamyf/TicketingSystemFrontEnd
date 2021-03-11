@@ -73,8 +73,8 @@ export class EditUserComponent implements OnInit, OnDestroy {
       const saveSubscr = this.apiService
         .editUser(this.formGroup.value).subscribe(res => {
             if (!res.body) {
-             this.router.navigate(['/']).then(r =>
-                 this.snackBar.open('تم تغيير كلمة المرور بنجاح', '', {
+             this.router.navigate(['/usersManagement']).then(r =>
+                 this.snackBar.open('تم تعديل المستخدم بنجاح', '', {
                      duration: 2000
                  })
              );
