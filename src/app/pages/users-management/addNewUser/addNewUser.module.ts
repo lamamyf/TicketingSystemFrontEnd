@@ -11,28 +11,32 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule  } from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [AddNewUserComponent],
-  imports: [
-    CommonModule,
-    FormsModule,
-    GeneralModule,
-    HighlightModule,
-    NgbNavModule,
-    NgbTooltipModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: AddNewUserComponent,
-      },
-    ]),
-    InlineSVGModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatSelectModule,
-    MatInputModule,
-    MatIconModule,
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        GeneralModule,
+        HighlightModule,
+        NgbNavModule,
+        NgbTooltipModule,
+        RouterModule.forChild([
+            {
+                path: '',
+                component: AddNewUserComponent,
+            },
+        ]),
+        InlineSVGModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatSelectModule,
+        MatInputModule,
+        MatIconModule,
+        MatSlideToggleModule,
+        MatRadioModule,
+    ],
 })
 export class AddNewUserModule {}

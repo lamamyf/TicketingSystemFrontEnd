@@ -73,6 +73,10 @@ export class ApiService {
   changePassword(body: any){
      return this.http.post<any>(this.url + 'admin/' + 'changePassword', body);
   }
+
+  editUser(body: any){
+     return this.http.post<any>(this.url + 'admin/' + 'updateUser', body);
+  }
   updatePaths(body: any){
      return this.http.post<any>(this.url + 'dash/' + 'updatePaths', body);
   }

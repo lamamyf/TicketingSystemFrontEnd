@@ -27,7 +27,7 @@
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef mat-sort-header> الإجراءات </mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <span  [queryParams]="{user: row.id}"  [routerLink]="['/change-password']"
+          <span  [queryParams]="{user: row.id, isActive: row.active}"  [routerLink]="['/editUser']"
                             class="btn btn-icon btn-light btn-hover-primary btn-sm">
             <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'"
                   class="svg-icon svg-icon-md svg-icon-primary"></span>

@@ -42,6 +42,13 @@ const routes: Routes = [
             import('./users-management/changePassword/change-password.module').then(
             (m) => m.ChangePasswordModule
           ),
+      },
+      {
+        path: 'editUser',
+        loadChildren: () =>
+            import('./users-management/editUser/editUser.module').then(
+            (m) => m.EditUserModule
+          ),
       },      {
         path: 'devices/results',
         loadChildren: () =>

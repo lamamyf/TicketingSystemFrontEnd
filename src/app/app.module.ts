@@ -25,6 +25,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {RouterExtService} from './services/RouterExtService.service';
+import {MatSlideToggle, MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatSliderModule} from "@angular/material/slider";
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -53,7 +55,8 @@ function appInitializer(authService: AuthService) {
     MatInputModule,
     MatRadioModule,
     ReactiveFormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSliderModule, MatSlideToggleModule
   ],
   providers: [
     {
