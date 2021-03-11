@@ -4,7 +4,7 @@ import { API_ENDPOINT, DOMAIN_NAME } from '../providers/providers';
 import {AuthService, UserModel} from '../modules/auth';
 import {catchError, retry} from 'rxjs/operators';
 import {BehaviorSubject, Observable, of, throwError} from 'rxjs';
-import {ResultsResponse} from '../pages/results/results.component';
+import {ResultsResponse} from '../pages/devices/results/results.component';
 
 
 /**
@@ -40,6 +40,18 @@ export class ApiService {
     params = params.append('pageNumber', pageNumber.toString());
 
     return this.http.get<ResultsResponse>(this.url + 'dash/' + `getAllResults`, { params })
+        .pipe(
+            retry(3),
+            catchError(this.handleError)
+        );
+  }
+  getResultsByUser(pageNumber, id): Observable<ResultsResponse> {
+
+    let params = new HttpParams();
+    params = params.append('pageNumber', pageNumber.toString());
+    params = params.append('createdBy', id.toString());
+
+    return this.http.get<ResultsResponse>(this.url + 'dash/' + `getResultsByUser`, { params })
         .pipe(
             retry(3),
             catchError(this.handleError)

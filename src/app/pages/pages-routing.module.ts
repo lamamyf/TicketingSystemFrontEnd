@@ -13,9 +13,9 @@ const routes: Routes = [
           import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
       {
-        path: 'results',
+        path: 'devices',
         loadChildren: () =>
-            import('./results/results.module').then((m) => m.ResultsModule),
+            import('./devices/devices.module').then((m) => m.DevicesModule),
       },
       {
         path: 'paths',
@@ -41,6 +41,12 @@ const routes: Routes = [
         loadChildren: () =>
             import('./users-management/changePassword/change-password.module').then(
             (m) => m.ChangePasswordModule
+          ),
+      },      {
+        path: 'devices/results',
+        loadChildren: () =>
+            import('./devices/results/results.module').then(
+            (m) => m.ResultsModule
           ),
       },
       {
