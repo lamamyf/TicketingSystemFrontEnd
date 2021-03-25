@@ -1,37 +1,42 @@
 <div class="card card-custom gutter-b ">
-  <div class="example-header p-10">
-    <mat-form-field>
+
+
+
+<div class="col-md-12 mt-9 ml-5 ">
+    <mat-form-field   >
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="بحث">
     </mat-form-field>
-
   </div>
+
+
+
   <div class="example-container mat-elevation-z8">
     <mat-table [dataSource]="dataSource" #table matSort>
       <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> الرقم التسلسلي </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.createdBy}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> رقم السجل </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="deviceName">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> اسم الجهاز </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> نوع الجهاز </mat-header-cell>
         <mat-cell *matCellDef="let row">  {{row.deviceName}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="systemStatus">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> النظام </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> نوع النظام </mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.platform}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="compromised">
         <mat-header-cell *matHeaderCellDef mat-sort-header> حالة النظام </mat-header-cell>
         <mat-cell *matCellDef="let row" >
-          <i *ngIf="row.compromised" class="fas fa-check-circle text-success font-size-h3"></i>
-          <i *ngIf="!row.compromised" class="fa fa-times-circle text-danger font-size-h3"></i>
+          <i *ngIf="row.compromised" class="fas fa-check-circle text-success"></i>
+          <i *ngIf="!row.compromised" class="fa fa-times-circle text-danger"></i>
         </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="currentSystemVersion">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> إصدار النظام الحالي </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> إصدار نظام التشغيل الحالي </mat-header-cell>
         <mat-cell *matCellDef="let row">  {{row.currentSystemVersion}}</mat-cell>
       </ng-container>
 
@@ -44,14 +49,15 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header> الاجراءات </mat-header-cell>
         <mat-cell *matCellDef="let row">
 
-          <span [queryParams]="{id: row.createdBy, deviceName: row.deviceName, platform: row.platform}"  [routerLink]="['/devices/results']"
-                class="btn btn-icon btn-light btn-hover-primary btn-sm"
-                matTooltip="السجلات السابقة">
-            <span [inlineSVG]="'./assets/media/svg/icons/Code/Time-schedule.svg'"
+
+          <span
+                class="btn btn-icon btn-light  btn-sm">
+            <span [inlineSVG]="'./assets/media/svg/icons/General/Other1.svg'"
+                  [matTooltip]="getMoreInformation(row)" matTooltipClass="material-tooltip"
                   class="svg-icon svg-icon-md svg-icon-primary"></span>
           </span>
 
-          <span (click)="download(row)" matTooltip="تنزيل سجل الجهاز"
+          <span (click)="download(row)"
                   class="btn btn-icon btn-light btn-hover-primary btn-sm mr-2">
             <span [inlineSVG]="'./assets/media/svg/icons/Files/Download.svg'"
                   class="svg-icon svg-icon-md svg-icon-primary"></span>
@@ -63,11 +69,12 @@
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
     <mat-paginator
-            [hidePageSize]="true"
             [length]="totalElements"
             [pageSize]="pageSize"
             [showFirstLastButtons]="true"
             (page)="onChangePage($event)"
     ></mat-paginator>
+
+
   </div>
 </div>

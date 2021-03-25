@@ -3,32 +3,56 @@ import {
   ViewChild,
   ElementRef, AfterViewInit, ChangeDetectorRef,
 } from '@angular/core';
+import { LayoutService } from '../../_metronic/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
-import {PageEvent} from '@angular/material/paginator';
-import {LayoutService} from '../../_metronic/core';
-import {ResultModel} from '../../models/result.model';
 import {ApiService} from '../../services/api.service';
+import {ResultModel} from '../../models/result.model';
+import {PageEvent} from '@angular/material/paginator';
+import {ActivatedRoute} from '@angular/router';
 
 
 @Component({
-  selector: 'app-devices',
-  templateUrl: './devices.component.html',
-  styleUrls: ['./devices.component.scss'],
+  selector: 'app-results',
+  templateUrl: './results.component.html',
+  styleUrls: ['./results.component.scss'],
 })
-export class DevicesComponent implements AfterViewInit {
+export class ResultsComponent implements AfterViewInit {
   displayedColumns = ['id', 'deviceName', 'systemStatus', 'compromised', 'currentSystemVersion', 'appVersion', 'actions'];
   dataSource: MatTableDataSource<ResultModel>;
   @ViewChild('TABLE') table: ElementRef;
   @ViewChild(MatSort) sort: MatSort;
   totalElements = 0;
   pageSize;
-
+  deviceID;
+  deviceName;
+  platform;
   constructor(private layout: LayoutService, private el: ElementRef,
               private apiService: ApiService,
-              private cdr: ChangeDetectorRef) {
+              private cdr: ChangeDetectorRef,
+              private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.queryParams.subscribe(params => {
+      console.log(params);
+      this.deviceID = params.id;
+      this.deviceName = params.deviceName;
+      this.platform = params.platform;
+    });
   }
-
+  getMoreInformation(row): string {
+    let data = ' نسخة التطبيق ' + row.appVersion  ;
+    data = data + '\n  المساحة المتوفرة   ' + row.capacityAvailable;
+    data = data + '\n  المشغل   ' + row.carrier;
+    data = data + '\n  اصدار التطبيق الحالي   ' + row.currentAvailableUpdate;
+    data = data + '\n  اصدار النظام الحالي   ' + row.currentSystemVersion;
+    data = data + '\n  مساحة الجهاز   ' + row.deviceCapacity;
+    data = data + '\n  اسم الجهاز   ' + row.deviceName;
+    data = data + '\n  اللغة   ' + row.language;
+    data = data + '\n  تفعيل القفل   ' + row.passcodeEnabled;
+    data = data + '\n  النظام   ' + row.platform;
+    data = data + '\n  حالة النظام   ' + row.systemStatus;
+    data = data + '\n  محدث   ' + row.updated;
+    return data;
+  }
   ngAfterViewInit(): void {
     this.getPage(0);
   }
@@ -54,7 +78,6 @@ export class DevicesComponent implements AfterViewInit {
     this.apiService.getPageableResults(page)
         .subscribe(
             (response: ResultsResponse) => {
-              console.log(response);
               this.dataSource = new MatTableDataSource(response.content);
               this.totalElements = response.totalElements;
               this.pageSize = response.size;

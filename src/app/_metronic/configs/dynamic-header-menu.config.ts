@@ -7,10 +7,10 @@ export const DynamicHeaderMenuConfig = {
       page: '/dashboard',
     },
     {
-      title: 'الأجهزة',
+      title: 'السجلات',
       root: true,
       alignment: 'left',
-      page: '/devices',
+      page: '/results',
     },
     {
       title: 'Paths',

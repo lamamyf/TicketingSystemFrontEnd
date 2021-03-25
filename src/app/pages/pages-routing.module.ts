@@ -13,11 +13,6 @@ const routes: Routes = [
           import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
       {
-        path: 'devices',
-        loadChildren: () =>
-            import('./devices/devices.module').then((m) => m.DevicesModule),
-      },
-      {
         path: 'paths',
         loadChildren: () =>
             import('./paths/paths.module').then((m) => m.PathsModule),
@@ -50,9 +45,9 @@ const routes: Routes = [
             (m) => m.EditUserModule
           ),
       },      {
-        path: 'devices/results',
+        path: 'results',
         loadChildren: () =>
-            import('./devices/results/results.module').then(
+            import('./results/results.module').then(
             (m) => m.ResultsModule
           ),
       },

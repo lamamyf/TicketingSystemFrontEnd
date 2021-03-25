@@ -4,7 +4,7 @@ import { API_ENDPOINT, DOMAIN_NAME } from '../providers/providers';
 import {AuthService, UserModel} from '../modules/auth';
 import {catchError, retry} from 'rxjs/operators';
 import {BehaviorSubject, Observable, of, throwError} from 'rxjs';
-import {ResultsResponse} from '../pages/devices/results/results.component';
+import {ResultsResponse} from "../pages/results/results.component";
 
 
 /**
