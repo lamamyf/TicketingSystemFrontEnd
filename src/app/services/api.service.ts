@@ -4,7 +4,6 @@ import { API_ENDPOINT, DOMAIN_NAME } from '../providers/providers';
 import {AuthService, UserModel} from '../modules/auth';
 import {catchError, retry} from 'rxjs/operators';
 import {BehaviorSubject, Observable, of, throwError} from 'rxjs';
-import {ResultsResponse} from "../pages/results/results.component";
 
 
 /**
@@ -30,37 +29,6 @@ export class ApiService {
   getAllUsers(){
     return this.http.get(this.url + 'admin/' + 'getAllNotDeletedUsers');
   }
-  getAllResults(){
-    return this.http.get(this.url + 'dash/' + 'getAllResults');
-  }
-
-  getPageableResults(pageNumber): Observable<ResultsResponse> {
-
-    let params = new HttpParams();
-    params = params.append('pageNumber', pageNumber.toString());
-
-    return this.http.get<ResultsResponse>(this.url + 'dash/' + `getAllResults`, { params })
-        .pipe(
-            retry(3),
-            catchError(this.handleError)
-        );
-  }
-  getResultsByUser(pageNumber, id): Observable<ResultsResponse> {
-
-    let params = new HttpParams();
-    params = params.append('pageNumber', pageNumber.toString());
-    params = params.append('createdBy', id.toString());
-
-    return this.http.get<ResultsResponse>(this.url + 'dash/' + `getResultsByUser`, { params })
-        .pipe(
-            retry(3),
-            catchError(this.handleError)
-        );
-  }
-
-  getAllPaths(){
-    return this.http.get(this.url + 'dash/' + 'getAllPaths');
-  }
   getDashboardData(){
     return this.http.get(this.url + 'dash/' + 'getDashboardData');
   }
@@ -77,10 +45,6 @@ export class ApiService {
   editUser(body: any){
      return this.http.post<any>(this.url + 'admin/' + 'updateUser', body);
   }
-  updatePaths(body: any){
-     return this.http.post<any>(this.url + 'dash/' + 'updatePaths', body);
-  }
-
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

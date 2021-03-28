@@ -18,15 +18,14 @@ import {ConfirmationDialogComponent} from './pages/confirmation-dialog/confirmat
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTableModule} from '@angular/material/table';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {EditPathsComponent} from './pages/paths/editPaths/editPaths';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatRadioModule} from '@angular/material/radio';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {RouterExtService} from './services/RouterExtService.service';
-import {MatSlideToggle, MatSlideToggleModule} from "@angular/material/slide-toggle";
-import {MatSliderModule} from "@angular/material/slider";
+import {MatSlideToggle, MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatSliderModule} from '@angular/material/slider';
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -37,7 +36,7 @@ function appInitializer(authService: AuthService) {
 }
 
 @NgModule({
-  declarations: [AppComponent, ConfirmationDialogComponent, EditPathsComponent],
+  declarations: [AppComponent, ConfirmationDialogComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -89,7 +88,7 @@ function appInitializer(authService: AuthService) {
       useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ConfirmationDialogComponent, EditPathsComponent]
+  entryComponents: [ConfirmationDialogComponent]
 
 })
 export class AppModule { }

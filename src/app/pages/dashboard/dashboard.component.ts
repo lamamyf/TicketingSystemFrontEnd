@@ -48,7 +48,7 @@ export class DashboardComponent implements OnInit {
       private apiService: ApiService,
       private cdr: ChangeDetectorRef,
   ) {
-    this.loadData();
+  //  this.loadData();
 
     this.chartOptions = {
       colors: ['#84DCC6', '#FF686B'],
@@ -72,6 +72,7 @@ export class DashboardComponent implements OnInit {
         }
       ],
     };
+    this.chartOpt([12, 22], [' آمن', ' غير آمن']);
 
     this.authenticationService.currentUser$.subscribe(x => this.currentUser = x);
 
@@ -84,13 +85,13 @@ export class DashboardComponent implements OnInit {
   setActiveTabId(tabId) {
     this.activeTabId = tabId;
     if (tabId === 'topbar_systemStatus') {
-      this.chartOpt([this.totalSecured, this.totalUnsecured], [' آمن', ' غير آمن']);
+      this.chartOpt([12, 22], [' آمن', ' غير آمن']);
     }
     else if (tabId === 'topbar_systemType') {
-      this.chartOpt([this.totalAndroid, this.totalIOS], [' جهاز Android', ' جهاز IOS']);
+      this.chartOpt([33, 44], [' جهاز Android', ' جهاز IOS']);
     }
     else {
-      this.chartOpt([this.totalLocked, this.totalUnlocked], [' يوجد قفل', ' لا يوجد قفل']);
+      this.chartOpt([12, 42], [' يوجد قفل', ' لا يوجد قفل']);
     }
 
   }

@@ -13,11 +13,6 @@ const routes: Routes = [
           import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
       {
-        path: 'paths',
-        loadChildren: () =>
-            import('./paths/paths.module').then((m) => m.PathsModule),
-      },
-      {
         path: 'usersManagement',
         loadChildren: () =>
           import('./users-management/usersmanagement.module').then(
@@ -43,12 +38,6 @@ const routes: Routes = [
         loadChildren: () =>
             import('./users-management/editUser/editUser.module').then(
             (m) => m.EditUserModule
-          ),
-      },      {
-        path: 'results',
-        loadChildren: () =>
-            import('./results/results.module').then(
-            (m) => m.ResultsModule
           ),
       },
       {
