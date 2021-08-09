@@ -8,11 +8,23 @@
     id="kt_login_signin_form"
     (ngSubmit)="submit()"
   >
+
+
     <!--begin::Title-->
-    <div class="pb-13 pt-lg-0 pt-5">
-      <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">
-        مرحبا بك بـ
-      </h3>
+    <div class="pb-13 pt-lg-0 pt-5"
+
+    style="background-image: url('./assets/media/svg/logos/LOGO.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+  
+    
+    height: 100px;
+    
+    
+    "
+    
+    >
+    
     </div>
     <!--end::Title-->
 
@@ -29,29 +41,29 @@
 
     <!--begin::Form group-->
     <div class="form-group">
-      <label class="font-size-h6 font-weight-bolder text-dark">اسم المستخدم</label>
+      <label class="font-size-h6 font-weight-bolder text-dark">البريد الإلكتروني</label>
       <input
         class="form-control form-control-solid h-auto py-7 px-6 rounded-lg"
-        type="text"
-        name="username"
-        formControlName="username"
-        pattern="[a-zA-Z0-9-]+"
-        [ngClass]="{ 'is-invalid': loginForm.controls['username'].invalid }"
+        type="email"
+        name="email"
+        formControlName="email"
+        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$"
+        [ngClass]="{ 'is-invalid': loginForm.controls['email'].invalid }"
       />
       <ng-container
         [ngTemplateOutlet]="formError"
         [ngTemplateOutletContext]="{
           validation: 'required',
-          message: 'حقل اسم المستخدم مطلوب',
-          control: loginForm.controls['username']
+          message: 'حقل البريد الإلكتروني مطلوب',
+          control: loginForm.controls['email']
         }"
       ></ng-container>      
       <ng-container
         [ngTemplateOutlet]="formError"
         [ngTemplateOutletContext]="{
           validation: 'pattern',
-          message: 'خطأ في اسم المستخدم',
-          control: loginForm.controls['username']
+          message: 'خطأ في البريد الإلكتروني',
+          control: loginForm.controls['email']
         }"
       ></ng-container>
 
@@ -90,15 +102,37 @@
         }"
       ></ng-container>
 
+
+<div style="margin-top: 1cm; margin-right: 2.5mm;">
+  لا يوجد لديك حساب؟
+  <a href="#register"> سجل الأن</a>
+</div>
+
+
     </div>
     <!--end::Form group-->
 
+
+
+
+
+
     <!--begin::Action-->
-    <div class="pb-lg-0 pb-5">
+    <div class="pb-lg-0 pb-5"
+    style="  margin: 0;
+    position: absolute;
+    left: 50%;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);"
+    >
       <button
         type="submit"
         id="kt_login_signin_submit"
         class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
+        style="background-color: #599fa8;
+        border: #599fa8;
+        border-radius: 30px;
+        "
         [disabled]="loginForm.invalid"
       >
         تسجيل الدخول

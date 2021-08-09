@@ -54,11 +54,11 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   initForm() {
     this.loginForm = this.fb.group({
-      username: [
-        this.defaultAuth.username,
+      email: [
+        this.defaultAuth.email,
         Validators.compose([
           Validators.required,
-            Validators.pattern('^[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ ]+$')
+            Validators.pattern('[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+\\.[a-z]{2,3}')
         ]),
       ],
       password: [
@@ -77,7 +77,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.isWrong = false;
     this.hasError = false;
     const loginSubscr = this.authService
-      .login(this.f.username.value, this.f.password.value)
+      .login(this.f.email.value, this.f.password.value)
       .pipe(first())
       .subscribe( data  => {
         if (data === undefined){
