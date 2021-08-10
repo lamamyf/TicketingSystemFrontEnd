@@ -14,6 +14,11 @@ export const routes: Routes = [
       import('./modules/errors/errors.module').then((m) => m.ErrorsModule),
   },
   {
+    path: 'pages',
+    loadChildren: () =>
+      import('./pages/pages-routing.module').then((m) => m.PagesRoutingModule),
+  },
+  {
     path: '',
     canActivate: [AuthGuard],
     loadChildren: () =>
