@@ -16,14 +16,7 @@
     style="background-image: url('./assets/media/svg/logos/LOGO.svg');
     background-position: center;
     background-repeat: no-repeat;
-  
-    
-    height: 100px;
-    
-    
-    "
-    
-    >
+    height: 100px; " >
     
     </div>
     <!--end::Title-->
@@ -47,6 +40,7 @@
         type="email"
         name="email"
         formControlName="email"
+        placeholder="البريد الإلكتروني"
         pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$"
         [ngClass]="{ 'is-invalid': loginForm.controls['email'].invalid }"
       />
@@ -83,6 +77,7 @@
         type="password"
         name="password"
         formControlName="password"
+        placeholder="كلمة المرور"
         [ngClass]="{ 'is-invalid': loginForm.controls['password'].invalid }"
       />
       <ng-container
@@ -134,7 +129,7 @@
         border: #599fa8;
         border-radius: 30px;"
         [disabled]="loginForm.invalid">
-        
+
         تسجيل الدخول
       </button>
 
