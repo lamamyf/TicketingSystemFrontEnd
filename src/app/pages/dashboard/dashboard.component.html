@@ -1,78 +1,74 @@
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 <div class="card card-custom gutter-b p-6">
     <div class="row pt-6 col-xl-12">
-        <div class="col-xl-6"style="margin-top: 60px !important;" >
-            <div  class="col-xl-4">
-                <div class="card card-custom text-white"
-                     [ngStyle]="{ height: widgetHeight, width:widgetWidth}"
-                     style="background-color: #7686c0 !important;">
-                    <div class="card-body"
-                    style="background-color: black;"
-                    >
-                        <span [inlineSVG]="'./assets/media/svg/icons/Communication/Group.svg'"
-                              class="svg-icon svg-icon-3x svg-icon-white"
-                        ></span>
-                        <div class="font-weight-bolder font-size-h2 mt-3" >{{totalUsers}}</div>
-                        <span class="font-weight-bold font-size-lg mt-1"
-                            >إجمالي المستخدمين</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 mt-6">
-                <div class="card card-custom text-white"
-                     [ngStyle]="{ height: widgetHeight, width:widgetWidth }" style="background-color: #bcbcbc; ">
-                    <div class="card-body">
-                        <span [inlineSVG]="'./assets/media/svg/icons/Layout/Layout-4-blocks.svg'"
-                              class="svg-icon svg-icon-3x svg-icon-white ml-n2"></span>
-                        <div class="font-weight-bolder font-size-h2 mt-3">
-                            {{totalResults}}
-                        </div>
-                        <span class="font-weight-bold font-size-lg mt-1"
-                        >إجمالي النتائج</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="border">
-            <div style="margin-top: -20px " >
-                <ul class="nav nav-bold nav-tabs nav-tabs-line nav-tabs-line-3x pt-6 border-bottom
-                nav-tabs-line-transparent-white nav-tabs-line-active-border-success px-8"
-                    role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link cursor-pointer text-dark"
-                            data-toggle="tab"
-                            (click)="setActiveTabId('topbar_systemStatus')"
-                            [ngClass]="getActiveCSSClasses('topbar_systemStatus')">
-                            حالة النظام</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link cursor-pointer text-dark"
-                           data-toggle="tab"
-                           (click)="setActiveTabId('topbar_systemType')"
-                           [ngClass]="getActiveCSSClasses('topbar_systemType')">
-                            نوع النظام</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link cursor-pointer text-dark"
-                            data-toggle="tab"
-                            (click)="setActiveTabId('topbar_lockStatus')"
-                            [ngClass]="getActiveCSSClasses('topbar_lockStatus')">
-                            قفل الهاتف</a>
-                    </li>
-                </ul>
-            </div>
 
-            <div id="chart" class=" col-xl-6 mt-5 tab-content">
-                <apx-chart class="tab-pane active show"
-                           role="tabpanel"
-                           [chart]="chartOptions.chart"
-                           [responsive]="chartOptions.responsive"
-                           [series]="chartOptions.series"
-                           [labels]="chartOptions.labels"
-                           [colors]="chartOptions.colors" >
-                </apx-chart>
-            </div>
+      
+        <div class="border" 
+       
+        >
+
+
+            <div 
+            class="grid-container"
+            *ngFor="let ticket of  getTicketByUser();">
+
+                <div class="grid-item">
+                 <p class="ticketTextSubject" >
+                {{ticket.subject}} </p>
+
+
+    <p *ngIf = "ticket.status == 'Pending'" class="ticketTextStatus" style="color: #EE9105;">
+          معلقة </p>
+                 
+          <p *ngIf = "ticket.status == 'Received'" class="ticketTextStatus" style="color: #46693E;">
+            تم الإستلام </p>
+
+
+            <p *ngIf = "ticket.status == 'Closed'" class="ticketTextStatus" style="color: #1111F5;">
+                مغلقة </p>
+
+
+
+                    <p class="ticketTextCreatedDate" >
+                        {{ticket.createdDate}} </p>
+               
+              
+                
+                </div>
+                
+          
+               
+                
+                </div>
+
+               
+
+               
+                <a 
+                class= "addTicketButton"
+            
+                href="#">
+                    <svg 
+                    style="margin-top: 50%;"
+                    width="90" height="90" viewBox="0 0 136 139" fill="transparent" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M68.0002 127.417C99.2963 127.417 124.667 101.487 124.667 69.5C124.667 37.5135 99.2963 11.5834 68.0002 11.5834C36.704 11.5834 11.3335 37.5135 11.3335 69.5C11.3335 101.487 36.704 127.417 68.0002 127.417Z" 
+                        stroke="#707074" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M68 46.3334V92.6667" stroke="#707074" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M45.3335 69.5H90.6668" stroke="#707074" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>                 
+            
+                  </a>
+                  
+               
+
 
 
          </div>
+
+
+
+
     </div>
 </div>

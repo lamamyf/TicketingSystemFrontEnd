@@ -1,6 +1,11 @@
 <!-- begin::Header Nav -->
 <ul class="menu-nav"
-style="background-color: #7BBDC7;"
+
+style="
+background-color: #7BBDC7;
+align-content: right;
+justify-content: right;
+"
 [ngClass]="ulCSSClasses">
   <!-- begin::1 Level -->
   <li 
@@ -9,7 +14,8 @@ style="background-color: #7BBDC7;"
   routerLinkActive="menu-item-active">
     <a class="menu-link" routerLink="/dashboard" routerLinkActive="active">
       <span 
-      style=" color: #46464B; font-size: larger;"
+      style=" color: #46464B; font-size: larger;
+       "
 
       class="menu-text">تذاكر</span>
      
@@ -35,6 +41,8 @@ style="background-color: #7BBDC7;"
 
 
 
+
+
   <!-- begin::1 Level -->
   <li class="menu-item menu-item-rel" routerLinkActive="menu-item-active">
     <a class="menu-link" routerLink="/usersManagement" routerLinkActive="active">
@@ -50,7 +58,33 @@ style="background-color: #7BBDC7;"
 
 
 
-
+ <!-- begin::1 Level -->
+  <li 
+  
+  class="menu-item menu-item-rel"
+  style=" position: absolute;
+  top: 8px;
+  left: 16px;"  
+  routerLinkActive="menu-item-active">
+    <a class="menu-link" routerLink="/dashboard" routerLinkActive="active">
+      <span 
+     
+     >
+     <svg width="48" height="54" viewBox="0 0 48 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18 47.25H10C8.93913 47.25 7.92172 46.7759 7.17157 45.932C6.42143 45.0881 6 43.9435 6 42.75V11.25C6 10.0565 6.42143 8.91193 7.17157 8.06802C7.92172 7.22411 8.93913 6.75 10 6.75H18" stroke="#46464B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M32 38.25L42 27L32 15.75" stroke="#46464B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M42 27H18" stroke="#46464B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      
+    
+    </span>
+     
+      <ng-container *ngIf="rootArrowEnabled">
+        <i class="menu-arrow"></i>
+      </ng-container>
+    </a>
+  </li>
+  <!-- end::1 Level -->
 
 
 </ul>

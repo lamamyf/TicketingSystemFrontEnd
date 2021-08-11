@@ -9,6 +9,7 @@ import {
 import {Router} from '@angular/router';
 import {AuthService, UserModel} from '../../modules/auth';
 import {ApiService} from '../../services/api.service';
+import { TicketModel } from 'src/app/modules/auth/_models/ticket.model';
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -24,6 +25,7 @@ export type ChartOptions = {
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  ticket: TicketModel;
   @Input() widgetHeight = '150px';
   @Input() widgetWidth = '400px';
   public chartOptions: Partial<ChartOptions>;
@@ -120,6 +122,95 @@ export class DashboardComponent implements OnInit {
         });
 
   }
+
+
+
+
+  getTicketByUser() : TicketModel []  {
+
+  
+    //dummy data
+    let tickets: TicketModel[] = [
+
+      {
+      id: 1,
+      userId: 1,
+      userFirstName: "nouf",
+      userLastName: "aljufair",
+      subject: "طلب",
+      description: "ssssss",
+      status: "Received",
+      category: "complaint",
+      createdDate: "11-11-2021",
+
+    },
+    {
+      id: 1,
+      userId: 1,
+      userFirstName: "nouf",
+      userLastName: "aljufair",
+      subject: "طلب",
+      description: "ssssss",
+      status: "Closed",
+      category: "complaint",
+      createdDate: "11-11-2021",
+
+    },
+    {
+      id: 1,
+      userId: 1,
+      userFirstName: "nouf",
+      userLastName: "aljufair",
+      subject: "طلب",
+      description: "ssssss",
+      status: "Pending",
+      category: "complaint",
+      createdDate: "11-11-2021",
+
+    },
+    {
+      id: 1,
+      userId: 1,
+      userFirstName: "nouf",
+      userLastName: "aljufair",
+      subject: "طلب",
+      description: "ssssss",
+      status: "Received",
+      category: "complaint",
+      createdDate: "11-11-2021",
+
+    },  {
+      id: 1,
+      userId: 1,
+      userFirstName: "nouf",
+      userLastName: "aljufair",
+      subject: "طلب",
+      description: "ssssss",
+      status: "Pending",
+      category: "complaint",
+      createdDate: "11-11-2021",
+
+    },
+    {
+      id: 2,
+      userId: 2,
+      userFirstName: "aaaaa",
+
+      userLastName: "aljufair",
+      subject: "طلب",
+      description: "ssssss",
+      status: "Closed",
+      category: "complaint",
+      createdDate: "11-11-2021",
+
+    }
+   ];
+
+
+    return tickets;
+}
+
+
 
   chartOpt(chartSeries, chartLabels): void {
 

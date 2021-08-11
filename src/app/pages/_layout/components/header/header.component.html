@@ -1,7 +1,8 @@
 <!--begin::Container-->
 <div
   [ngClass]="headerContainerCSSClasses"
-  style="background-color: #7BBDC7;"
+  style="background-color: #7BBDC7;
+  float:right;"
   class="d-flex align-items-stretch justify-content-between"
 >
   <ng-container *ngIf="loader$ | async as _loader">
@@ -14,11 +15,18 @@
 
   <!--begin::Left-->
   <div 
-  style="background-color: #7BBDC7;"
+  style="background-color: #7BBDC7;
+  
+  "
   class="d-flex align-items-stretch mr-3">
 
     <!--begin::Header Logo-->
-    <div class="header-logo">
+    <div class="header-logo"
+    
+    style=" position: absolute;
+    top: 10px;
+    right: 16px;"
+    >
       <a routerLink="/">
         <img
           alt="Logo"
@@ -38,6 +46,7 @@
       <!--begin::Header Menu Wrapper-->
       <div
         class="header-menu-wrapper header-menu-wrapper-left"
+        style="float: left;"
         id="kt_header_menu_wrapper"
       >
         <!--begin::Header Menu-->
@@ -48,6 +57,7 @@
             #ktHeaderMenu
             id="kt_header_menu"
             class="header-menu header-menu-left header-menu-mobile"
+           
             [ngClass]="headerMenuCSSClasses"
           ></app-header-menu>
         </ng-container>
@@ -55,7 +65,7 @@
           <!-- DYNAMIC MENU -->
           <app-header-menu-dynamic
             #ktHeaderMenu
-            style="background-color: #7BBDC7;"
+            
             id="kt_header_menu"
             class="header-menu header-menu-left header-menu-mobile"
             [ngClass]="headerMenuCSSClasses"
