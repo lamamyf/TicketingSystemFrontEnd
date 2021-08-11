@@ -16,7 +16,7 @@ export class AuthInterceptor implements HttpInterceptor {
         const a = this.injector.get(AuthService);
         const currentUser = a.currentUserValue;
         const tok = a.currentToken;
-        if (currentUser && currentUser.username) {
+        if (currentUser && currentUser.id) {
             request = request.clone({
                 setHeaders: {
                     Authorization: `Bearer ${tok}`,

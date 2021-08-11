@@ -60,7 +60,7 @@ export class UsersmanagementComponent implements OnInit {
           width: '500px',
           height: '170px'
       });
-      this.dialogRef.componentInstance.confirmMessage = 'هل آنت متآكد من حذف الحساب ' + user.username + ' ؟';
+      this.dialogRef.componentInstance.confirmMessage = 'هل آنت متآكد من حذف الحساب ' + user.firstName+" "+user.lastName + ' ؟';
       this.dialogRef.afterClosed().subscribe(result => {
           if (result) {
               this.apiService
