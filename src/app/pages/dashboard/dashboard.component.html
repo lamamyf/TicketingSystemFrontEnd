@@ -1,5 +1,4 @@
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <div class="card card-custom gutter-b p-6">
     <div class="row pt-6 col-xl-12">
@@ -14,6 +13,8 @@
             class="grid-container"
             *ngFor="let ticket of  getTicketByUser();">
 
+
+            <a routerLink="/dashboard/ticketview">
                 <div class="grid-item">
                  <p class="ticketTextSubject" >
                 {{ticket.subject}} </p>
@@ -38,7 +39,7 @@
                 
                 </div>
                 
-          
+            </a>
                
                 
                 </div>

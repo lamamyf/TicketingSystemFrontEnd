@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './_layout/layout.component';
 
+;
 const routes: Routes = [
   {
     path: '',
@@ -11,6 +12,11 @@ const routes: Routes = [
         path: 'dashboard',
         loadChildren: () =>
           import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+      },
+      {
+        path: 'dashboard/ticketView',
+        loadChildren: () =>
+          import('./Ticketview/TicketView.module').then((m) => m.TicketViewModel),
       },
       {
         path: 'usersManagement',
