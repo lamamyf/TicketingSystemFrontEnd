@@ -28,8 +28,9 @@
     <!-- end::Alert error-->
 
     <!--begin::Form group-->
-    <div class="form-group">
 
+    <div class="form-group">
+<div style="margin-left: 55%;">
       <label class="font-size-h6 font-weight-bolder text-dark">الإسم الأول*</label>
       <input
         class="form-control form-control-solid h-auto py-4 px-5 rounded-lg font-size-h6"
@@ -41,7 +42,7 @@
         [ngClass]="{
           'is-invalid': registrationForm.controls['firstName'].invalid
         }"
-      />
+      /></div>
 
       <ng-container
         [ngTemplateOutlet]="formError"
@@ -73,7 +74,7 @@
     
     <!--begin::Form group-->
     <div class="form-group">
-
+      <div style="margin-right: 52%; margin-top: -25%;" >
       <label class="font-size-h6 font-weight-bolder text-dark">الإسم الأخير*</label>
       <input
         class="form-control form-control-solid h-auto py-4 px-5 rounded-lg font-size-h6"
@@ -85,7 +86,7 @@
         [ngClass]="{
           'is-invalid': registrationForm.controls['lastName'].invalid
         }"
-      />
+      /></div>
 
       <ng-container
         [ngTemplateOutlet]="formError"
@@ -269,7 +270,7 @@
         <!--begin::Form group-->
     <div class="form-group">
        <label class="font-size-h6 font-weight-bolder text-dark pt-5">
-       الجنس:* <br>
+       الجنس* <br>
   <input
 
         type="radio"
