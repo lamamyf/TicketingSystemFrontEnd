@@ -7,6 +7,7 @@ import { MatDialogRef } from '@angular/material/dialog';
     styleUrls: ['./confirmation-dialog.scss'],
 
 })
+
 export class ConfirmationDialogComponent {
     constructor(public dialogRef: MatDialogRef<ConfirmationDialogComponent>) {}
 

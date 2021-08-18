@@ -6,7 +6,7 @@ import {
   ApexResponsive,
   ApexChart
 } from 'ng-apexcharts';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService, UserModel} from '../../modules/auth';
 import {ApiService} from '../../services/api.service';
 import { TicketModel } from 'src/app/modules/auth/_models/ticket.model';
@@ -43,12 +43,19 @@ export class DashboardComponent implements OnInit {
   totalUnsecured;
   totalLocked;
   totalUnlocked;
+  id: any;
+
+
+
+
 
   constructor(
       private router: Router,
       private authenticationService: AuthService,
       private apiService: ApiService,
       private cdr: ChangeDetectorRef,
+      private Router: ActivatedRoute,
+
   ) {
   //  this.loadData();
 
@@ -81,6 +88,10 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+
+  
+
 
   }
 

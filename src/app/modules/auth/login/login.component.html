@@ -16,7 +16,14 @@
     style="background-image: url('./assets/media/svg/logos/LOGO.svg');
     background-position: center;
     background-repeat: no-repeat;
-    height: 100px; " >
+  
+    
+    height: 100px;
+    
+    
+    "
+    
+    >
     
     </div>
     <!--end::Title-->
@@ -40,8 +47,7 @@
         type="email"
         name="email"
         formControlName="email"
-        placeholder="البريد الإلكتروني"
-        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$"
+       
         [ngClass]="{ 'is-invalid': loginForm.controls['email'].invalid }"
       />
       <ng-container
@@ -68,8 +74,7 @@
     <div class="form-group">
       <div class="d-flex justify-content-between mt-n5">
         <label class="font-size-h6 font-weight-bolder text-dark pt-5"
-          >كلمة المرور</label
-        >
+          >كلمة المرور</label>
       </div>
 
       <input
@@ -77,7 +82,6 @@
         type="password"
         name="password"
         formControlName="password"
-        placeholder="كلمة المرور"
         [ngClass]="{ 'is-invalid': loginForm.controls['password'].invalid }"
       />
       <ng-container
@@ -100,7 +104,7 @@
 
 <div style="margin-top: 1cm; margin-right: 2.5mm;">
   لا يوجد لديك حساب؟
-  <a  routerLink="auth/register" routerLinkActive="active">سجل الأن</a>
+  <a  routerLink="/auth/register" routerLinkActive="active">سجل الأن</a>
 
 </div>
 
@@ -124,12 +128,14 @@
       <button
         type="submit"
         id="kt_login_signin_submit"
+        routerLink = "/pages/dashboard"
         class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
         style="background-color: #599fa8;
         border: #599fa8;
-        border-radius: 30px;"
-        [disabled]="loginForm.invalid">
-
+        border-radius: 30px;
+        "
+        [disabled]="loginForm.invalid"
+      >
         تسجيل الدخول
       </button>
 

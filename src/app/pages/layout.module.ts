@@ -21,6 +21,7 @@ import { CoreModule } from '../_metronic/core';
 import { SubheaderModule } from '../_metronic/partials/layout/subheader/subheader.module';
 import { AsideDynamicComponent } from './_layout/components/aside-dynamic/aside-dynamic.component';
 import { HeaderMenuDynamicComponent } from './_layout/components/header/header-menu-dynamic/header-menu-dynamic.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { HeaderMenuDynamicComponent } from './_layout/components/header/header-m
     NgbProgressbarModule,
     CoreModule,
     SubheaderModule,
+    ReactiveFormsModule,
   ],
 })
 export class LayoutModule { }

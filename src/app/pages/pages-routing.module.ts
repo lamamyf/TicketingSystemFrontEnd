@@ -13,11 +13,29 @@ const routes: Routes = [
         loadChildren: () =>
           import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
+
+      {
+        path: 'about',
+        loadChildren: () =>
+          import('./aboutUs/about.module').then((m) => m.AboutModule),
+      },
+
+
       {
         path: 'dashboard/ticketView',
         loadChildren: () =>
-          import('./Ticketview/TicketView.module').then((m) => m.TicketViewModel),
+          import('./Ticketview/TicketView.module').then((m) => m.TicketViewModule),
       },
+      {
+
+
+        path: 'dashboard/addTicket',
+        loadChildren: () =>
+          import('./addTickets/addTicket.module').then((m) => m.AddTicketModule),
+      },
+
+      
+
       {
         path: 'usersManagement',
         loadChildren: () =>

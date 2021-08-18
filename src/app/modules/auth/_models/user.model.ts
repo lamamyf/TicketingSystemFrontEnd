@@ -23,6 +23,7 @@ export class UserModel extends AuthModel {
     this.avatar = './assets/media/users/default.jpg';
     this.gender = user.gender;
 
-    
   }
+
+  
 }

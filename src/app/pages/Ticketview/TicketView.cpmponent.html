@@ -1,5 +1,78 @@
-<h1>
+<app-confirmdialog>
+    
+</app-confirmdialog>
 
-viewing tickets here
 
-</h1>
+<div class="card card-custom gutter-b p-6">
+    <div class="row pt-6 col-xl-12">
+
+      
+       
+        <div 
+        
+        *ngFor="let ticket of  getTicket();">
+
+
+            <div>
+             <p class="ticketTextSubject" >
+
+            {{ticket.subject}} </p>
+
+<label class="font-size-h8 font-weight-bolder text-dark pt-5">  الوصف:</label>
+            <div 
+           
+            >
+
+
+         
+
+
+            <textarea  class="ticketTextDescription" disabled  [scrollTop] 
+            style="width: 500px;
+            height: 150px;
+            text-align: right;
+            text-justify: right;"
+            
+            >
+                {{ticket.description}}
+            </textarea>
+            
+
+            </div>
+
+            <label class="font-size-h8 font-weight-bolder text-dark pt-5"> حالة التذكرة:</label>
+        
+<p *ngIf = "ticket.status == 'Pending'" class="ticketTextStatus" style="color: #EE9105;">
+      معلقة </p>
+             
+      <p *ngIf = "ticket.status == 'Received'" class="ticketTextStatus" style="color: #46693E;">
+        تم الإستلام </p>
+
+
+        <p *ngIf = "ticket.status == 'Closed'" class="ticketTextStatus" style="color: #1111F5;">
+            مغلقة </p>
+
+
+            <label class="font-size-h8 font-weight-bolder text-dark pt-5"> التصنيف:</label>
+
+
+<p class="ticketCategory"
+>{{ ticket.category}}</p>
+            
+
+<label class="font-size-h8 font-weight-bolder text-dark pt-5">تاريخ الإنشاء:</label>
+
+                <p class="ticketCategory" >
+                    {{ticket.createdDate}} </p>
+           
+             
+            
+            </div>
+            
+       
+           
+            
+            </div>
+
+    </div>
+</div>

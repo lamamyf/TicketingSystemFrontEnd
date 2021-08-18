@@ -14,7 +14,14 @@
             *ngFor="let ticket of  getTicketByUser();">
 
 
-            <a routerLink="/dashboard/ticketview">
+
+            
+            <a 
+
+            [routerLink]="['/pages/dashboard/ticketView', ticket]"
+
+            routerLinkActive="active"
+            >
                 <div class="grid-item">
                  <p class="ticketTextSubject" >
                 {{ticket.subject}} </p>
@@ -49,7 +56,7 @@
                
                 <a 
                 class= "addTicketButton"
-            
+                routerLink = "/pages/dashboard/addTicket"
                 href="#">
                     <svg 
                     style="margin-top: 50%;"
