@@ -1,5 +1,8 @@
 <ng-container>
-  <div class="card card-custom" [formGroup]="formGroup">
+  <div class="card card-custom" 
+  [formGroup]="formGroup">
+  
+
     <!-- begin::Loading -->
     <ng-container *ngIf="isLoading$ | async">
       <div class="progress progress-modal">
@@ -19,77 +22,141 @@
       <div class="card-title align-items-start flex-column">
         <h3 class="card-label font-weight-bolder text-dark">تعديل المستخدم</h3>
       </div>
-      <div class="card-toolbar">
-        <button type="submit" [disabled]="formGroup.invalid" class="btn btn-success  confirmBtn mr-2" (click)="save()">حفظ التغييرات</button>
-        <button type="button" class="btn btn-success  font-size-sm cancelBtn" (click)="cancel()">إلغاء</button>
-      </div>
+    
+
     </div>
     <!--end::Header-->
     <!--begin::Form-->
     <div class="form">
       <div class="card-body">
-        <div class="form-group row">
-          <label class="col-xl-3 col-lg-3 col-form-label font-size-h5 ">كلمة المرور الحالية</label>
-          <div class="col-lg-9 col-xl-6">
-            <input type="password"
-              class="form-control form-control-lg form-control-solid mb-2"
-              placeholder="كلمة المرور الحالية"
-              autocomplete="off"
-              formControlName="currentPassword"
-            />
-            <mat-error  *ngIf="hasError">
-              كلمة المرور الحالية خاطئة
-            </mat-error>
-
-          </div>
+      
+        <div class="form-group col-md-5">
+                <label class="font-size-h6 font-weight-bolder text-dark">الإسم الأول*</label>
+                <input
+                  class="form-control form-control-solid h-auto py-4 px-5 rounded-lg font-size-h6"
+                  type="text"
+                  name="firstName"
+                  formControlName="firstName"
+                  placeholder="الإسم الأول"
+                  autocomplete="off"
+                  [ngClass]="{
+                    'is-invalid': formGroup.controls['firstName'].invalid
+                  }"
+                />
+          
+                <ng-container
+                  [ngTemplateOutlet]="formError"
+                  [ngTemplateOutletContext]="{
+                    validation: 'required',
+                    message: 'الإسم الأول مطلوب',
+                    control: formGroup.controls['firstName']
+                  }"
+                ></ng-container>
+                <ng-container
+                  [ngTemplateOutlet]="formError"
+                  [ngTemplateOutletContext]="{
+                    validation: 'minlength',
+                    message: 'الإسم الأول يجب أن يتكون من ٣ حروف على الأقل',
+                    control: formGroup.controls['firstName']
+                  }"
+                ></ng-container>
+                <ng-container
+                  [ngTemplateOutlet]="formError"
+                  [ngTemplateOutletContext]="{
+                    validation: 'maxLength',
+                    message: 'الإسم الأول يجب أن لا يكون أكثر من ١٠٠ حرف',
+                    control: formGroup.controls['firstName']
+                  }"
+                ></ng-container>
+              </div>
+        <div class="form-group col-md-5">
+         
+          <label  class=" font-size-h6 font-weight-bolder text-dark">الإسم الأخير*</label>
+          <input
+          class="form-control form-control-lg form-control-solid h-auto py-4 px-5 rounded-lg font-size-h6 " 
+            type="text"
+            name="lastName"
+            formControlName="lastName"
+            placeholder="الإسم الأخير"
+            autocomplete="off"
+            [ngClass]="{
+              'is-invalid': formGroup.controls['lastName'].invalid
+            }"
+          />
+    
+          <ng-container
+            [ngTemplateOutlet]="formError"
+            [ngTemplateOutletContext]="{
+              validation: 'required',
+              message: 'الإسم الأخير مطلوب',
+              control: formGroup.controls['lastName']
+            }"
+          ></ng-container>
+          <ng-container
+            [ngTemplateOutlet]="formError"
+            [ngTemplateOutletContext]="{
+              validation: 'minlength',
+              message: 'الإسم الأخير يجب أن يتكون من ٣ حروف على الأقل',
+              control: formGroup.controls['lastName']
+            }"
+          ></ng-container>
+          <ng-container
+            [ngTemplateOutlet]="formError"
+            [ngTemplateOutletContext]="{
+              validation: 'maxLength',
+              message: 'الإسم الأخير يجب أن لا يكون أكثر من ١٠٠ حرف',
+              control: formGroup.controls['lastName']
+            }"
+          ></ng-container>
         </div>
-        <div class="form-group row">
-          <label class="col-xl-3 col-lg-3 col-form-label font-size-h5">كلمة المرور الجديدة</label>
-          <div class="col-lg-9 col-xl-6 input-placeholder">
-            <input type="password"
-              class="form-control form-control-lg form-control-solid"
-              placeholder="كلمة المرور الجديدة"
-              autocomplete="off"
-              formControlName="password" [type]="hide ? 'password' : 'text'"
-             required/>
-            <mat-icon   class="field-icon" (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-            <ng-container [ngTemplateOutlet]="formError"
-                          [ngTemplateOutletContext]="{ validation: 'minlength',
-                          message: 'كلمة المرور يجب ان تتكون على الاقل 8 خانات',
-                          control: formGroup.controls['password']}">
-            </ng-container>
-            <ng-container [ngTemplateOutlet]="formError"
-                          [ngTemplateOutletContext]="{ validation: 'pattern',
-                          message: 'كلمة المرور يجب ان تحتوي على أحرف صغيرة وكبيرة وأرقام ورموز',
-                          control: formGroup.controls['password']}">
-            </ng-container>
-          </div>
-
-        </div>
-        <div class="form-group row">
-          <label class="col-xl-3 col-lg-3 col-form-label font-size-h5">تأكيد كلمة المرور</label>
-          <div class="col-lg-9 col-xl-6">
-            <input type="password"
-              class="form-control form-control-lg form-control-solid"
-              placeholder="تأكيد كلمة المرور"
-              autocomplete="off"
-              formControlName="confirmPassword"
-             />
-            <mat-error *ngIf="formGroup.hasError('notSame')">
-              كلمة المرور غير متطابقة
-            </mat-error>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-xl-3 col-lg-3 col-form-label font-size-h5">تفعيل المستخدم</label>
-          <div class="col-lg-9 col-xl-6">
-            <mat-slide-toggle formControlName="active"></mat-slide-toggle>
-
-          </div>
-        </div>
+        <div class="form-group ">
+          <label class="font-size-h6 font-weight-bolder text-dark pt-5">
+          الجنس* <br>
+     <input
+   
+           type="radio"
+           id="male" 
+           name="gender" 
+           value="male"
+           autocomplete="off"
+           formControlName="gender"
+           [ngClass]="{
+             'is-invalid': formGroup.controls['gender'].invalid
+           }"
+     >
+     <label 
+     class="font-size-h5 font-weight-bold text-dark"
+   
+     for="male"> ذكر </label>
+     &nbsp;&nbsp;&nbsp;
+     <input 
+     
+           type="radio"
+           id="female" 
+           name="gender" 
+           value="female"
+           autocomplete="off"
+           formControlName="gender"
+           [ngClass]="{
+             'is-invalid': formGroup.controls['gender'].invalid
+           }"
+     
+     >
+     <label 
+     class="font-size-h5 font-weight-bold text-dark"
+   
+     for="female"> أنثى </label> 
+    
+            
+             </label>
+           </div>
       </div>
     </div>
     <!--end::Form-->
+    <div class="card-toolbar">
+      <button type="submit" [disabled]="formGroup.invalid" class="btn btn-success  confirmBtn mr-2" (click)="save()">حفظ التغييرات</button>
+      <button type="button" class="btn btn-success  font-size-sm cancelBtn" (click)="cancel()">إلغاء</button>
+    </div>
   </div>
 </ng-container>
 
@@ -109,3 +176,6 @@
     </div>
   </ng-container>
 </ng-template>
+
+
+
