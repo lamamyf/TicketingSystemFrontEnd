@@ -43,10 +43,7 @@ export class AsideComponent implements OnInit {
   }
 
   private getLogo() {
-    if (this.brandSkin === 'light') {
-      return './assets/media/logos/logo-dark.png';
-    } else {
-      return './assets/media/logos/logo-light.png';
-    }
+      return './assets/media/logos/LOGO-3.png';
+
   }
 }
