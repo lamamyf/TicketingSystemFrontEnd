@@ -63,21 +63,21 @@ style="font-size: 25px;"
        
             
             
-<p *ngIf="getTicket().status == 'Pending'"
+<div *ngIf="getTicket().status == 'Pending'"
 
 class="ticketTextStatus" style="color: #EE9105;">
-      معلقة </p>
+      معلقة </div>
              
 
 
 
-      <p *ngIf="getTicket().status == 'Received'" class="ticketTextStatus" style="color: #46693E;">
-        تم الإستلام </p>
+      <div *ngIf="getTicket().status == 'Received'" class="ticketTextStatus" style="color: #46693E;">
+        تم الإستلام </div>
 
 
-        <p *ngIf="getTicket().status == 'Closed'" 
+        <div *ngIf="getTicket().status == 'Closed'" 
         class="ticketTextStatus" style="color: #1111F5;">
-            مغلقة </p>
+            مغلقة </div>
 
 
             <br>

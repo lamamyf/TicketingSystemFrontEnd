@@ -16,6 +16,7 @@ import { SplashScreenModule } from './_metronic/partials/layout/splash-screen/sp
 import {JwtInterceptor} from './services/jwt.interceptor';
 import {ConfirmationDialogComponent} from './pages/confirmation-dialog/confirmation-dialog';
 import {TicketAddDialogComponent} from './pages/TicketAddDialog/TicketAddDialog';
+import {TicketViewDialogComponent} from './pages/TicketViewDialog/TicketViewDialog';
 
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTableModule} from '@angular/material/table';
@@ -28,6 +29,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {RouterExtService} from './services/RouterExtService.service';
 import {MatSlideToggle, MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSliderModule} from '@angular/material/slider';
+import { CommonModule } from "@angular/common";
 
 
 
@@ -40,8 +42,9 @@ function appInitializer(authService: AuthService) {
 }
 
 @NgModule({
-  declarations: [AppComponent, ConfirmationDialogComponent , TicketAddDialogComponent],
+  declarations: [AppComponent, ConfirmationDialogComponent , TicketAddDialogComponent , TicketViewDialogComponent],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     SplashScreenModule,

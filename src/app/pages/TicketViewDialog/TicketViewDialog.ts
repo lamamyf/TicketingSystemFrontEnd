@@ -39,7 +39,7 @@ export class TicketViewDialogComponent {
 t : DashboardComponent;
     lang;
     dir;
-      id: any;
+     
 
   
 //changed
@@ -70,7 +70,6 @@ t : DashboardComponent;
           });
 
 
-this.id = this.ticket.id;
 
 
     }
@@ -90,10 +89,10 @@ this.id = this.ticket.id;
         userId: 2,
         userFirstName: "nouf",
         userLastName: "aljufair",
-        subject: "طلب",
-        description: "ssssss",
+        subject: " طلب أدوات",
+        description: "يوجد نقص  أدوات طلب نقص ادوات تذكرة عاجل",
         status: "Received",
-        category: "complaint",
+        category: "شكوى",
         createdDate: "11-11-2021",
   
       }

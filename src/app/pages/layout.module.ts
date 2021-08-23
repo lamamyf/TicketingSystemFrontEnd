@@ -23,7 +23,7 @@ import { AsideDynamicComponent } from './_layout/components/aside-dynamic/aside-
 import { HeaderMenuDynamicComponent } from './_layout/components/header/header-menu-dynamic/header-menu-dynamic.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import {NgApexchartsModule} from 'ng-apexcharts';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -51,6 +51,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     SubheaderModule,
     ReactiveFormsModule,
     MatDialogModule,
+    NgApexchartsModule,
   ],
 })
 export class LayoutModule { }

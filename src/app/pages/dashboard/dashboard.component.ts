@@ -160,10 +160,10 @@ export class DashboardComponent implements OnInit {
       userId: 1,
       userFirstName: "nouf",
       userLastName: "aljufair",
-      subject: "طلب",
-      description: "ssssss",
+      subject: "١طلب",
+      description: "احتياج ادوات ونقص وطلب",
       status: "Received",
-      category: "complaint",
+      category: "شكوى",
       createdDate: "11-11-2021",
 
     },
@@ -172,10 +172,10 @@ export class DashboardComponent implements OnInit {
       userId: 1,
       userFirstName: "nouf",
       userLastName: "aljufair",
-      subject: "طلب",
-      description: "ssssss",
+      subject: "٢طلب",
+      description: "وصف للمشكلة",
       status: "Closed",
-      category: "complaint",
+      category: "شكوى",
       createdDate: "11-11-2021",
 
     },
@@ -184,10 +184,10 @@ export class DashboardComponent implements OnInit {
       userId: 1,
       userFirstName: "nouf",
       userLastName: "aljufair",
-      subject: "طلب",
-      description: "ssssss",
+      subject: "٣طلب",
+      description: "مدري",
       status: "Pending",
-      category: "complaint",
+      category: "شكوى",
       createdDate: "11-11-2021",
 
     },
@@ -196,10 +196,10 @@ export class DashboardComponent implements OnInit {
       userId: 1,
       userFirstName: "nouf",
       userLastName: "aljufair",
-      subject: "طلب",
-      description: "ssssss",
+      subject: "٤طلب",
+      description: "سيكيورتي بريتش",
       status: "Received",
-      category: "complaint",
+      category: "اقتراح",
       createdDate: "11-11-2021",
 
     },  {
@@ -207,10 +207,10 @@ export class DashboardComponent implements OnInit {
       userId: 1,
       userFirstName: "nouf",
       userLastName: "aljufair",
-      subject: "طلب",
-      description: "ssssss",
+      subject: "٥طلب",
+      description: "نقص ادوات",
       status: "Pending",
-      category: "complaint",
+      category: "اخرى",
       createdDate: "11-11-2021",
 
     },
@@ -220,10 +220,10 @@ export class DashboardComponent implements OnInit {
       userFirstName: "aaaaa",
 
       userLastName: "aljufair",
-      subject: "طلب",
-      description: "ssssss",
+      subject: "٦طلب",
+      description: "اسستم خربان",
       status: "Closed",
-      category: "complaint",
+      category: "اقتراح",
       createdDate: "11-11-2021",
 
     }
@@ -259,7 +259,9 @@ ViewTicket(){
     width: '400px',
     height: '550px'
 });
- this.dialogRef.afterClosed().subscribe(result => {
+
+
+ this.dialogRefView.afterClosed().subscribe(result => {
  
    
 });
