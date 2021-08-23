@@ -13,7 +13,7 @@ import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 // Highlight JS
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { SplashScreenModule } from './_metronic/partials/layout/splash-screen/splash-screen.module';
-import {AuthInterceptor} from './services/auth.interceptor';
+import {JwtInterceptor} from './services/jwt.interceptor';
 import {ConfirmationDialogComponent} from './pages/confirmation-dialog/confirmation-dialog';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTableModule} from '@angular/material/table';
@@ -63,7 +63,7 @@ function appInitializer(authService: AuthService) {
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
+      useClass: JwtInterceptor,
       multi: true
     },
     {

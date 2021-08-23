@@ -13,7 +13,7 @@ const API_URL = `${environment.apiUrl}/admin`;
 export class AuthHTTPService {
   constructor(private http: HttpClient) { }
 
-  // public methods
+ 
   login(username: string, password: string): Observable<any> {
     const httpHeaders = new HttpHeaders({
       'Accept-Language': `ar`,
@@ -23,11 +23,12 @@ export class AuthHTTPService {
     });
   }
 
-  // CREATE =>  POST: add a new user to the server
+
   createUser(user: UserModel): Observable<UserModel> {
     return this.http.post<UserModel>(`${API_URL}/register`, user);
   }
-  // Your server should check email => If email exists send link to the user and return true | If email doesn't exist return false
+
+  //Change too update password
   forgotPassword(email: string): Observable<boolean> {
     return this.http.post<boolean>(`${API_URL}/forgot-password`, {
       email,
