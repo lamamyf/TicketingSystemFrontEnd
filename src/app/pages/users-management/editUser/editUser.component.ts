@@ -89,7 +89,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
   cancel(){
       this.previousUrl = this.routerExtService.getPreviousUrl();
       if (this.previousUrl !== '/usersManagement'){
-          this.router.navigate(['/']);
+          this.router.navigate(['/pages/dashboard']);
       }
       else {
           this.location.back();

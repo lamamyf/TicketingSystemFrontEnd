@@ -1,3 +1,4 @@
+import { UserRole } from './userRole';
 import { AuthModel } from './auth.model';
 import { AddressModel } from './address.model';
 import { SocialNetworksModel } from './social-networks.model';
@@ -11,7 +12,7 @@ export class UserModel extends AuthModel {
   email: string;
   avatar: string;
   gender: string;
-
+  UserRole: UserRole;
 
 
   setUser(user: any) {
@@ -20,7 +21,7 @@ export class UserModel extends AuthModel {
     this.firstName = user.firstName;
     this.lastName = user.lastName;
     this.email = user.email;
-    this.avatar = './assets/media/users/default.jpg';
+    this.avatar = './assets/media/svg/avatars/default.jpg';
     this.gender = user.gender;
 
   }

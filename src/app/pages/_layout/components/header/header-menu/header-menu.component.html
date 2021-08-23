@@ -1,3 +1,4 @@
+
 <!-- begin::Header Nav -->
 <ul class="menu-nav"
 
@@ -28,7 +29,8 @@ justify-content: right;
 
   <!-- begin::1 Level -->
   <li class="menu-item menu-item-rel" routerLinkActive="menu-item-active">
-    <a class="menu-link" routerLink="/pages/editUser" routerLinkActive="active">
+    
+    <!-- <a class="menu-link" routerLinkActive="active" >
       <span 
       style=" color: #46464B; font-size: larger;"
 
@@ -37,12 +39,21 @@ justify-content: right;
         <i class="menu-arrow"></i>
       </ng-container>
     </a>
+     -->
+    
+     <div class="dropdown">
+      <button class="dropbtn" routerLinkActive="active">حسابي</button>
+      <div class="dropdown-content">
+        <a routerLink="/pages/editUser">تعديل الحساب</a>
+        <a routerLink="/pages/change-password">تغير كلمة المرور</a>
+        <a href="#">حذف الحساب</a>
+      </div>
+    </div>
+  
   </li>
+ 
 
-
-
-
-
+  
   <!-- begin::1 Level -->
   <li class="menu-item menu-item-rel" routerLinkActive="menu-item-active">
     <a class="menu-link" routerLink="/pages/about" routerLinkActive="active">
