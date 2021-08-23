@@ -7,7 +7,8 @@ import {
   import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
   import { Subscription } from 'rxjs';
 import { TicketModel } from 'src/app/modules/auth/_models/ticket.model';
- import { NgModule }      from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 
 
@@ -32,7 +33,7 @@ import { TicketModel } from 'src/app/modules/auth/_models/ticket.model';
    
     constructor(
         private Router: ActivatedRoute,
-
+        public dialog: MatDialog,
         
       ) {
           
@@ -61,6 +62,7 @@ this.id = this.ticket.id;
     ngOnDestroy() {
       this.unsubscribe.forEach((sb) => sb.unsubscribe());
     }
+
 
 
 

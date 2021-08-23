@@ -1,32 +1,31 @@
-import {
-    Component,
-    ChangeDetectionStrategy,
-    OnDestroy,
-    OnInit,
-  } from '@angular/core';
-  import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-  import { Observable, Subscription } from 'rxjs';
-import { TicketModel } from 'src/app/modules/auth/_models/ticket.model';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import {  FormBuilder, FormGroup, Validators , ReactiveFormsModule} from '@angular/forms';
-
-import {Directive} from '@angular/core';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MAT_DIALOG_DATA, MatDialogConfig , MatDialogState , MatDialogContent} from '@angular/material/dialog';
+import { Observable, Subscription } from 'rxjs';
+import { TicketModel } from 'src/app/modules/auth/_models/ticket.model';
+import { ReactiveFormsModule } from '@angular/forms';
+
+@Component({
+    selector: 'app-confirmdialog',
+    templateUrl: './TicketAddDialog.html',
+    styleUrls: ['./TicketAddDialog.scss'],
+
+})
 
 
 
+//changed
+export class TicketAddDialogComponent {
+
+  //changed
+    constructor(public dialogRef: MatDialogRef<TicketAddDialogComponent> ,  private fb: FormBuilder,
+        ) {
 
 
 
-  @Component({
-    selector: 'addTicket-view',
-    templateUrl: './addTicket.component.html',
-    styleUrls: ['./addTicket.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-  })
-
-
-  export class AddTicketComponent implements OnInit, OnDestroy {
+    }
+    
     addTicketForm : FormGroup;
 
     
@@ -46,17 +45,11 @@ import { MatDialogRef } from '@angular/material/dialog';
 
     lang;
     dir;
-      id: any;
+    id: any;
 
   
    
-    constructor(
-        private fb: FormBuilder,
-
-        
-      ) {
-       
-      }
+    
 
 
     ngOnInit() {
@@ -100,7 +93,5 @@ import { MatDialogRef } from '@angular/material/dialog';
   
       
   }
-
-
-  }
-  
+    public confirmMessage: string;
+}

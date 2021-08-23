@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './_layout/layout.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
+import { ReactiveFormsModule } from '@angular/forms';
 ;
 const routes: Routes = [
   {
@@ -66,6 +69,8 @@ const routes: Routes = [
             (m) => m.EditUserModule
           ),
       },
+
+   
       {
         path: '',
         redirectTo: 'dashboard',
@@ -80,7 +85,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
 export class PagesRoutingModule { }

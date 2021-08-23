@@ -1,0 +1,110 @@
+
+
+<button  md-button type="button" class="close" aria-label="Close" 
+(click)="dialogRef.close(false)" >
+    <span  style="size: 29px;" aria-hidden="true">
+    <a style="font-size: 25px;">X</a>
+    </span>
+  </button>
+
+
+
+<div>
+
+
+    
+<h3 md-dialog-title
+style="font-size: 25px;"
+>
+
+ {{getTicket().subject}}
+</h3>
+
+ <div mat-dialog-content class="mt-4 font-size-h6">
+  
+
+ <div>
+       <div>
+           
+               
+
+
+<label class="font-size-h8 font-weight-bolder text-dark pt-5">  الوصف:</label>
+            <div >
+
+
+         
+
+
+            <textarea  class="ticketTextDescription" disabled  [scrollTop] 
+            style="width: 350px;
+            height: 150px;
+            text-align: right;
+            text-justify: right;"
+            
+            >
+                {{getTicket().description}}
+            </textarea>
+
+            
+            
+
+            </div>
+
+            <label 
+           
+            class="font-size-h8 font-weight-bolder text-dark pt-5"> حالة التذكرة:</label>
+            <br>
+
+            
+        
+       
+           
+       
+            
+            
+<p *ngIf="getTicket().status == 'Pending'"
+
+class="ticketTextStatus" style="color: #EE9105;">
+      معلقة </p>
+             
+
+
+
+      <p *ngIf="getTicket().status == 'Received'" class="ticketTextStatus" style="color: #46693E;">
+        تم الإستلام </p>
+
+
+        <p *ngIf="getTicket().status == 'Closed'" 
+        class="ticketTextStatus" style="color: #1111F5;">
+            مغلقة </p>
+
+
+            <br>
+            <label class="font-size-h8 font-weight-bolder text-dark pt-5"> التصنيف:</label>
+
+
+
+<p class="ticketCategory"
+>{{ getTicket().category}}</p>
+            
+
+<label class="font-size-h8 font-weight-bolder text-dark pt-5">تاريخ الإنشاء:</label>
+
+                <p class="ticketCategory" >
+                    {{getTicket().createdDate}} </p>
+           
+             
+            
+            </div>
+            
+       
+           
+            
+            </div>
+
+
+
+ </div>
+
+</div>

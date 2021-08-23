@@ -5,10 +5,13 @@ import { DashboardComponent } from './dashboard.component';
 import { DashboardsModule } from '../../_metronic/partials/content/dashboards/dashboards.module';
 import {InlineSVGModule} from 'ng-inline-svg';
 import {NgApexchartsModule} from 'ng-apexcharts';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [DashboardComponent],
     imports: [
+        MatDialogModule,
         CommonModule,
         RouterModule.forChild([
             {
@@ -19,6 +22,7 @@ import {NgApexchartsModule} from 'ng-apexcharts';
         DashboardsModule,
         InlineSVGModule,
         NgApexchartsModule,
+        ReactiveFormsModule,
     ],
 })
 export class DashboardModule {}

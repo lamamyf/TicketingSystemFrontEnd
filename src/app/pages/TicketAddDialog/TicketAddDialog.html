@@ -1,57 +1,35 @@
-<!--begin::Signin-->
-<div>
-    <a 
-    href="javascript: history.go(-1)">
-    
-    <i style="font-size:28px;
-    color: black;" 
-    
-     class="fa">&#xf105;</i>
-    
-</a>
+<h3 md-dialog-title>طلب مساعدة</h3>
 
-    <!--begin::Form-->
-    <form
+
+ <div mat-dialog-content class="mt-4 font-size-h6">
+  
+     
+<form
+
+   
       class="form"
-      novalidate="novalidate"
       [formGroup]="addTicketForm"
+      novalidate="novalidate"
       id="kt_login_signin_form"
       (ngSubmit)="submit()"
-    >
-  
-  
-      <!--begin::Title-->
-      <div class="pb-13 pt-lg-0 pt-5"
-      
-      style="
-       margin-top: 3mm;
-      text-align: center;
-      font-size: xx-large;
-      font-weight: bolder;
-      color: #707074;
-      text-justify: center;
-      justify-content: center;"
-      
-      >
+>
 
-        رفع طلب مساعدة
-      
-      </div>
-      <!--end::Title-->
-  
-  
-      <!-- begin::Alert error-->
-      <ng-container *ngIf="hasError">
-        <div
-          class="mb-10 alert alert-custom alert-danger alert-dismissible"
-        >
-          <div class="alert-text"  >خطأ في البيانات المدخلة</div>
-        </div>
-      </ng-container>
-      <!-- end::Alert error-->
-  
-      <!--begin::Form group-->
-      <div class="form-group">
+
+
+<!-- begin::Alert error-->
+<ng-container *ngIf="hasError">
+    <div
+      class="mb-10 alert alert-custom alert-danger alert-dismissible"
+    >
+      <div class="alert-text"  >خطأ في البيانات المدخلة</div>
+    </div>
+  </ng-container>
+  <!-- end::Alert error-->
+
+
+
+    <!--begin::Form group-->
+    <div class="form-group">
         <label class="font-size-h22 font-weight-normal text-darkGray"
         style="
       text-align: right;
@@ -90,9 +68,8 @@
 
       </div>
       <!--end::Form group-->
-  
 
-      
+
       <!--begin::Form group-->
       <div class="form-group">
         <div class="d-flex justify-content-between mt-n5">
@@ -176,65 +153,53 @@
 
 
 
-    
+
+
+</form>
 
 
 
 
-    
-  
-  
-      <!--begin::Action-->
-      <div class="pb-lg-0 pb-5"
-      style="align-content: left;"
- >
-        <button
-          type="submit"
-          id="kt_login_signin_submit"
-          routerLink = "/pages/dashboard"
-          class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-9 mr-13"
-          style="background-color: #599fa8;
- 
 
 
-          border: #599fa8;
-          border-radius: 30px;
-          "
 
-         
-          [disabled]="addTicketForm.invalid"
+      
+      <ng-template
+        #formError
+        let-control="control"
+        let-message="message"
+        let-validation="validation"
+      >
+        <ng-container
+          *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
         >
-        
-          رفع الطلب
-        </button>
-  
-        <ng-container *ngIf="isLoading$ | async">
-          <span class="spinner spinner-primary ml-5"></span>
+          <div class="fv-plugins-message-container">
+            <div class="fv-help-block">
+              {{ message }}
+            </div>
+          </div>
         </ng-container>
-        <ng-container *ngIf="isWrong">
-          <span class="text-danger"> {{errorMessage}}</span>
-        </ng-container>
-      </div>
-      <!--end::Action-->
-    </form>
-    <!--end::Form-->
-  </div>
-  <!--end::Signin-->
-  
-  <ng-template
-    #formError
-    let-control="control"
-    let-message="message"
-    let-validation="validation"
-  >
-    <ng-container
-      *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
-    >
-      <div class="fv-plugins-message-container">
-        <div class="fv-help-block">
-          {{ message }}
-        </div>
-      </div>
-    </ng-container>
-  </ng-template>
-  
+      </ng-template>
+      
+
+    {{confirmMessage}}
+
+ </div>
+
+ <div mat-dialog-actions  class="btnActions pl-0 mt-5">
+    <button md-button 
+    
+    type="submit"
+    id="kt_login_signin_submit"
+   
+    
+    [disabled]="addTicketForm.invalid"
+    
+    class="confirmBtn btn btn-success font-weight-bolder font-size-sm pr-4"
+    (click)="dialogRef.close(true)">رفع الطلب </button>
+<button md-button class="cancelBtn btn btn-success font-weight-bolder font-size-sm mr-2"
+    (click)="dialogRef.close(false)">إلغاء</button>
+
+
+ </div>
+

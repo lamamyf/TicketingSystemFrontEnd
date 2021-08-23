@@ -22,6 +22,7 @@ import { SubheaderModule } from '../_metronic/partials/layout/subheader/subheade
 import { AsideDynamicComponent } from './_layout/components/aside-dynamic/aside-dynamic.component';
 import { HeaderMenuDynamicComponent } from './_layout/components/header/header-menu-dynamic/header-menu-dynamic.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     LanguageSelectorComponent,
     AsideDynamicComponent,
     HeaderMenuDynamicComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -48,6 +50,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CoreModule,
     SubheaderModule,
     ReactiveFormsModule,
+    MatDialogModule,
   ],
 })
 export class LayoutModule { }

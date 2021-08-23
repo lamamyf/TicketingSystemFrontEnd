@@ -11,6 +11,12 @@ import {AuthService, UserModel} from '../../modules/auth';
 import {ApiService} from '../../services/api.service';
 import { TicketModel } from 'src/app/modules/auth/_models/ticket.model';
 
+//changed
+import { TicketAddDialogComponent } from '../TicketAddDialog/TicketAddDialog';
+import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
+import { TicketViewDialogComponent } from '../TicketViewDialog/TicketViewDialog';
+
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
   chart: ApexChart;
@@ -25,6 +31,10 @@ export type ChartOptions = {
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+
+  dialogRef: MatDialogRef<TicketAddDialogComponent>;
+  dialogRefView: MatDialogRef<TicketViewDialogComponent>;
+
   ticket: TicketModel;
   @Input() widgetHeight = '150px';
   @Input() widgetWidth = '400px';
@@ -51,6 +61,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(
       private router: Router,
+      public dialog: MatDialog,
+
       private authenticationService: AuthService,
       private apiService: ApiService,
       private cdr: ChangeDetectorRef,
@@ -220,6 +232,41 @@ export class DashboardComponent implements OnInit {
 
     return tickets;
 }
+
+
+
+
+
+addTicket(){
+
+  this.dialogRef = this.dialog.open(TicketAddDialogComponent, {
+    disableClose: false,
+    width: '700px',
+    height: '500px'
+});
+this.dialogRef.componentInstance.confirmMessage = 'hiiii';
+this.dialogRef.afterClosed().subscribe(result => {
+ 
+   
+});
+}
+
+
+ViewTicket(){
+
+  this.dialogRefView = this.dialog.open(TicketViewDialogComponent, {
+    disableClose: false,
+    width: '400px',
+    height: '550px'
+});
+ this.dialogRef.afterClosed().subscribe(result => {
+ 
+   
+});
+}
+
+
+
 
 
 

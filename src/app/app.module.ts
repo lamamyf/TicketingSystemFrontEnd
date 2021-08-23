@@ -15,6 +15,8 @@ import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { SplashScreenModule } from './_metronic/partials/layout/splash-screen/splash-screen.module';
 import {AuthInterceptor} from './services/auth.interceptor';
 import {ConfirmationDialogComponent} from './pages/confirmation-dialog/confirmation-dialog';
+import {TicketAddDialogComponent} from './pages/TicketAddDialog/TicketAddDialog';
+
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTableModule} from '@angular/material/table';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
@@ -27,6 +29,8 @@ import {RouterExtService} from './services/RouterExtService.service';
 import {MatSlideToggle, MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSliderModule} from '@angular/material/slider';
 
+
+
 function appInitializer(authService: AuthService) {
   return () => {
     return new Promise((resolve) => {
@@ -36,7 +40,7 @@ function appInitializer(authService: AuthService) {
 }
 
 @NgModule({
-  declarations: [AppComponent, ConfirmationDialogComponent],
+  declarations: [AppComponent, ConfirmationDialogComponent , TicketAddDialogComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -46,6 +50,7 @@ function appInitializer(authService: AuthService) {
     HighlightModule,
     ClipboardModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     InlineSVGModule.forRoot(),
     MatDialogModule,
     MatTableModule,

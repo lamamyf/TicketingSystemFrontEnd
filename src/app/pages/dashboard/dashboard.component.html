@@ -16,11 +16,12 @@
 
 
             
-            <a 
+            <span
+            (click)="ViewTicket()"
 
-            [routerLink]="['/pages/dashboard/ticketView', ticket]"
 
-            routerLinkActive="active"
+           
+
             >
                 <div class="grid-item">
                  <p class="ticketTextSubject" >
@@ -46,18 +47,18 @@
                 
                 </div>
                 
-            </a>
+            </span>
                
                 
                 </div>
 
-               
+       
 
-               
-                <a 
-                class= "addTicketButton"
-                routerLink = "/pages/dashboard/addTicket"
-                href="#">
+
+        <span>
+                <span
+                (click)="addTicket()"
+                class= "addTicketButton">
                     <svg 
                     style="margin-top: 50%;"
                     width="90" height="90" viewBox="0 0 136 139" fill="transparent" xmlns="http://www.w3.org/2000/svg">
@@ -67,11 +68,11 @@
                         <path d="M45.3335 69.5H90.6668" stroke="#707074" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>                 
             
-                  </a>
+                  </span>
                   
                
 
-
+                </span>
 
          </div>
 
