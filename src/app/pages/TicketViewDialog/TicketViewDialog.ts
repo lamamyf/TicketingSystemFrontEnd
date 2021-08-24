@@ -90,7 +90,7 @@ t : DashboardComponent;
         userFirstName: "nouf",
         userLastName: "aljufair",
         subject: " طلب أدوات",
-        description: "يوجد نقص  أدوات طلب نقص ادوات تذكرة عاجل",
+        description: "يوجد نقص  أدوات طلب نقص ادوات تذكرة عاجلل",
         status: "Received",
         category: "شكوى",
         createdDate: "11-11-2021",
