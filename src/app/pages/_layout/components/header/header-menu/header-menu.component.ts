@@ -38,8 +38,8 @@ export class HeaderMenuComponent implements OnInit {
   });
   this.dialogRef.componentInstance.confirmMessage = 'هل آنت متآكد من تسجيل الخروج ؟';
   this.dialogRef.afterClosed().subscribe(result => {
-   
-      this.dialogRef = null;
+
+    this.dialogRef = null;
   });
 
   }
