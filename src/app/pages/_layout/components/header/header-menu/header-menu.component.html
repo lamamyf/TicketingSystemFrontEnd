@@ -77,9 +77,12 @@ justify-content: right;
   top: 8px;
   left: 16px;"  
   routerLinkActive="menu-item-active">
-    <a class="menu-link" routerLink="/dashboard" routerLinkActive="active">
+   
      
       <span 
+      (click)="logout()"
+      routerLink = "/auth/login"
+
       class="menu-text"
       style=" color: #46464B; font-size: larger;"
      >   
@@ -96,7 +99,7 @@ justify-content: right;
       <ng-container *ngIf="rootArrowEnabled">
         <i class="menu-arrow"></i>
       </ng-container>
-    </a>
+   
   </li>
   <!-- end::1 Level -->
 

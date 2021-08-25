@@ -46,7 +46,7 @@
           name="subject"
           formControlName="subject"
          
-          [ngClass]="{ 'is-invalid': addTicketForm.controls['subject'].invalid }"
+          [ngClass]="{'is-invalid': addTicketForm.controls['subject'].invalid }"
         />
         <ng-container
           [ngTemplateOutlet]="formError"
@@ -125,8 +125,8 @@
         <select 
         class="form-control form-control-solid h-auto py-24 px-6 rounded-lg"
           name="catgory"
-          formControlName="catgory"
-          [ngClass]="{ 'is-invalid': addTicketForm.controls['catgory'].invalid }"
+          formControlName="cat"
+          [ngClass]="{ 'is-invalid': addTicketForm.controls['cat'].invalid }"
         
     >
             <option selected="selected" value="Complaint">شكوى</option>
@@ -181,9 +181,6 @@
         </ng-container>
       </ng-template>
       
-
-    {{confirmMessage}}
-
  </div>
 
  <div mat-dialog-actions  class="btnActions pl-0 mt-5">
@@ -196,7 +193,7 @@
     [disabled]="addTicketForm.invalid"
     
     class="confirmBtn btn btn-success font-weight-bolder font-size-sm pr-4"
-    (click)="dialogRef.close(true)">رفع الطلب </button>
+    (click)="submit()" (click)="dialogRef.close(true)">رفع الطلب </button>
 <button md-button class="cancelBtn btn btn-success font-weight-bolder font-size-sm mr-2"
     (click)="dialogRef.close(false)">إلغاء</button>
 

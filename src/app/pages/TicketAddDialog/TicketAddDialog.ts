@@ -5,6 +5,7 @@ import { MatDialog, MatDialogModule, MAT_DIALOG_DATA, MatDialogConfig , MatDialo
 import { Observable, Subscription } from 'rxjs';
 import { TicketModel } from 'src/app/modules/auth/_models/ticket.model';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-confirmdialog',
@@ -19,7 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class TicketAddDialogComponent {
 
   //changed
-    constructor(public dialogRef: MatDialogRef<TicketAddDialogComponent> ,  private fb: FormBuilder,
+    constructor(public dialogRef: MatDialogRef<TicketAddDialogComponent> ,  private fb: FormBuilder, private router: Router
         ) {
 
 
@@ -32,8 +33,11 @@ export class TicketAddDialogComponent {
 
     defaultAuth: any = {
         subject: '',
-        password: '',
+        description: '',
+        cat: '',
       };
+
+
     hasError: boolean;
     returnUrl: string;
     isLoading$: Observable<boolean>;
@@ -66,20 +70,29 @@ export class TicketAddDialogComponent {
 
 
     initForm() {
+
         this.addTicketForm = this.fb.group({
           subject: [
             this.defaultAuth.subject,
             Validators.compose([
               Validators.required,
-                Validators.pattern('[A-Za-z._%-]{3}')
+                
             ]),
           ],
-          password: [
-            this.defaultAuth.password,
+          description: [
+            this.defaultAuth.description,
             Validators.compose([
               Validators.required,
-              Validators.minLength(8),
-              Validators.maxLength(100),
+             
+              
+            ]),
+          ],
+
+          cat: [
+            this.defaultAuth.cat,
+            Validators.compose([
+              Validators.required,
+              
             ]),
           ],
         });
@@ -90,8 +103,10 @@ export class TicketAddDialogComponent {
     this.isWrong = false;
     this.hasError = false;
    
-  
-      
+  window.alert("تم رفع الطلب بنجاح");
+
+
+
   }
     public confirmMessage: string;
 }

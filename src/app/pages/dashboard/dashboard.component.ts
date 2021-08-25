@@ -242,11 +242,10 @@ addTicket(){
   this.dialogRef = this.dialog.open(TicketAddDialogComponent, {
     disableClose: false,
     width: '700px',
-    height: '500px'
+    height: '600px'
 });
-this.dialogRef.componentInstance.confirmMessage = 'hiiii';
 this.dialogRef.afterClosed().subscribe(result => {
- 
+  this.dialogRef = null;
    
 });
 }
