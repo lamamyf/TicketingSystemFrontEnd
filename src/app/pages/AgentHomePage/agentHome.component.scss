@@ -1,0 +1,83 @@
+.grid-container {
+    float: right;
+    display: grid;
+    grid-template-columns:auto auto auto auto auto;
+
+  padding-left: 2.5mm;
+  padding-right: 2.5mm;
+  padding-bottom: 2.5mm;
+  padding-top: 2.5mm;
+
+  
+  }
+  
+  
+  .grid-item {
+  align-self: left;
+  display: grid;
+
+    float: center;
+    background: rgba(246,245,245,1);
+    width: 1350%;
+    height: 60px;
+    border-radius: 20px;
+    -moz-box-shadow:    inset 0 0 10px #cecbcb;
+    -webkit-box-shadow: inset 0 0 10px #cecbcb;
+    box-shadow:         inset 0 0 10px #cecbcb;
+  margin-bottom: 20px;
+    
+  
+  }
+  
+
+  .addTicketButton{
+
+
+    float: right;
+ 
+
+
+    justify-content: center;
+  //  justify-items: center;
+  float: inline-end;
+    display:  grid;
+    background: rgba(246,245,245,1);
+    width: 185px;
+    height: 180px;
+    border-radius: 20px;
+margin-top: 2.5mm;
+margin-left: 2.5mm;
+margin-right: 2.5mm;
+margin-bottom: 2.5mm;
+
+
+
+  }
+
+  .ticketTextSubject{
+      margin-top: 3mm;
+text-align: left;
+font-size: x-large;
+font-weight: bolder;
+color: #707074;
+
+  }
+  
+  
+  .ticketTextStatus{
+
+    text-align: center;
+    font-size: large;
+    font-weight: bolder;
+    color: #707074;
+    
+      }
+
+
+      .ticketTextCreatedDate{
+        text-align: center;
+        font-size:small;
+        font-weight: lighter;
+        color: #000000;
+        
+          }
