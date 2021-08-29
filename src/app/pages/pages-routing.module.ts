@@ -17,6 +17,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
+      {
+        path: 'agentHome',
+        loadChildren: () =>
+          import('./AgentHomePage/agentHome.module').then((m) => m.AgentHomePageModule),
+      },
 
       {
         path: 'about',

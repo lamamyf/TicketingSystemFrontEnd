@@ -1,0 +1,58 @@
+
+
+<div class="card card-custom gutter-b p-6">
+    <div class="row pt-6 col-xl-12">
+
+      
+        <div 
+       
+        >
+
+
+            <ul 
+
+            *ngFor="let ticket of  getAllTickets();">
+            
+            <span
+            (click)="ViewTicket()"
+            >
+                <li class="grid-item">
+
+
+
+                 <p class="ticketTextSubject" >{{ticket.subject}} </p> <p *ngIf = "ticket.status == 'Pending'" class="ticketTextStatus" style="color: #EE9105;">معلقة </p>
+
+
+
+                 
+          <p *ngIf = "ticket.status == 'Received'" class="ticketTextStatus" style="color: #46693E;">
+            تم الإستلام </p>
+
+
+            <p *ngIf = "ticket.status == 'Closed'" class="ticketTextStatus" style="color: #1111F5;">
+                مغلقة </p>
+
+
+
+                    <p class="ticketTextCreatedDate" >
+                        {{ticket.createdDate}} </p>
+               
+              
+                
+                </li>
+                
+            </span>
+               
+                
+                </ul>
+
+       
+
+
+         </div>
+
+
+
+
+    </div>
+</div>
