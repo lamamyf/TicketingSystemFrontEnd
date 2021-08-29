@@ -95,6 +95,12 @@ export class EditUserComponent implements OnInit, OnDestroy {
       }
 
   }
+
+  getUser(): number{
+
+    return 0;
+  }
+
   deleteUser(){
 
     this.dialogRef = this.dialog.open(ConfirmationDialogComponent, {
