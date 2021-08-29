@@ -1,0 +1,38 @@
+
+<button  md-button type="button" class="close" aria-label="Close" 
+(click)="dialogRef.close(false)" >
+    <span  style="size: 29px;" aria-hidden="true">
+    <a style="font-size: 25px;">X</a>
+    </span>
+  </button>
+
+
+
+<div>
+
+
+    
+<h3 md-dialog-title
+style="font-size: 25px;"
+>
+
+</h3>
+
+ <div mat-dialog-content class="mt-4 font-size-h6">
+  
+
+ <div>
+     
+    <div 
+    class="grid-container"
+    *ngFor="let item of getAvatars(); index as i">
+     
+        <img
+       
+         src="/src/assets/avatars-new/{{item}}.png" alt="{{item}}">
+      </div>
+
+
+ </div>
+
+</div>

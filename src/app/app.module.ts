@@ -30,6 +30,7 @@ import {RouterExtService} from './services/RouterExtService.service';
 import {MatSlideToggle, MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSliderModule} from '@angular/material/slider';
 import { CommonModule } from "@angular/common";
+import { AvatarsDialogComponent } from './pages/avatars/avatarsDialog';
 
 
 
@@ -42,7 +43,7 @@ function appInitializer(authService: AuthService) {
 }
 
 @NgModule({
-  declarations: [AppComponent, ConfirmationDialogComponent , TicketAddDialogComponent , TicketViewDialogComponent],
+  declarations: [AppComponent, ConfirmationDialogComponent , TicketAddDialogComponent , TicketViewDialogComponent , AvatarsDialogComponent],
   imports: [
     CommonModule,
     BrowserModule,

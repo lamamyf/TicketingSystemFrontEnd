@@ -9,6 +9,7 @@ import {Location} from '@angular/common';
 import {RouterExtService} from '../../../services/RouterExtService.service';
 import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { AvatarsDialogComponent } from '../../avatars/avatarsDialog';
 
 @Component({
   selector: 'app-edituser',
@@ -25,6 +26,8 @@ export class EditUserComponent implements OnInit, OnDestroy {
   hasError: boolean;
   previousUrl: string;
   isActive;
+  dialogRefAvatar: MatDialogRef<AvatarsDialogComponent>;
+
   dialogRef: MatDialogRef<ConfirmationDialogComponent>;
   constructor(private userService: AuthService,
               private fb: FormBuilder,
@@ -53,6 +56,21 @@ export class EditUserComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
       this.subscriptions.forEach(sb => sb.unsubscribe());
   }
+
+
+  
+editAvatar(){
+    this.dialogRefAvatar = this.dialog.open(AvatarsDialogComponent, {
+      disableClose: false,
+      width: '700px',
+      height: '600px'
+  });
+  this.dialogRefAvatar.afterClosed().subscribe(result => {
+    this.dialogRefAvatar = null;
+     
+  });
+  }
+  
 
   loadForm() {
       this.hasError = false;

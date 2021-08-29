@@ -24,6 +24,7 @@ import { HeaderMenuDynamicComponent } from './_layout/components/header/header-m
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import {NgApexchartsModule} from 'ng-apexcharts';
+import { AvatarsDialogComponent } from './avatars/avatarsDialog';
 @NgModule({
   declarations: [
     LayoutComponent,

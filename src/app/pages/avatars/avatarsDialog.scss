@@ -1,0 +1,27 @@
+.grid-container {
+    float: right;
+    display: grid;
+    grid-template-columns:auto auto auto auto auto;
+
+  padding-left: 2.5mm;
+  padding-right: 2.5mm;
+  padding-bottom: 2.5mm;
+  padding-top: 2.5mm;
+
+  
+  }
+  
+  
+  .grid-item {
+  
+    float: right;
+    display:  grid;
+   
+    width: 185px;
+    height: 180px;
+    border-radius: 20px;
+  
+    
+  
+  }
+  
