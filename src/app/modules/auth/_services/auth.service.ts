@@ -23,13 +23,14 @@ export class AuthService implements OnDestroy {
   isLoadingSubject: BehaviorSubject<boolean>;
   errorMessage: any;
 
-  get currentUserValue(): UserModel {
-    return this.currentUserSubject.value;
-  }
   get currentToken(): String {
     return this.getAuthFromLocalStorage();
   }
 
+  get currentUserValue(): UserModel {
+    return this.currentUserSubject.value;
+  }
+  
   set currentUserValue(user: UserModel) {
     this.currentUserSubject.next(user);
   }
@@ -50,7 +51,7 @@ export class AuthService implements OnDestroy {
     this.isLoadingSubject.next(true);
 
     return this.authHttpService.login(email, password).pipe(
-      map((auth: any) => {
+      map((auth: AuthModel) => {
         if (auth.jwt !== undefined) {
           const result = this.setAuthFromLocalStorage(auth);
           this.errorMessage = null;
@@ -150,7 +151,7 @@ export class AuthService implements OnDestroy {
   }
   private setAuthFromLocalStorage(auth: AuthModel): boolean {
     // store auth accessToken/refreshToken/epiresIn in local storage to keep user logged in between page refreshes
-    localStorage.setItem(this.authLocalStorageToken, JSON.stringify(auth.jwt));
+    localStorage.setItem(this.authLocalStorageToken, auth.jwt);
     return true;
   }
 
