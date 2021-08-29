@@ -27,10 +27,18 @@ style="font-size: 25px;"
     class="grid-container"
     *ngFor="let item of getAvatars(); index as i">
      
+
+
+    <span 
+  (click)="dialogRef.close(true)"> 
+
         <img
-       
+       style="height: 150px;
+       width: 150px;"
          src="./assets/avatars-new/{{item}}.png" alt="{{item}}"/>
-      </div>
+   
+        </span>
+    </div>
 
 
  </div>

@@ -62,7 +62,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
 editAvatar(){
     this.dialogRefAvatar = this.dialog.open(AvatarsDialogComponent, {
       disableClose: false,
-      width: '700px',
+      width: '650px',
       height: '600px'
   });
   this.dialogRefAvatar.afterClosed().subscribe(result => {
