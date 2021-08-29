@@ -25,6 +25,10 @@
     
 
     </div>
+    <!-- <div 
+        
+        *ngFor="let user of  getUser();"> -->
+
     <!--end::Header-->
     <!--begin::Form-->
     <div class="form">
@@ -72,6 +76,8 @@
         <div class="form-group col-md-5">
          
           <label  class=" font-size-h6 font-weight-bolder text-dark">الإسم الأخير*</label>
+          <!-- <p>
+            {{user.firstName}} </p> -->
           <input
           class="form-control form-control-lg form-control-solid h-auto py-4 px-5 rounded-lg font-size-h6 " 
             type="text"
@@ -155,11 +161,12 @@
     <!--end::Form-->
     <div class="card-toolbar">
       <button type="submit" [disabled]="formGroup.invalid" class="btn btn-success  confirmBtn mr-2" (click)="save()">حفظ التغييرات</button>
+      <button type="submit" class="btn btn-success  confirmBtn mr-2" (click)="deleteUser()">حذف الحساب</button>
       <button type="button" class="btn btn-success  font-size-sm cancelBtn" (click)="cancel()">إلغاء</button>
     </div>
-  </div>
-</ng-container>
 
+<!-- </div> -->
+</div>
 <ng-template
         #formError
         let-control="control"
