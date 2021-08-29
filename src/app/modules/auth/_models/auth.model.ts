@@ -1,13 +1,10 @@
+import { UserRole } from './userRole';
 export class AuthModel {
-  accessToken: string;
-  refreshToken: string;
-  expiresIn: Date;
   jwt: string;
+  id: number;
+  userRole: UserRole;
 
-  setAuth(auth: any) {
-    this.accessToken = auth.accessToken;
-    this.refreshToken = auth.refreshToken;
-    this.expiresIn = auth.expiresIn;
+  constructor(auth: any){
     this.jwt = auth.jwt;
   }
 }

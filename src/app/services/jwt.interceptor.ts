@@ -1,30 +1,65 @@
 import { AuthService } from './../modules/auth/_services/auth.service';
-import {HTTP_INTERCEPTORS, HttpEvent} from '@angular/common/http';
-import {Injectable, Injector} from '@angular/core';
+import { HttpEvent, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 
-import {Observable} from 'rxjs';
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
+import { catchError, filter, switchMap, take } from 'rxjs/operators';
 
 const TOKEN_HEADER_KEY = 'Authorization';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
+    private isRefreshing = false;
+    private jwtSubject: BehaviorSubject<any> = new BehaviorSubject(null);
+
     constructor(private authService: AuthService) { }
 
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {        
+    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const currentUser = this.authService.currentUserValue;
         const token = this.authService.currentToken;
-        
+
         if (currentUser && token) {
-            request = request.clone({
-                setHeaders: {
-                    Authorization: `Bearer ${token}`,
-                    'Accept-Language': `ar`,
-                }
-            });
+            request = this.setAuthorizationHeader(request, token);
         }
 
-        return next.handle(request);
+        return next.handle(request).pipe(catchError(error => {
+            if (error instanceof HttpErrorResponse && error.status === 401 && JSON.stringify(error.error.subcode) === "420") {
+                return this.refreshJwt(request, next);
+            }
+            return throwError(error);
+        }));
+    }
+
+    private setAuthorizationHeader(request: HttpRequest<any>, token: String) {
+        return request.clone({
+            setHeaders: {
+                'Authorization': `Bearer ${token}`,
+                'Accept-Language': `ar`,
+            }
+        });
+    }
+
+    private refreshJwt(request: HttpRequest<any>, next: HttpHandler) {
+        if (!this.isRefreshing) {
+            this.isRefreshing = true;
+            this.jwtSubject.next(null);
+
+            return this.authService.refreshToken().pipe(
+                switchMap((token: any) => {
+                    this.isRefreshing = false;
+                    this.jwtSubject.next(token.jwt);
+                    return next.handle(this.setAuthorizationHeader(request, token.jwt));
+                }));
+
+        } else {
+            return this.jwtSubject.pipe(
+                filter(token => token != null),
+                take(1),
+                switchMap(jwt => {
+                    return next.handle(this.setAuthorizationHeader(request, jwt));
+                }));
+        }
     }
 
 }

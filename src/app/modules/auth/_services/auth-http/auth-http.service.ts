@@ -44,7 +44,18 @@ export class AuthHTTPService {
     });
   }
 
-  logout(token) {
+  
+  refreshToken(): Observable<any> {
+    const httpHeaders = new HttpHeaders({
+      'isRefreshToken': `true`,
+    });
+
+    return this.http.get<AuthModel>(`${environment.apiUrl}/refreshToken`, {
+      headers: httpHeaders,
+    });
+  } 
+  
+  logout(token): Observable<any>{
     const httpHeaders = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });

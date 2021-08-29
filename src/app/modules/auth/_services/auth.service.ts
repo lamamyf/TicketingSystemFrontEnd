@@ -1,12 +1,12 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, BehaviorSubject, of, Subscription } from 'rxjs';
-import { map, catchError, switchMap, finalize } from 'rxjs/operators';
+import { map, catchError, switchMap, finalize, tap } from 'rxjs/operators';
 import { UserModel } from '../_models/user.model';
 import { AuthModel } from '../_models/auth.model';
 import { AuthHTTPService } from './auth-http';
-import {  } from '../../../services/api.service';
+import { } from '../../../services/api.service';
 import { environment } from 'src/environments/environment';
-import { Router } from '@angular/router';
+
 
 @Injectable({
   providedIn: 'root',
@@ -36,7 +36,6 @@ export class AuthService implements OnDestroy {
 
   constructor(
     private authHttpService: AuthHTTPService,
-    private router: Router
   ) {
     this.isLoadingSubject = new BehaviorSubject<boolean>(false);
     this.currentUserSubject = new BehaviorSubject<UserModel>(undefined);
@@ -52,7 +51,7 @@ export class AuthService implements OnDestroy {
 
     return this.authHttpService.login(email, password).pipe(
       map((auth: any) => {
-        if (auth.jwt !== undefined){
+        if (auth.jwt !== undefined) {
           const result = this.setAuthFromLocalStorage(auth);
           this.errorMessage = null;
           return result;
@@ -69,10 +68,20 @@ export class AuthService implements OnDestroy {
     );
   }
 
-  logout() {
-    this.authHttpService.logout(this.currentToken);
-    localStorage.removeItem(this.authLocalStorageToken);
-    this.router.navigate(['/auth/login']);
+  
+  logout(): Observable<any> {
+    this.isLoadingSubject.next(true);
+    //*might not nedd to send token as param*
+    return this.authHttpService.logout(this.currentToken)
+      .pipe(
+        tap(() => this.clean),
+        catchError(error => {
+          alert(error.error);
+          return of(false);
+        }),
+        finalize(() =>
+          this.isLoadingSubject.next(false)
+        ));
   }
 
   getUserByToken(): Observable<any> {
@@ -81,23 +90,23 @@ export class AuthService implements OnDestroy {
     if (auth == null && this.errorMessage == null) {
       return of(undefined);
     }
-    
-    if (this.errorMessage != null){
+
+    if (this.errorMessage != null) {
       return of(this.errorMessage);
     }
 
     this.isLoadingSubject.next(true);
 
     return this.authHttpService.getUserByToken(auth).pipe(
-        map((user: UserModel) => {
-          this.currentUserSubject = new BehaviorSubject<UserModel>(user);
-          return user;
-        }),
-        finalize(() => this.isLoadingSubject.next(false))
+      map((user: UserModel) => {
+        this.currentUserSubject = new BehaviorSubject<UserModel>(user);
+        return user;
+      }),
+      finalize(() => this.isLoadingSubject.next(false))
     );
   }
 
-  
+
   registration(user: UserModel): Observable<any> {
     this.isLoadingSubject.next(true);
 
@@ -114,8 +123,8 @@ export class AuthService implements OnDestroy {
     );
   }
 
-    //Change to update password
-    forgotPassword(email: string): Observable<boolean> {
+  //Change to update password
+  forgotPassword(email: string): Observable<boolean> {
     this.isLoadingSubject.next(true);
 
     return this.authHttpService
@@ -123,7 +132,22 @@ export class AuthService implements OnDestroy {
       .pipe(finalize(() => this.isLoadingSubject.next(false)));
   }
 
+  refreshToken(): Observable<any> {
+    this.isLoadingSubject.next(true);
 
+    return this.authHttpService.refreshToken().pipe(
+      tap((jwt: AuthModel) => this.setAuthFromLocalStorage(jwt)),
+      catchError((err) => {
+        console.error('err', err);
+        return of(undefined);
+      }),
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  }
+  private clean() {
+    this.currentUserSubject = new BehaviorSubject<UserModel>(undefined);
+    localStorage.removeItem(this.authLocalStorageToken);
+  }
   private setAuthFromLocalStorage(auth: AuthModel): boolean {
     // store auth accessToken/refreshToken/epiresIn in local storage to keep user logged in between page refreshes
     localStorage.setItem(this.authLocalStorageToken, JSON.stringify(auth.jwt));
