@@ -5,9 +5,6 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { EmailSettingsComponent } from './email-settings/email-settings.component';
 import { PersonalInformationComponent } from './personal-information/personal-information.component';
 import { ProfileOverviewComponent } from './profile-overview/profile-overview.component';
-import { SavedCreditCardsComponent } from './saved-credit-cards/saved-credit-cards.component';
-import { StatementsComponent } from './statements/statements.component';
-import { TaxInformationComponent } from './tax-information/tax-information.component';
 import { UserProfileComponent } from './user-profile.component';
 
 const routes: Routes = [
@@ -34,18 +31,6 @@ const routes: Routes = [
       {
         path: 'email-settings',
         component: EmailSettingsComponent
-      },
-      {
-        path: 'saved-credic-cards',
-        component: SavedCreditCardsComponent
-      },
-      {
-        path: 'tax-information',
-        component: TaxInformationComponent
-      },
-      {
-        path: 'statements',
-        component: StatementsComponent
       },
       { path: '', redirectTo: 'profile-overview', pathMatch: 'full' },
       { path: '**', redirectTo: 'profile-overview', pathMatch: 'full' },

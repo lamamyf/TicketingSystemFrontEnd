@@ -19,8 +19,10 @@ export class AuthService implements OnDestroy {
 
   currentUser$: Observable<UserModel>;
   isLoading$: Observable<boolean>;
+
   currentUserSubject: BehaviorSubject<UserModel>;
   isLoadingSubject: BehaviorSubject<boolean>;
+
   errorMessage: any;
 
   get currentToken(): String {
@@ -30,7 +32,7 @@ export class AuthService implements OnDestroy {
   get currentUserValue(): UserModel {
     return this.currentUserSubject.value;
   }
-  
+
   set currentUserValue(user: UserModel) {
     this.currentUserSubject.next(user);
   }
@@ -40,8 +42,10 @@ export class AuthService implements OnDestroy {
   ) {
     this.isLoadingSubject = new BehaviorSubject<boolean>(false);
     this.currentUserSubject = new BehaviorSubject<UserModel>(undefined);
+
     this.currentUser$ = this.currentUserSubject.asObservable();
     this.isLoading$ = this.isLoadingSubject.asObservable();
+    
     const subscr = this.getUserByToken().subscribe();
     this.unsubscribe.push(subscr);
   }
