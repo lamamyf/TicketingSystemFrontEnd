@@ -17,19 +17,22 @@ import { AvatarsDialogComponent } from '../../avatars/avatarsDialog';
   styleUrls: ['./editUser.component.scss']
 })
 export class EditUserComponent implements OnInit, OnDestroy {
+    
   formGroup: FormGroup;
   userID: number;
   firstUserState: UserModel;
   subscriptions: Subscription[] = [];
   isLoading$: Observable<boolean>;
   hide = true;
+  public  static avatarId: number;
   hasError: boolean;
   previousUrl: string;
   isActive;
   dialogRefAvatar: MatDialogRef<AvatarsDialogComponent>;
 
   dialogRef: MatDialogRef<ConfirmationDialogComponent>;
-  constructor(private userService: AuthService,
+  constructor(
+    private userService: AuthService,
               private fb: FormBuilder,
               private apiService: ApiService,
               private router: Router,
@@ -45,6 +48,9 @@ export class EditUserComponent implements OnInit, OnDestroy {
       this.activatedRoute.queryParams.subscribe(params => {
           this.userID = params.user;
           this.isActive = params.isActive;
+          this.cdr=cdr;
+          //change later
+          EditUserComponent.avatarId = -1;
       });
   }
 
@@ -60,6 +66,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
 
   
 editAvatar(){
+
     this.dialogRefAvatar = this.dialog.open(AvatarsDialogComponent, {
       disableClose: false,
       width: '650px',
@@ -67,8 +74,13 @@ editAvatar(){
   });
   this.dialogRefAvatar.afterClosed().subscribe(result => {
     this.dialogRefAvatar = null;
-     
-  });
+
+    this.cdr.detectChanges()
+
+    //location.reload();
+
+
+});
   }
   
 
@@ -87,6 +99,11 @@ editAvatar(){
   }
 
   save() {
+    
+    this.snackBar.open('تم تعديل المستخدم بنجاح', '', {
+      duration: 2000
+  })
+
       const saveSubscr = this.apiService
         .editUser(this.formGroup.value).subscribe(res => {
             if (!res.body) {
@@ -116,7 +133,14 @@ editAvatar(){
 
   getUser(): number{
 
-    return 0;
+    return  EditUserComponent.avatarId ;
+  }
+
+
+  static setUser(user : number){
+
+    EditUserComponent.avatarId  = user;
+
   }
 
   deleteUser(){

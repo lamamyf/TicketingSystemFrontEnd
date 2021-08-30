@@ -35,7 +35,7 @@
       <div class="card-body">
 
 
-<div >
+<div  class="form-group col-md-5">
 
 
 <img class="avatar" src="./assets/avatars-new/{{getUser()}}.png" style="
@@ -201,7 +201,9 @@ bottom: -50px; " xml:space="preserve">
     <!--end::Form-->
     <div class="card-toolbar">
       <button type="submit" [disabled]="formGroup.invalid" class="btn btn-success  confirmBtn mr-2" (click)="save()">حفظ التغييرات</button>
-      <button type="submit" class="btn btn-success  confirmBtn mr-2" (click)="deleteUser()">حذف الحساب</button>
+      <button type="submit" class="deletebtn" 
+      
+      (click)="deleteUser()">حذف الحساب</button>
       <button type="button" class="btn btn-success  font-size-sm cancelBtn" (click)="cancel()">إلغاء</button>
     </div>
 
@@ -214,7 +216,7 @@ bottom: -50px; " xml:space="preserve">
         let-validation="validation"
 >
   <ng-container
-          *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
+          *ngIf="control.hasError(validation) && (control.touched)"
   >
     <div class="fv-plugins-message-container">
       <div class="fv-help-block text-danger">
