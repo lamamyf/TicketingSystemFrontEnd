@@ -16,7 +16,7 @@ import { SplashScreenModule } from './_metronic/partials/layout/splash-screen/sp
 import {JwtInterceptor} from './services/jwt.interceptor';
 import {ConfirmationDialogComponent} from './modules/shared/confirmation-dialog/confirmation-dialog';
 import {TicketAddDialogComponent} from './modules/client/TicketAddDialog/TicketAddDialog';
-import {TicketViewDialogComponent} from './pages/TicketViewDialog/TicketViewDialog';
+import {TicketViewDialogComponent} from './modules/shared/TicketViewDialog/TicketViewDialog';
 
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTableModule} from '@angular/material/table';

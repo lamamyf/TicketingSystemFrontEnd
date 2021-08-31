@@ -12,10 +12,9 @@ import {ApiService} from '../../../services/api.service';
 import { TicketModel } from 'src/app/modules/auth/_models/ticket.model';
 
 //changed
-import { TicketAddDialogComponent } from '../../client/TicketAddDialog/TicketAddDialog';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatDialog, MatDialogModule, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
-import { TicketViewDialogComponent } from '../../../pages/TicketViewDialog/TicketViewDialog';
+import { TicketViewDialogComponent } from '../../shared/TicketViewDialog/TicketViewDialog';
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
