@@ -7,7 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { InlineSVGModule } from 'ng-inline-svg';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthService } from './modules/auth/_services/auth.service';
+import { AuthService } from './modules/auth/services/auth.service';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 
 // Highlight JS

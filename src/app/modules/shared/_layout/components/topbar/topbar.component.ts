@@ -1,8 +1,8 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LayoutService } from '../../../../../_metronic/core';
-import { AuthService } from '../../../../auth/_services/auth.service';
-import { UserModel } from '../../../../auth/_models/user.model';
+import { AuthService } from '../../../../auth/services/auth.service';
+import { UserModel } from '../../../../../models/user.model';
 import KTLayoutQuickSearch from '../../../../../../assets/js/layout/extended/quick-search';
 import KTLayoutQuickNotifications from '../../../../../../assets/js/layout/extended/quick-notifications';
 import KTLayoutQuickActions from '../../../../../../assets/js/layout/extended/quick-actions';

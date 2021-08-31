@@ -9,7 +9,7 @@ import {
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService, UserModel} from '../../auth';
 import {ApiService} from '../../../services/api.service';
-import { TicketModel } from 'src/app/modules/auth/_models/ticket.model';
+import { TicketModel } from 'src/app/models/ticket.model';
 
 //changed
 import { MatDialogRef } from '@angular/material/dialog';

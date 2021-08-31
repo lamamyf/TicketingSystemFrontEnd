@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
-import { TicketModel } from 'src/app/modules/auth/_models/ticket.model';
+import { TicketModel } from 'src/app/models/ticket.model';
 import { ActivatedRoute } from '@angular/router';
 import { DashboardComponent } from '../../client/dashboard/dashboard.component';
 @Component({

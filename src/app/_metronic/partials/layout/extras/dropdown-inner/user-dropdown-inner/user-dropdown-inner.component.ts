@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LayoutService } from '../../../../../core';
-import { UserModel } from '../../../../../../modules/auth/_models/user.model';
-import { AuthService } from '../../../../../../modules/auth/_services/auth.service';
+import { UserModel } from '../../../../../../models/user.model';
+import { AuthService } from '../../../../../../modules/auth/services/auth.service';
 @Component({
   selector: 'app-user-dropdown-inner',
   templateUrl: './user-dropdown-inner.component.html',

@@ -10,8 +10,8 @@ import { LoginComponent } from '../login/login.component';
 import { LogoutComponent } from '../logout/logout.component';
 import { Routes, RouterModule } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { UserModel } from '../_models/user.model';
-import { AuthService } from '../_services/auth.service';
+import { UserModel } from '../../../models/user.model';
+import { AuthService } from '../services/auth.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 const fakeAuth = {

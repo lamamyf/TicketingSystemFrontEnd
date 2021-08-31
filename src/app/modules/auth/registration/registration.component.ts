@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
-import { AuthService } from '../_services/auth.service';
+import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { ConfirmPasswordValidator } from './confirm-password.validator';
-import { UserModel } from '../_models/user.model';
+import { UserModel } from '../../../models/user.model';
 import { first } from 'rxjs/operators';
 
 @Component({

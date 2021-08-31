@@ -35,11 +35,11 @@ const routes: Routes = [
             (m) => m.UserManagementModule
           ),
       },
-      {//redircte based on role
-        path: '',
-        loadChildren: () =>
-          import('../../client/client.module').then((m) => m.ClientModule)
-      },
+      // {//redircte based on role
+      //   path: '',
+      //   redirectTo: 'client',
+      //   pathMatch:'full',
+      // },
       {
         path: '**',
         redirectTo: 'error/404',

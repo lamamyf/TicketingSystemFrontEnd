@@ -1,4 +1,4 @@
-import { AuthService } from './../modules/auth/_services/auth.service';
+import { AuthService } from '../modules/auth/services/auth.service';
 import { HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
