@@ -14,7 +14,7 @@ const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () =>
-          import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+          import('../modules/client/dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
       {
         path: 'agentHome',
@@ -34,17 +34,6 @@ const routes: Routes = [
         loadChildren: () =>
           import('./Ticketview/TicketView.module').then((m) => m.TicketViewModule),
       },
-      {
-
-
-        path: 'dashboard/addTicket',
-        loadChildren: () =>
-          import('./addTickets/addTicket.module').then((m) => m.AddTicketModule),
-      },
-
-
-      
-      
 
       {
         path: 'usersManagement',

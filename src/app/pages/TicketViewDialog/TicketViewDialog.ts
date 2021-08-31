@@ -6,8 +6,7 @@ import { Observable, Subscription } from 'rxjs';
 import { TicketModel } from 'src/app/modules/auth/_models/ticket.model';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { TicketViewComponent } from '../Ticketview/TicketView.component';
-import { DashboardComponent } from '../dashboard/dashboard.component';
+import { DashboardComponent } from '../../modules/client/dashboard/dashboard.component';
 @Component({
     selector: 'app-TicketViewdialog',
     templateUrl: './TicketViewDialog.html',

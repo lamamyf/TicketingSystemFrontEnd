@@ -15,7 +15,7 @@ import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { SplashScreenModule } from './_metronic/partials/layout/splash-screen/splash-screen.module';
 import {JwtInterceptor} from './services/jwt.interceptor';
 import {ConfirmationDialogComponent} from './modules/shared/confirmation-dialog/confirmation-dialog';
-import {TicketAddDialogComponent} from './pages/TicketAddDialog/TicketAddDialog';
+import {TicketAddDialogComponent} from './modules/client/TicketAddDialog/TicketAddDialog';
 import {TicketViewDialogComponent} from './pages/TicketViewDialog/TicketViewDialog';
 
 import {MatDialogModule} from '@angular/material/dialog';

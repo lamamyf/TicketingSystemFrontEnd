@@ -7,15 +7,15 @@ import {
   ApexChart
 } from 'ng-apexcharts';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AuthService, UserModel} from '../../modules/auth';
-import {ApiService} from '../../services/api.service';
+import {AuthService, UserModel} from '../../auth';
+import {ApiService} from '../../../services/api.service';
 import { TicketModel } from 'src/app/modules/auth/_models/ticket.model';
 
 //changed
 import { TicketAddDialogComponent } from '../TicketAddDialog/TicketAddDialog';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatDialog, MatDialogModule, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
-import { TicketViewDialogComponent } from '../TicketViewDialog/TicketViewDialog';
+import { TicketViewDialogComponent } from '../../../pages/TicketViewDialog/TicketViewDialog';
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
