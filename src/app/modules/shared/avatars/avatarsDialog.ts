@@ -8,7 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from "@angular/common";
 import { NumericLiteral } from 'typescript';
-import { EditUserComponent } from '../../users-management/editUser/editUser.component';
+import { EditUserComponent } from '../../user-management/editUser/editUser.component';
 
 @Component({
     selector: 'app-avatar',

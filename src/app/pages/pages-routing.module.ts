@@ -17,7 +17,7 @@ const routes: Routes = [
           import('../modules/client/dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
       {
-        path: 'agentHome',
+        path: 'agent',
         loadChildren: () =>
           import('../modules/agent/agent.module').then((m) => m.AgentModule),
       },
@@ -28,26 +28,27 @@ const routes: Routes = [
           import('../modules/aboutUs/about.module').then((m) => m.AboutModule),
       },
       {
-        path: 'usersManagement',
+        path: 'users',
         loadChildren: () =>
-          import('../modules/users-management/usersmanagement.module').then(
-            (m) => m.UsersmanagementModule
+          import('src/app/modules/user-management/user-management.module').then(
+            (m) => m.UserManagementModule
           ),
       },
-      {
-        path: 'change-password',
-        loadChildren: () =>
-          import('../modules/users-management/changePassword/change-password.module').then(
-            (m) => m.ChangePasswordModule
-          ),
-      },
-      {
-        path: 'editUser',
-        loadChildren: () =>
-          import('../modules/users-management/editUser/editUser.module').then(
-            (m) => m.EditUserModule
-          ),
-      },
+
+      // {
+      //   path: 'change-password',
+      //   loadChildren: () =>
+      //     import('../modules/user-management/changePassword/change-password.module').then(
+      //       (m) => m.ChangePasswordModule
+      //     ),
+      // },
+      // {
+      //   path: 'editUser',
+      //   loadChildren: () =>
+      //     import('../modules/user-management/editUser/editUser.module').then(
+      //       (m) => m.EditUserModule
+      //     ),
+      // },
 
 
       {
