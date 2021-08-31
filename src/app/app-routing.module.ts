@@ -23,7 +23,7 @@ export const routes: Routes = [
     path: '',
     canActivate: [AuthGuard],
     loadChildren: () =>
-      import('./pages/layout.module').then((m) => m.LayoutModule),
+      import('src/app/modules/shared/layout.module').then((m) => m.LayoutModule),
   },
   { path: '**', redirectTo: 'error/404' },
 ];

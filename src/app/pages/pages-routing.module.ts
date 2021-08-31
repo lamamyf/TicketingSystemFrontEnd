@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Routes, RouterModule } from '@angular/router';
-import { LayoutComponent } from './_layout/layout.component';
+import { LayoutComponent } from '../modules/shared/_layout/layout.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';  
 import { ReactiveFormsModule } from '@angular/forms';
@@ -19,13 +19,13 @@ const routes: Routes = [
       {
         path: 'agentHome',
         loadChildren: () =>
-          import('./AgentHomePage/agentHome.module').then((m) => m.AgentHomePageModule),
+          import('../modules/agent/AgentHomePage/agentHome.module').then((m) => m.AgentHomePageModule),
       },
 
       {
         path: 'about',
         loadChildren: () =>
-          import('./aboutUs/about.module').then((m) => m.AboutModule),
+          import('../modules/aboutUs/about.module').then((m) => m.AboutModule),
       },
 
 
@@ -49,28 +49,21 @@ const routes: Routes = [
       {
         path: 'usersManagement',
         loadChildren: () =>
-          import('./users-management/usersmanagement.module').then(
+          import('../modules/users-management/usersmanagement.module').then(
             (m) => m.UsersmanagementModule
-          ),
-      },
-      {
-        path: 'usersManagement/addNewUser',
-        loadChildren: () =>
-          import('./users-management/addNewUser/addNewUser.module').then(
-            (m) => m.AddNewUserModule
           ),
       },
       {
         path: 'change-password',
         loadChildren: () =>
-            import('./users-management/changePassword/change-password.module').then(
+            import('../modules/users-management/changePassword/change-password.module').then(
             (m) => m.ChangePasswordModule
           ),
       },
       {
         path: 'editUser',
         loadChildren: () =>
-            import('./users-management/editUser/editUser.module').then(
+            import('../modules/users-management/editUser/editUser.module').then(
             (m) => m.EditUserModule
           ),
       },

@@ -14,7 +14,7 @@ import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { SplashScreenModule } from './_metronic/partials/layout/splash-screen/splash-screen.module';
 import {JwtInterceptor} from './services/jwt.interceptor';
-import {ConfirmationDialogComponent} from './pages/confirmation-dialog/confirmation-dialog';
+import {ConfirmationDialogComponent} from './modules/shared/confirmation-dialog/confirmation-dialog';
 import {TicketAddDialogComponent} from './pages/TicketAddDialog/TicketAddDialog';
 import {TicketViewDialogComponent} from './pages/TicketViewDialog/TicketViewDialog';
 
@@ -30,7 +30,7 @@ import {RouterExtService} from './services/RouterExtService.service';
 import {MatSlideToggle, MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSliderModule} from '@angular/material/slider';
 import { CommonModule } from "@angular/common";
-import { AvatarsDialogComponent } from './pages/avatars/avatarsDialog';
+import { AvatarsDialogComponent } from './modules/shared/avatars/avatarsDialog';
 
 
 
