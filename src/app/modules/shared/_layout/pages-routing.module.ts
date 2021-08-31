@@ -1,7 +1,8 @@
+import { ClientModule } from '../../client/client.module';
 import { NgModule } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Routes, RouterModule } from '@angular/router';
-import { LayoutComponent } from '../modules/shared/_layout/layout.component';
+import { LayoutComponent } from './layout.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -12,20 +13,20 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        path: 'dashboard',
+        path: 'client',
         loadChildren: () =>
-          import('../modules/client/dashboard/dashboard.module').then((m) => m.DashboardModule),
+          import('../../client/client.module').then((m) => m.ClientModule),
       },
       {
         path: 'agent',
         loadChildren: () =>
-          import('../modules/agent/agent.module').then((m) => m.AgentModule),
+          import('../../agent/agent.module').then((m) => m.AgentModule),
       },
 
       {
         path: 'about',
         loadChildren: () =>
-          import('../modules/aboutUs/about.module').then((m) => m.AboutModule),
+          import('../../aboutUs/about.module').then((m) => m.AboutModule),
       },
       {
         path: 'users',
@@ -34,27 +35,10 @@ const routes: Routes = [
             (m) => m.UserManagementModule
           ),
       },
-
-      // {
-      //   path: 'change-password',
-      //   loadChildren: () =>
-      //     import('../modules/user-management/changePassword/change-password.module').then(
-      //       (m) => m.ChangePasswordModule
-      //     ),
-      // },
-      // {
-      //   path: 'editUser',
-      //   loadChildren: () =>
-      //     import('../modules/user-management/editUser/editUser.module').then(
-      //       (m) => m.EditUserModule
-      //     ),
-      // },
-
-
-      {
+      {//redircte based on role
         path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full',
+        loadChildren: () =>
+          import('../../client/client.module').then((m) => m.ClientModule)
       },
       {
         path: '**',

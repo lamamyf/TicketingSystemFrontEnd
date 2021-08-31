@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InlineSVGModule } from 'ng-inline-svg';
-import { PagesRoutingModule } from '../../pages/pages-routing.module';
+import { PagesRoutingModule } from './_layout/pages-routing.module';
 import {
   NgbDropdownModule,
   NgbProgressbarModule,
