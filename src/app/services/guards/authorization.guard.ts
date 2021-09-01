@@ -14,17 +14,16 @@ export class AuthorizationGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const currentUser = this.authService.currentUserValue;
 
-    // if(currentUser){
-    //   if(currentUser.userRole === route.data.role)
-    //     return true;
-    //   return false; //redircte to frbbden or do sth
-    // }
+    if(currentUser){
+      if(currentUser.userRole === route.data.role)
+        return true;
+      return false; //redircte to frbbden or do sth
+    }
 
-    // this.router.navigate(['/auth']);
-    // return false;
+    this.router.navigate(['/auth']);
+    return false;
 
     
-    return true;
   }
   
 }
