@@ -1,8 +1,7 @@
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_ENDPOINT, DOMAIN_NAME } from '../providers/providers';
-import {AuthService, UserModel} from '../modules/auth';
-import {catchError, retry} from 'rxjs/operators';
+import {AuthService} from '../modules/auth';
 import {BehaviorSubject, Observable, of, throwError} from 'rxjs';
 
 

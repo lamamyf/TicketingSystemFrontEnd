@@ -1,4 +1,3 @@
-import { Dashboard1Component } from './../../_metronic/partials/content/dashboards/dashboard1/dashboard1.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';

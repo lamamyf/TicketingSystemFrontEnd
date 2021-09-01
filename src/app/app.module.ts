@@ -27,7 +27,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {RouterExtService} from './services/RouterExtService.service';
-import {MatSlideToggle, MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSliderModule} from '@angular/material/slider';
 import { CommonModule } from "@angular/common";
 import { AvatarsDialogComponent } from './modules/shared/avatars/avatarsDialog';

@@ -4,7 +4,6 @@ import {
     OnDestroy,
     OnInit,
   } from '@angular/core';
-  import { Router, NavigationEnd } from '@angular/router';
   import { Subscription } from 'rxjs';
 
 

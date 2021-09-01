@@ -1,13 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { MatDialog, MatDialogModule, MAT_DIALOG_DATA, MatDialogConfig , MatDialogState , MatDialogContent} from '@angular/material/dialog';
-import { Observable, Subscription } from 'rxjs';
-import { TicketModel } from 'src/app/models/ticket.model';
-import { ReactiveFormsModule } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { CommonModule } from "@angular/common";
-import { NumericLiteral } from 'typescript';
 import { EditUserComponent } from '../../user-management/editUser/editUser.component';
 
 @Component({

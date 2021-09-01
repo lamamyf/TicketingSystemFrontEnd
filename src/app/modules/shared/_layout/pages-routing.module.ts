@@ -1,4 +1,4 @@
-import { ClientModule } from '../../client/client.module';
+import { AuthorizationGuard } from './../../../services/guards/authorization.guard';
 import { NgModule } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Routes, RouterModule } from '@angular/router';
@@ -6,6 +6,7 @@ import { LayoutComponent } from './layout.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UserRole } from 'src/app/models/userRole';
 
 const routes: Routes = [
   {
@@ -16,11 +17,15 @@ const routes: Routes = [
         path: 'client',
         loadChildren: () =>
           import('../../client/client.module').then((m) => m.ClientModule),
+          canActivate: [AuthorizationGuard],
+          data: {role: UserRole.CLIENT}
       },
       {
         path: 'agent',
         loadChildren: () =>
           import('../../agent/agent.module').then((m) => m.AgentModule),
+          canActivate: [AuthorizationGuard],
+          data: {role: UserRole.ADMIN}
       },
 
       {
