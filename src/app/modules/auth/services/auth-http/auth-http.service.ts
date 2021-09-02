@@ -5,7 +5,7 @@ import { UserModel } from '../../../../models/user.model';
 import { environment } from '../../../../../environments/environment';
 import { AuthModel } from '../../../../models/auth.model';
 
-const API_URL = `${environment.apiUrl}/admin`;
+const API_URL = `${environment.apiUrl}`;
 
 @Injectable({
   providedIn: 'root',
