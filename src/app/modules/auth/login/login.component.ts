@@ -5,6 +5,7 @@ import { first } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -75,6 +76,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.errorMessage = '';
     this.isWrong = false;
     this.hasError = false;
+
     const loginSubscr = this.authService
       .login(this.f.email.value, this.f.password.value)
       .pipe(first())

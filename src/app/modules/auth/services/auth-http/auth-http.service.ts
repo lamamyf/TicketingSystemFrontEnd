@@ -14,14 +14,14 @@ export class AuthHTTPService {
   constructor(private http: HttpClient) { }
 
  
-  login(username: string, password: string): Observable<any> {
+  login(email: string, password: string): Observable<any> {
     const httpHeaders = new HttpHeaders({
       'Accept-Language': `ar`,
     });
-    return this.http.post<AuthModel>(`${environment.apiUrl}/authenticate`,   { username, password },  {
+    return this.http.post<AuthModel>(`${environment.apiUrl}/login`,   { email, password },  {
       headers: httpHeaders,
     });
-  }
+  } 
 
 
   createUser(user: UserModel): Observable<UserModel> {
@@ -36,10 +36,11 @@ export class AuthHTTPService {
   }
 
     getUserByToken(token): Observable<UserModel> {
+      console.log(token);
     const httpHeaders = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    return this.http.get<UserModel>(`${API_URL}/me`, {
+    return this.http.get<UserModel>(`${API_URL}/users/1`, {
       headers: httpHeaders,
     });
   }

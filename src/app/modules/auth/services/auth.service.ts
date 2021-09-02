@@ -57,7 +57,7 @@ export class AuthService implements OnDestroy {
     return this.authHttpService.login(email, password).pipe(
       map((auth: AuthModel) => {
         if (auth.jwt !== undefined) {
-          const result = this.setAuthFromLocalStorage(auth);
+          const result = this.setAuthFromLocalStorage(new AuthModel(auth));
           this.errorMessage = null;
           return result;
         }
@@ -91,7 +91,7 @@ export class AuthService implements OnDestroy {
 
   getUserByToken(): Observable<any> {
     const auth = this.getAuthFromLocalStorage();
-
+    
     if (auth == null && this.errorMessage == null) {
       return of(undefined);
     }
@@ -99,7 +99,7 @@ export class AuthService implements OnDestroy {
     if (this.errorMessage != null) {
       return of(this.errorMessage);
     }
-
+   
     this.isLoadingSubject.next(true);
 
     return this.authHttpService.getUserByToken(auth).pipe(
@@ -161,9 +161,9 @@ export class AuthService implements OnDestroy {
 
   private getAuthFromLocalStorage(): String {
     try {
-      return JSON.parse(
-        localStorage.getItem(this.authLocalStorageToken)
-      );
+     
+      return localStorage.getItem(this.authLocalStorageToken)
+      
     } catch (error) {
       console.error(error);
       return undefined;
