@@ -15,21 +15,20 @@ export class ProtectedResourceGuard implements CanActivate, OnDestroy {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    // const currentUser = this.authService.currentUserValue;
-    
-    // if (currentUser) {
-    //   return true;
-    // }
+    const currentUser = this.authService.currentAuthValue;
 
-    // const logoutSubscr = this.authService.logout()
-    //   .pipe(first())
-    //   .subscribe(() => {
-    //     this.router.navigate(['/auth/login']);
-    //   });
+    if (currentUser) {
+      return true;
+    }
 
-    // this.unsubscribe.push(logoutSubscr);
-    // return false;
-    return true;
+    const logoutSubscr = this.authService.logout()
+      .pipe(first())
+      .subscribe(() => {
+        this.router.navigate(['/auth/login']);
+      });
+
+    this.unsubscribe.push(logoutSubscr);
+    return false;
   }
 
   ngOnDestroy(): void {
