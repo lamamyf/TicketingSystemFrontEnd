@@ -99,7 +99,7 @@ export class AuthService implements OnDestroy {
       .pipe(
         tap(() => this.clean),
         catchError(error => {
-          alert(error.error);
+          //alert(error.error);
           return of(false);
         }),
         finalize(() =>

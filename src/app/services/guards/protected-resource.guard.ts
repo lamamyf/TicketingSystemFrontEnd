@@ -21,13 +21,16 @@ export class ProtectedResourceGuard implements CanActivate, OnDestroy {
       return true;
     }
 
-    const logoutSubscr = this.authService.logout()
-      .pipe(first())
-      .subscribe(() => {
-        this.router.navigate(['/auth/login']);
-      });
+    if (!this.authService.isLoadingSubject.value){
+      const logoutSubscr = this.authService.logout()
+        .pipe(first())
+        .subscribe(() => {
+          this.router.navigate(['/auth/login']);
+        });
 
-    this.unsubscribe.push(logoutSubscr);
+      this.unsubscribe.push(logoutSubscr);
+    }
+
     return false;
   }
 
