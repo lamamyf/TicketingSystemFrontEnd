@@ -18,9 +18,11 @@ export class AuthService implements OnDestroy {
 
 
   currentUser$: Observable<UserModel>;
+  currentAuth$: Observable<AuthModel>;
   isLoading$: Observable<boolean>;
 
   currentUserSubject: BehaviorSubject<UserModel>;
+  currentAuthSubject: BehaviorSubject<AuthModel>;
   isLoadingSubject: BehaviorSubject<boolean>;
 
   errorMessage: any;
@@ -37,15 +39,26 @@ export class AuthService implements OnDestroy {
     this.currentUserSubject.next(user);
   }
 
+
+  get currentAuthValue(): AuthModel {
+    return this.currentAuthSubject.value;
+  }
+
+  set currentAuthValue(auth: AuthModel) {
+    this.currentAuthSubject.next(auth);
+  }
+
   constructor(
     private authHttpService: AuthHTTPService,
   ) {
     this.isLoadingSubject = new BehaviorSubject<boolean>(false);
     this.currentUserSubject = new BehaviorSubject<UserModel>(undefined);
+    this.currentAuthSubject = new BehaviorSubject<AuthModel>(undefined);
 
     this.currentUser$ = this.currentUserSubject.asObservable();
     this.isLoading$ = this.isLoadingSubject.asObservable();
-    
+    this.currentAuth$ = this.currentAuthSubject.asObservable();
+
     const subscr = this.getUserByToken().subscribe();
     this.unsubscribe.push(subscr);
   }
@@ -57,10 +70,15 @@ export class AuthService implements OnDestroy {
     return this.authHttpService.login(email, password).pipe(
       map((auth: AuthModel) => {
         if (auth.jwt !== undefined) {
-          const result = this.setAuthFromLocalStorage(new AuthModel(auth));
+          const newAuth = new AuthModel(auth);
+          this.currentAuthSubject.next(newAuth);
+
+          const result = this.setAuthFromLocalStorage(newAuth);
+
           this.errorMessage = null;
           return result;
         }
+
         this.errorMessage = auth;
         return false;
       }),
@@ -73,7 +91,7 @@ export class AuthService implements OnDestroy {
     );
   }
 
-  
+
   logout(): Observable<any> {
     this.isLoadingSubject.next(true);
     //*might not nedd to send token as param*
@@ -91,7 +109,7 @@ export class AuthService implements OnDestroy {
 
   getUserByToken(): Observable<any> {
     const auth = this.getAuthFromLocalStorage();
-    
+
     if (auth == null && this.errorMessage == null) {
       return of(undefined);
     }
@@ -99,7 +117,7 @@ export class AuthService implements OnDestroy {
     if (this.errorMessage != null) {
       return of(this.errorMessage);
     }
-   
+
     this.isLoadingSubject.next(true);
 
     return this.authHttpService.getUserByToken(auth).pipe(
@@ -141,7 +159,13 @@ export class AuthService implements OnDestroy {
     this.isLoadingSubject.next(true);
 
     return this.authHttpService.refreshToken().pipe(
-      tap((jwt: AuthModel) => this.setAuthFromLocalStorage(jwt)),
+      tap((auth: AuthModel) => {
+        const newAuth = new AuthModel(auth);
+        this.currentAuthSubject.next(newAuth);
+
+        this.setAuthFromLocalStorage(newAuth);
+      }
+      ),
       catchError((err) => {
         console.error('err', err);
         return of(undefined);
@@ -151,6 +175,8 @@ export class AuthService implements OnDestroy {
   }
   private clean() {
     this.currentUserSubject = new BehaviorSubject<UserModel>(undefined);
+    this.currentAuthSubject = new BehaviorSubject<AuthModel>(undefined);
+
     localStorage.removeItem(this.authLocalStorageToken);
   }
   private setAuthFromLocalStorage(auth: AuthModel): boolean {
@@ -161,9 +187,9 @@ export class AuthService implements OnDestroy {
 
   private getAuthFromLocalStorage(): String {
     try {
-     
+
       return localStorage.getItem(this.authLocalStorageToken)
-      
+
     } catch (error) {
       console.error(error);
       return undefined;
@@ -173,4 +199,5 @@ export class AuthService implements OnDestroy {
   ngOnDestroy() {
     this.unsubscribe.forEach((sb) => sb.unsubscribe());
   }
+
 }
