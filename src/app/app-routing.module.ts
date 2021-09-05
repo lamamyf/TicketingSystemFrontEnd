@@ -18,11 +18,12 @@ export const routes: Routes = [
       import('./modules/errors/errors.module').then((m) => m.ErrorsModule),
   },
   {
-    path: '',
+    path: 'pages',
     canActivate: [ProtectedResourceGuard],
     loadChildren: () =>
       import('src/app/modules/shared/layout.module').then((m) => m.LayoutModule),
   },
+  { path: '', redirectTo: 'auth/login', pathMatch: 'full'},
   { path: '**', redirectTo: 'error/404' },
 ];
 
