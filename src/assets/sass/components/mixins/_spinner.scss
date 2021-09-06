@@ -32,7 +32,7 @@
 
 @mixin spinner-theme($color, $important: false) {
 	&:before {
-    	border-color: black valueif($important, !important, null);
+    	border-color: $color valueif($important, !important, null);
 		border-right-color: transparent;
     }
 }
