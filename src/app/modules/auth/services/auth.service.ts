@@ -70,7 +70,7 @@ export class AuthService implements OnDestroy {
     this.isLoadingSubject.next(true);
 
     return this.authHttpService.login(email, password).pipe(
-      map((auth: AuthModel) => {
+      map((auth: any) => {
         if (auth.jwt !== undefined) {
           const newAuth = new AuthModel(auth);
           this.currentAuthSubject.next(newAuth);
@@ -82,7 +82,7 @@ export class AuthService implements OnDestroy {
         }
 
         this.errorMessage = auth;
-        return false;
+        return auth.response;
       }),
       switchMap(() => this.getUserByToken()),
       catchError((err) => {
