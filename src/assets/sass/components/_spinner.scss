@@ -37,7 +37,7 @@
     @each $name, $color in $theme-colors {
         &.spinner-#{$name} {
             &:before {
-                border: 2px solid black;
+                border: 2px solid $color;
                 border-right: 2px solid transparent;
             }
         }
