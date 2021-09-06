@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initForm();
-    }
+  }
 
   // convenience getter for easy access to form fields
   get f() {
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.defaultAuth.email,
         Validators.compose([
           Validators.required,
-            Validators.pattern('[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+\\.[a-z]{2,3}')
+          Validators.pattern('[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+\\.[a-z]{2,3}')
         ]),
       ],
       password: [
@@ -78,10 +78,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     const loginSubscr = this.authService
       .login(this.f.email.value, this.f.password.value)
       .pipe(first())
-      .subscribe( data  => {
-        if (data === undefined){
+      .subscribe(data => {
+        if (data === undefined) {
           this.hasError = true;
-        } else if (typeof(data) === 'string'){
+        } else if (typeof (data) === 'string') {
           this.errorMessage = data;
           this.isWrong = true;
         }
