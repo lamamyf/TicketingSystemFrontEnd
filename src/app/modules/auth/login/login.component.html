@@ -141,11 +141,11 @@
       <ng-container *ngIf="isLoading$ | async">
         <span class="spinner spinner-primary ml-5"></span>
       </ng-container>
-      <ng-container *ngIf="isWrong">
-        <span class="text-danger"> {{errorMessage}}</span>
-      </ng-container>
-      <!-- errorMessage/login -->
     </div>
+   <!-- <br><br><br> -->
+    <ng-container *ngIf="isWrong">
+      <p class="text-danger" style="margin-top: 80px;"> {{errorMessage}}</p>
+    </ng-container>
     <!--end::Action-->
   </form>
   <!--end::Form-->
