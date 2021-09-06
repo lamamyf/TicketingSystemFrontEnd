@@ -23,7 +23,7 @@ export const routes: Routes = [
     loadChildren: () =>
       import('src/app/modules/shared/layout.module').then((m) => m.LayoutModule),
   },
-  { path: '', redirectTo: 'auth/login', pathMatch: 'full'},
+  { path: '', redirectTo: 'auth/', pathMatch: 'full'},
   { path: '**', redirectTo: 'error/404' },
 ];
 

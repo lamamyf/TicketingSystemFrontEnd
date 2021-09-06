@@ -13,7 +13,7 @@ justify-content: right;
   
   class="menu-item menu-item-rel"  
   routerLinkActive="menu-item-active">
-    <a class="menu-link" routerLink="/client" routerLinkActive="active">
+    <a class="menu-link" routerLink="{{dashboardUrl}}" routerLinkActive="active">
       <span 
       style=" color: #46464B; font-size: larger;
        "
@@ -44,8 +44,8 @@ justify-content: right;
      <div class="dropdown">
       <button class="dropbtn" routerLinkActive="active">حسابي</button>
       <div class="dropdown-content">
-        <a routerLink="/users/edit-user">تعديل الحساب</a>
-        <a routerLink="/users/change-password">تغير كلمة المرور</a>
+        <a routerLink="/pages/users/edit-user">تعديل الحساب</a>
+        <a routerLink="/pages/users/change-password">تغير كلمة المرور</a>
       </div>
     </div>
   
@@ -55,7 +55,7 @@ justify-content: right;
   
   <!-- begin::1 Level -->
   <li class="menu-item menu-item-rel" routerLinkActive="menu-item-active">
-    <a class="menu-link" routerLink="/about" routerLinkActive="active">
+    <a class="menu-link" routerLink="/pages/about" routerLinkActive="active">
       <span 
       style=" color: #46464B; font-size: larger;"
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { AuthService } from 'src/app/modules/auth';
 import { ConfirmationDialogComponent } from 'src/app/modules/shared/confirmation-dialog/confirmation-dialog';
 import { LayoutService } from '../../../../../../_metronic/core';
 
@@ -14,8 +15,9 @@ export class HeaderMenuComponent implements OnInit {
   location: Location;
   headerMenuDesktopToggle: string;
   dialogRef: MatDialogRef<ConfirmationDialogComponent>;
+  dashboardUrl: string;
 
-  constructor(private layout: LayoutService ,  public dialog: MatDialog,) {
+  constructor(private layout: LayoutService ,  public dialog: MatDialog, private authService :AuthService) {
   }
 
   ngOnInit(): void {
@@ -24,6 +26,7 @@ export class HeaderMenuComponent implements OnInit {
     this.headerMenuDesktopToggle = this.layout.getProp(
       'header.menu.desktop.toggle'
     );
+    this.dashboardUrl = this.authService.currentAuthValue.userRole  === "ADMIN" ? '/pages/agent' : '/pages/client';
   }
 
 

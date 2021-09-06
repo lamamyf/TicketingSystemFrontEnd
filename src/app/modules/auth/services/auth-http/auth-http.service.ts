@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserModel } from '../../../../models/user.model';
 import { environment } from '../../../../../environments/environment';
 import { AuthModel } from '../../../../models/auth.model';
+import { AuthService } from '../auth.service';
 
 const API_URL = `${environment.apiUrl}`;
 
@@ -35,11 +36,11 @@ export class AuthHTTPService {
     });
   }
 
-    getUserByToken(token): Observable<UserModel> {
+    getUserByToken(token, id): Observable<UserModel> {
     const httpHeaders = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    return this.http.get<UserModel>(`${API_URL}/users/1`, {
+    return this.http.get<UserModel>(`${API_URL}/users/`+ id, {
       headers: httpHeaders,
     });
   }

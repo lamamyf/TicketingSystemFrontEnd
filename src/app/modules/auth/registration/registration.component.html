@@ -30,7 +30,7 @@
     <!--begin::Form group-->
 
     <div class="form-group">
-<div style="margin-left: 55%;">
+
       <label class="font-size-h6 font-weight-bolder text-dark">الإسم الأول*</label>
       <input
         class="form-control form-control-solid h-auto py-4 px-5 rounded-lg font-size-h6"
@@ -42,7 +42,7 @@
         [ngClass]="{
           'is-invalid': registrationForm.controls['firstName'].invalid
         }"
-      /></div>
+      />
 
       <ng-container
         [ngTemplateOutlet]="formError"
@@ -74,7 +74,7 @@
     
     <!--begin::Form group-->
     <div class="form-group">
-      <div style="margin-right: 52%; margin-top: -25%;" >
+     
       <label class="font-size-h6 font-weight-bolder text-dark">الإسم الأخير*</label>
       <input
         class="form-control form-control-solid h-auto py-4 px-5 rounded-lg font-size-h6"
@@ -86,7 +86,7 @@
         [ngClass]="{
           'is-invalid': registrationForm.controls['lastName'].invalid
         }"
-      /></div>
+      />
 
       <ng-container
         [ngTemplateOutlet]="formError"
@@ -320,6 +320,7 @@
     -ms-transform: translateX(-50%);
     transform: translateX(-50%);"
     >
+  
       <button
         type="submit"
         id="kt_login_signup_submit"
@@ -328,11 +329,8 @@
         style="background-color: #599fa8;
         border: #599fa8;
         border-radius: 30px;
-        align-self: center;
-        "
-           [disabled]="
-          true
-         "
+        align-self: center;"
+        [disabled]="true"
       >
         التسجيل
       </button>
@@ -341,6 +339,11 @@
         <span class="spinner spinner-primary ml-5"></span>
       </ng-container>
     </div>
+    <div style="margin-top: -20px; margin-right:5px;">
+      يوجد لديك حساب؟
+     <a  routerLink="/auth/login" routerLinkActive="active">سجل دخولك الأن</a>
+   
+   </div>
     <!--end::Form group-->
   </form>
   <!--end::Form-->

@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   isWrong: boolean;
   errorMessage: any;
 
+
   // private fields
   private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
 
@@ -42,9 +43,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initForm();
-    // get return url from route parameters or default to '/'
-    this.returnUrl =
-        this.route.snapshot.queryParams['returnUrl'.toString()] || '/';
     }
 
   // convenience getter for easy access to form fields
@@ -88,6 +86,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.isWrong = true;
         }
         else {
+          this.returnUrl = this.authService.currentAuthValue.userRole === "ADMIN" ? 'pages/agent' : 'pages/client';
           this.router.navigate([this.returnUrl]);
         }
 

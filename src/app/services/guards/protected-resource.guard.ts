@@ -16,7 +16,7 @@ export class ProtectedResourceGuard implements CanActivate, OnDestroy {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const currentUser = this.authService.currentAuthValue;
-
+    
     if (currentUser) {
       return true;
     }

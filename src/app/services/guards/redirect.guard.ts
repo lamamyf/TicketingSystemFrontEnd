@@ -13,7 +13,7 @@ export class RedirectGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       
-    this.authService.currentAuthValue.userRole === "ADMIN" ? this.router.navigate(['/agent']) : this.router.navigate(['/client']);
+    this.authService.currentAuthValue.userRole === "ADMIN" ? this.router.navigate(['/pages/agent']) : this.router.navigate(['/pages/client']);
 
     return true;
   }

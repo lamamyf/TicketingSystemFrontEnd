@@ -53,7 +53,9 @@ export class AuthService implements OnDestroy {
   ) {
     this.isLoadingSubject = new BehaviorSubject<boolean>(false);
     this.currentUserSubject = new BehaviorSubject<UserModel>(undefined);
-    this.currentAuthSubject = new BehaviorSubject<AuthModel>(undefined);
+    
+    var token = this.getAuthFromLocalStorage();
+    this.currentAuthSubject = token ? new BehaviorSubject<AuthModel>(new AuthModel(token)) : new BehaviorSubject<AuthModel>(undefined);
 
     this.currentUser$ = this.currentUserSubject.asObservable();
     this.isLoading$ = this.isLoadingSubject.asObservable();
@@ -120,7 +122,7 @@ export class AuthService implements OnDestroy {
 
     this.isLoadingSubject.next(true);
 
-    return this.authHttpService.getUserByToken(auth).pipe(
+    return this.authHttpService.getUserByToken(auth, this.currentAuthValue.id).pipe(
       map((user: UserModel) => {
         this.currentUserSubject = new BehaviorSubject<UserModel>(user);
         return user;

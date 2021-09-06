@@ -13,7 +13,7 @@ export class AuthorizationGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const currentUser = this.authService.currentAuthValue;
-
+    
     if(currentUser){
       if(currentUser.userRole === route.data.role)
         return true;
