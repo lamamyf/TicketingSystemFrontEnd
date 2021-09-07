@@ -1,8 +1,7 @@
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_ENDPOINT, DOMAIN_NAME } from '../providers/providers';
-import {AuthService} from '../modules/auth';
-import {BehaviorSubject, Observable, of, throwError} from 'rxjs';
+import {BehaviorSubject, throwError} from 'rxjs';
 
 
 /**
@@ -18,7 +17,7 @@ export class ApiService {
   isLoadingSubject: BehaviorSubject<boolean>;
   changePassSubject: BehaviorSubject<any>;
 
-  constructor(public http: HttpClient, private authService: AuthService) {
+  constructor(public http: HttpClient) {
     this.isLoadingSubject = new BehaviorSubject<boolean>(false);
     this.changePassSubject = new BehaviorSubject<any>(false);
 

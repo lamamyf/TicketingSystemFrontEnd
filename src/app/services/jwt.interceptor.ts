@@ -1,6 +1,6 @@
-import { AuthService } from '../modules/auth/services/auth.service';
+import { AuthService } from 'src/app/modules/auth';
 import { HttpEvent, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
@@ -12,8 +12,10 @@ const TOKEN_HEADER_KEY = 'Authorization';
 export class JwtInterceptor implements HttpInterceptor {
     private isRefreshing = false;
     private jwtSubject: BehaviorSubject<any> = new BehaviorSubject(null);
-
-    constructor(private authService: AuthService) { }
+    private authService: AuthService;
+    constructor(private injector: Injector) { 
+        this.authService = this.injector.get(AuthService);
+    }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const currentUser = this.authService.currentAuthValue;
