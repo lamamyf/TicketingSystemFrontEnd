@@ -31,8 +31,10 @@ export class EditUserComponent implements OnInit, OnDestroy {
   dialogRefAvatar: MatDialogRef<AvatarsDialogComponent>;
 
   dialogRef: MatDialogRef<ConfirmationDialogComponent>;
+
   constructor(
     private userService: AuthService,
+    private authService: AuthService,
               private fb: FormBuilder,
               private apiService: ApiService,
               private router: Router,
@@ -119,17 +121,11 @@ editAvatar(){
         });
       this.subscriptions.push(saveSubscr);
   }
-
-  cancel(){
-      this.previousUrl = this.routerExtService.getPreviousUrl();
-      if (this.previousUrl !== '/usersManagement'){
-          this.router.navigate(['/pages/dashboard']);
-      }
-      else {
-          this.location.back();
-      }
-
-  }
+  
+  cancel() {
+    const url = this.authService.currentAuthValue.userRole === "ADMIN" ? 'pages/agent' : 'pages/client';
+    this.router.navigate([url]);
+}
 
   getUser(): number{
 
