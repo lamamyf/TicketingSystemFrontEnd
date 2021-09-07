@@ -1,7 +1,8 @@
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize, tap } from 'rxjs/operators';
+import { UserManagementHttpService } from './user-management-http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,15 +10,23 @@ import { finalize } from 'rxjs/operators';
 export class UserManagentService {
   isLoadingSubject: BehaviorSubject<boolean>;
   isLoading$: Observable<boolean>;
-  constructor(private userManagementHttpService: UserManagentService) { 
+  constructor(private userManagementHttpService: UserManagementHttpService) { 
     this.isLoadingSubject = new BehaviorSubject<boolean>(false);
     this.isLoading$ = this.isLoadingSubject.asObservable();
   }
 
-  changePassword(currentPassword: String, password: String): Observable<any> {
+  changePassword(currentPassword: string, password: string): Observable<any> {
     this.isLoadingSubject.next(true);
     return this.userManagementHttpService.changePassword(currentPassword, password).pipe(
-      finalize(() => this.isLoadingSubject.next(false))
+      catchError((err) => {
+        console.log(err);
+        console.error('err', err.error);
+        return of(err.error);
+      }),
+      finalize(() => {
+        this.isLoadingSubject.next(false);
+      })
+      
     );
 }
 }

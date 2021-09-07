@@ -4,8 +4,6 @@ import { Observable, Subscription } from 'rxjs';
 import { AuthService, ConfirmPasswordValidator, UserModel } from '../../auth';
 import {  Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Location } from '@angular/common';
-import { RouterExtService } from '../../../services/RouterExtService.service';
 import { UserManagentService } from '../services/user-managent.service';
 
 @Component({
@@ -29,8 +27,6 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
         private router: Router,
         private snackBar: MatSnackBar,
         private cdr: ChangeDetectorRef,
-        private location: Location,
-        private routerExtService: RouterExtService,
     ) {
         this.isLoading$ = this.userManagentService.isLoadingSubject.asObservable();
     }
@@ -70,7 +66,7 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
                         })
                     );
                 } else {
-                    this.hasError = result.success.response;
+                    this.hasError = !result.success;
                     this.cdr.markForCheck();
                 }
             });
