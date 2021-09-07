@@ -4,7 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserModel } from '../../../../models/user.model';
 import { environment } from '../../../../../environments/environment';
 import { AuthModel } from '../../../../models/auth.model';
-import { AuthService } from '../auth.service';
 
 const API_URL = `${environment.apiUrl}`;
 
