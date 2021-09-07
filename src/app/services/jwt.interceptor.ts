@@ -12,9 +12,9 @@ const TOKEN_HEADER_KEY = 'Authorization';
 export class JwtInterceptor implements HttpInterceptor {
     private isRefreshing = false;
     private jwtSubject: BehaviorSubject<any> = new BehaviorSubject(null);
-    private authService: AuthService;
+    
     constructor(private injector: Injector) { 
-        this.authService = this.injector.get(AuthService);
+
     }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -62,6 +62,10 @@ export class JwtInterceptor implements HttpInterceptor {
                     return next.handle(this.setAuthorizationHeader(request, jwt));
                 }));
         }
+    }
+
+    get authService(){
+        return this.injector.get(AuthService);
     }
 
 }
