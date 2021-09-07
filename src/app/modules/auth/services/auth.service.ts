@@ -148,15 +148,6 @@ export class AuthService implements OnDestroy {
     );
   }
 
-  //Change to update password
-  forgotPassword(email: string): Observable<boolean> {
-    this.isLoadingSubject.next(true);
-
-    return this.authHttpService
-      .forgotPassword(email)
-      .pipe(finalize(() => this.isLoadingSubject.next(false)));
-  }
-
   refreshToken(): Observable<any> {
     this.isLoadingSubject.next(true);
 

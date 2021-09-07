@@ -29,12 +29,6 @@ export class AuthHTTPService {
     return this.http.post<UserModel>(`${API_URL}/register`, user);
   }
 
-  //Change too update password
-  forgotPassword(email: string): Observable<boolean> {
-    return this.http.post<boolean>(`${API_URL}/forgot-password`, {
-      email,
-    });
-  }
 
     getUserByToken(token, id): Observable<UserModel> {
     const httpHeaders = new HttpHeaders({
