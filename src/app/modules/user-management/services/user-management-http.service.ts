@@ -18,4 +18,8 @@ export class UserManagementHttpService {
         currentPassword, password
       });
   }
+
+  editUser(body: any): Observable<any> {
+    return this.http.put<any>(`${API_URL}/${this.authService.currentAuthValue.id}`, body);
+  }
 }

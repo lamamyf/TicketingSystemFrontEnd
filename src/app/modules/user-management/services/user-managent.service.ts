@@ -10,7 +10,8 @@ import { UserManagementHttpService } from './user-management-http.service';
 export class UserManagentService {
   isLoadingSubject: BehaviorSubject<boolean>;
   isLoading$: Observable<boolean>;
-  constructor(private userManagementHttpService: UserManagementHttpService) { 
+
+  constructor(private userManagementHttpService: UserManagementHttpService) {
     this.isLoadingSubject = new BehaviorSubject<boolean>(false);
     this.isLoading$ = this.isLoadingSubject.asObservable();
   }
@@ -26,7 +27,22 @@ export class UserManagentService {
       finalize(() => {
         this.isLoadingSubject.next(false);
       })
-      
+
     );
-}
+  }
+
+  editUser(body: any): Observable<any> {
+    this.isLoadingSubject.next(true);
+    return this.userManagementHttpService.editUser(body).pipe(
+      catchError((err) => {
+        console.log(err);
+        console.error('err', err.error);
+        return of(err.error);
+      }),
+      finalize(() => {
+        this.isLoadingSubject.next(false);
+      })
+
+    );
+  }
 }
