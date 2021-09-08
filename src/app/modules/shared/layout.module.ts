@@ -24,6 +24,8 @@ import { HeaderMenuDynamicComponent } from './_layout/components/header/header-m
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import {NgApexchartsModule} from 'ng-apexcharts';
+import { NbThemeModule } from '@nebular/theme';
+
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -52,6 +54,8 @@ import {NgApexchartsModule} from 'ng-apexcharts';
     ReactiveFormsModule,
     MatDialogModule,
     NgApexchartsModule,
+    //NbThemeModule.forRoot(),
+
   ],
 })
 export class LayoutModule { }

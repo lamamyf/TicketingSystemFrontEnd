@@ -50,10 +50,11 @@ export class AuthHTTPService {
   } 
   
   logout(token): Observable<any>{
+    console.log(token);
     const httpHeaders = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    return this.http.get<UserModel>(`${API_URL}/logout`, {
+    return this.http.post<any>(`${API_URL}/logout`, {
       headers: httpHeaders,
     });
   }

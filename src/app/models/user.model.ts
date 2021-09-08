@@ -8,7 +8,7 @@ export class UserModel{
   email: string;
   avatar: string;
   gender: string;
-  userRole: UserRole;
+  role: UserRole;
 
   constructor()
 
@@ -19,7 +19,7 @@ export class UserModel{
       this.lastName = user.lastName;
       this.email = user.email;
       this.gender = user.gender;
-      this.userRole = user.userRole;
+      this.role = user.userRole;
     }
   }
   
@@ -31,6 +31,7 @@ export class UserModel{
     this.email = user.email;
     this.avatar = './assets/media/svg/avatars/default.jpg';
     this.gender = user.gender;
+    this.role = UserRole.CLIENT;
 
   }
 

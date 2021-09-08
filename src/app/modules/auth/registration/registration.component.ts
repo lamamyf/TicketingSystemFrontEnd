@@ -85,22 +85,26 @@ export class RegistrationComponent implements OnInit, OnDestroy {
             Validators.maxLength(100),
           ]),
         ],
-        gender: [false, Validators.compose([Validators.required])],
+       gender: [false, Validators.compose([Validators.required])],
       },
-      {
-        validator: ConfirmPasswordValidator.MatchPassword,
-      }
+     
     );
   }
 
   submit() {
+   
     this.hasError = false;
+
     const result = {};
     Object.keys(this.f).forEach(key => {
       result[key] = this.f[key].value;
     });
+  
+
     const newUser = new UserModel();
     newUser.setUser(result);
+    console.log(result);
+    console.log(newUser);
     const registrationSubscr = this.authService
       .registration(newUser)
       .pipe(first())
@@ -108,7 +112,8 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         if (user) {
           this.router.navigate(['/']);
         } else {
-          this.hasError = true;
+                  console.log("ssss");
+                    this.hasError = true;
         }
       });
     this.unsubscribe.push(registrationSubscr);

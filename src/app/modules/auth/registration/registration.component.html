@@ -274,9 +274,9 @@
   <input
 
         type="radio"
-        id="male" 
+        id="MALE" 
         name="gender" 
-        value="male"
+        value="MALE"
         autocomplete="off"
         formControlName="gender"
         [ngClass]="{
@@ -286,14 +286,13 @@
   <label 
   class="font-size-h5 font-weight-bold text-dark"
 
-  for="male"> ذكر </label>
+  for="MALE"> ذكر </label>
   &nbsp;&nbsp;&nbsp;
   <input 
-  
         type="radio"
-        id="female" 
+        id="FEMALE" 
         name="gender" 
-        value="female"
+        value="FEMALE"
         autocomplete="off"
         formControlName="gender"
         [ngClass]="{
@@ -304,7 +303,7 @@
   <label 
   class="font-size-h5 font-weight-bold text-dark"
 
-  for="female"> أنثى </label> 
+  for="FEMALE"> أنثى </label> 
  
          
           </label>
@@ -323,14 +322,13 @@
   
       <button
         type="submit"
-        id="kt_login_signup_submit"
-     
+        id="kt_login_signup_submit" 
         class="btn btn-primary font-weight-bolder font-size-h6 px-14 py-4 my-3 mr-4"
         style="background-color: #599fa8;
         border: #599fa8;
         border-radius: 30px;
         align-self: center;"
-        [disabled]="true"
+        [disabled]="registrationForm.invalid"
       >
         التسجيل
       </button>

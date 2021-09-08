@@ -99,9 +99,9 @@ export class AuthService implements OnDestroy {
     //*might not nedd to send token as param*
     return this.authHttpService.logout(this.currentToken)
       .pipe(
-        tap(() => this.clean),
+        tap(() => this.clean()),
         catchError(error => {
-          //alert(error.error);
+          console.log(error.error);
           return of(false);
         }),
         finalize(() =>
@@ -167,10 +167,12 @@ export class AuthService implements OnDestroy {
     );
   }
   private clean() {
+    console.log("clean 1");
     this.currentUserSubject = new BehaviorSubject<UserModel>(undefined);
     this.currentAuthSubject = new BehaviorSubject<AuthModel>(undefined);
 
     localStorage.removeItem(this.authLocalStorageToken);
+    console.log("clean 2");
   }
   private setAuthFromLocalStorage(auth: AuthModel): boolean {
     // store auth accessToken/refreshToken/epiresIn in local storage to keep user logged in between page refreshes
