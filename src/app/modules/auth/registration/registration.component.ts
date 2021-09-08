@@ -61,12 +61,11 @@ export class RegistrationComponent implements OnInit, OnDestroy {
           ]),
         ],
         email: [
-          'qwe@qwe.qwe',
+          '',
           Validators.compose([
             Validators.required,
-            Validators.pattern('[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+\\.[a-z]{2,3}'),
-            Validators.email,
             Validators.maxLength(320), // https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
+            Validators.pattern('[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+\\.[a-z]{2,3}'),
           ]),
         ],
         password: [
@@ -77,7 +76,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
             Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&].{3,}')
           ]),
         ],
-        cPassword: [
+        confirmPassword: [
           '',
           Validators.compose([
             Validators.required,
@@ -113,7 +112,6 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         if (user) {
           this.router.navigate(['/']);
         } else {
-                  console.log("ssss");
                     this.hasError = true;
         }
       });

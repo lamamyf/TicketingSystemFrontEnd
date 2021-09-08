@@ -135,30 +135,32 @@
           control: registrationForm.controls['email']
         }"
       ></ng-container>
-      <ng-container
+      <!-- <ng-container
         [ngTemplateOutlet]="formError"
         [ngTemplateOutletContext]="{
           validation: 'email',
           message: 'البريد الإلكتروني غير صحيح',
           control: registrationForm.controls['email']
         }"
-      ></ng-container>
-      <ng-container
-        [ngTemplateOutlet]="formError"
-        [ngTemplateOutletContext]="{
-          validation: 'minlength',
-          message: 'البريد الإلكتروني يجب أن يتكون من ٣ حروف على الأقل',
-          control: registrationForm.controls['email']
-        }"
-      ></ng-container>
+      ></ng-container> -->
+    
       <ng-container
         [ngTemplateOutlet]="formError"
         [ngTemplateOutletContext]="{
           validation: 'maxLength',
-          message: 'البريد الإلكتروني لا يمكن أن يكون أكثر من ٣٦٠ حروف',
+          message: 'البريد الإلكتروني لا يمكن أن يكون أكثر من ٣٢٠ حرف',
           control: registrationForm.controls['email']
         }"
       ></ng-container>
+
+      <ng-container
+      [ngTemplateOutlet]="formError"
+      [ngTemplateOutletContext]="{
+        validation: 'pattern',
+        message: 'خطأ في البريد الإلكتروني',
+        control: registrationForm.controls['email']
+      }"
+    ></ng-container>
     </div>
     <!--end::Form group-->
 
@@ -207,23 +209,31 @@
           control: registrationForm.controls['password']
         }"
       ></ng-container>
+
+      <ng-container
+      [ngTemplateOutlet]="formError"
+      [ngTemplateOutletContext]="{ 
+      validation: 'pattern',
+      message: 'كلمة المرور يجب ان تحتوي على أحرف صغيرة وكبيرة وأرقام ورموز',
+      control: registrationForm.controls['password']
+    }"
+    ></ng-container>
     </div>
     <!--end::Form group-->
 
     <!--begin::Form group-->
     <div class="form-group">
       <label class="font-size-h6 font-weight-bolder text-dark pt-5"
-        >إعادة كلمة المرور*</label
-      >
+        >إعادة كلمة المرور*</label>
       <input
         class="form-control form-control-solid h-auto py-4 px-5 rounded-lg font-size-h6"
         type="password"
         placeholder="إعادة كلمة المرور"
-        name="cPassword"
+        name="confirmPassword"
         autocomplete="off"
-        formControlName="cPassword"
+        formControlName="confirmPassword"
         [ngClass]="{
-          'is-invalid': registrationForm.controls['cPassword'].invalid
+          'is-invalid': registrationForm.controls['confirmPassword'].invalid
         }"
       />
       <ng-container
@@ -231,29 +241,13 @@
         [ngTemplateOutletContext]="{
           validation: 'required',
           message: 'إعادة كلمة المرور مطلوبة',
-          control: registrationForm.controls['cPassword']
-        }"
-      ></ng-container>
-      <ng-container
-        [ngTemplateOutlet]="formError"
-        [ngTemplateOutletContext]="{
-          validation: 'minlength',
-          message: 'إعادة كلمة المرور يجب أن تتكون من ٣ حروف على الأقل',
-          control: registrationForm.controls['cPassword']
-        }"
-      ></ng-container>
-      <ng-container
-        [ngTemplateOutlet]="formError"
-        [ngTemplateOutletContext]="{
-          validation: 'maxLength',
-          message: 'إعادة كلمة المرور لا يمكن أن تكون أكثر من ١٠٠ حرف',
-          control: registrationForm.controls['cPassword']
+          control: registrationForm.controls['confirmPassword']
         }"
       ></ng-container>
       <ng-container
         *ngIf="
-          registrationForm.controls['cPassword'].errors &&
-          registrationForm.controls['cPassword'].errors.ConfirmPassword
+          registrationForm.controls['confirmPassword'].errors &&
+          registrationForm.controls['confirmPassword'].errors.ConfirmPassword
         "
       >
         <div class="fv-plugins-message-container">
@@ -262,6 +256,7 @@
     </div>
         </div>
       </ng-container>
+    
     </div>
     <!--end::Form group-->
 
@@ -279,10 +274,10 @@
         value="MALE"
         autocomplete="off"
         formControlName="gender"
-        [ngClass]="{
-          'is-invalid': registrationForm.controls['gender'].invalid
+        [ngClass]="{'is-invalid': registrationForm.controls['gender'].invalid
         }"
   >
+
   <label 
   class="font-size-h5 font-weight-bold text-dark"
 
