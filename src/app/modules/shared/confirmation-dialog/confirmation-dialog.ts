@@ -5,8 +5,7 @@ import { LogoutComponent } from '../../auth/logout/logout.component';
 import { first } from 'rxjs/operators';
 import { Subscription} from 'rxjs';
 import { Router } from '@angular/router';
-import { JwtInterceptor } from 'src/app/services/jwt.interceptor';
-import { NbAuthJWTInterceptor } from '@nebular/auth';
+
 
 
 @Component({
@@ -29,15 +28,10 @@ export class ConfirmationDialogComponent implements OnDestroy {
         .logout()
         .pipe(first())
         .subscribe(()=>{
-            console.log("jjjjj");
             this.router.navigate(['/auth/login']);         
-            console.log("rrrrrr");
-
-
         });
     
         this.unsubscribe.push(logoutSubscr);
-
     }
 
 

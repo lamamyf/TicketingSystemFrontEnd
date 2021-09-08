@@ -6,7 +6,7 @@ export class UserModel{
   lastName: string;
   password: string;
   email: string;
-  avatar: string;
+  avatar: number;
   gender: string;
   role: UserRole;
 
@@ -29,7 +29,7 @@ export class UserModel{
     this.firstName = user.firstName;
     this.lastName = user.lastName;
     this.email = user.email;
-    this.avatar = './assets/media/svg/avatars/default.jpg';
+    this.avatar = user.gender === "FEMALE"? 0 : -1 ;
     this.gender = user.gender;
     this.role = UserRole.CLIENT;
 

@@ -64,8 +64,8 @@ export class RegistrationComponent implements OnInit, OnDestroy {
           'qwe@qwe.qwe',
           Validators.compose([
             Validators.required,
+            Validators.pattern('[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+\\.[a-z]{2,3}'),
             Validators.email,
-            Validators.minLength(3),
             Validators.maxLength(320), // https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
           ]),
         ],
@@ -73,21 +73,22 @@ export class RegistrationComponent implements OnInit, OnDestroy {
           '',
           Validators.compose([
             Validators.required,
-            Validators.minLength(3),
-            Validators.maxLength(100),
+            Validators.minLength(8),
+            Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&].{3,}')
           ]),
         ],
         cPassword: [
           '',
           Validators.compose([
             Validators.required,
-            Validators.minLength(3),
-            Validators.maxLength(100),
-          ]),
+          ]),{
+            validator: ConfirmPasswordValidator.MatchPassword
+        }
         ],
        gender: [false, Validators.compose([Validators.required])],
       },
      
+      
     );
   }
 
