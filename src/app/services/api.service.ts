@@ -40,9 +40,6 @@ export class ApiService {
      return this.http.post<any>(this.url + 'admin/' + 'changePassword', body);
   }
 
-  editUser(body: any){
-     return this.http.post<any>(this.url + 'admin/' + 'updateUser', body);
-  }
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
