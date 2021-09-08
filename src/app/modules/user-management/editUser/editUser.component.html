@@ -31,7 +31,7 @@
         <div class="form-group col-md-5">
 
 
-          <img class="avatar" src="./assets/avatars-new/{{getUser()}}.png" style="
+          <img class="avatar" src="./assets/avatars-new/{{avatar}}.png" style="
      height: 150px;
     width: 150px; 
      " />
@@ -68,65 +68,66 @@ bottom: -50px; " xml:space="preserve">
         </div>
 
         <div class="form-group col-md-5">
-          <label class="font-size-h6 font-weight-bolder text-dark">الإسم الأول*</label>
-          <input class="form-control form-control-solid h-auto py-4 px-5 rounded-lg font-size-h6" type="text"
-            name="firstName" formControlName="firstName" placeholder="الإسم الأول" autocomplete="off" [ngClass]="{
+          <label class="font-size-h6 font-weight-bolder text-dark"> الاسم الأول*</label>
+
+          <input class="form-control form-control-solid h-auto py-4 px-5 rounded-lg font-size-h6" type="text" 
+            name="firstName" formControlName="firstName" placeholder="الاسم الأول"autocomplete="off" [ngClass]="{
                     'is-invalid': formGroup.controls['firstName'].invalid
-                  }" />
+                  }" />  
 
           <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
                     validation: 'required',
-                    message: 'الإسم الأول مطلوب',
+                    message: 'الاسم الأول مطلوب',
                     control: formGroup.controls['firstName']
                   }"></ng-container>
           <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
                     validation: 'minlength',
-                    message: 'الإسم الأول يجب أن يتكون من ٣ حروف على الأقل',
+                    message: 'الاسم الأول يجب أن يتكون من ٣ حروف على الأقل',
                     control: formGroup.controls['firstName']
                   }"></ng-container>
           <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
                     validation: 'maxLength',
-                    message: 'الإسم الأول يجب أن لا يكون أكثر من ١٠٠ حرف',
+                    message: 'الاسم الأول يجب أن لا يكون أكثر من ١٠٠ حرف',
                     control: formGroup.controls['firstName']
                   }"></ng-container>
         </div>
         <div class="form-group col-md-5">
 
-          <label class=" font-size-h6 font-weight-bolder text-dark">الإسم الأخير*</label>
+          <label class=" font-size-h6 font-weight-bolder text-dark">الاسم الأخير*</label>
           <!-- <p>
             {{user.firstName}} </p> -->
           <input class="form-control form-control-lg form-control-solid h-auto py-4 px-5 rounded-lg font-size-h6 "
-            type="text" name="lastName" formControlName="lastName" placeholder="الإسم الأخير" autocomplete="off"
+            type="text" name="lastName" formControlName="lastName" placeholder="الاسم الأخير" autocomplete="off"
             [ngClass]="{
               'is-invalid': formGroup.controls['lastName'].invalid
             }" />
 
           <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
               validation: 'required',
-              message: 'الإسم الأخير مطلوب',
+              message: 'الاسم الأخير مطلوب',
               control: formGroup.controls['lastName']
             }"></ng-container>
           <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
               validation: 'minlength',
-              message: 'الإسم الأخير يجب أن يتكون من ٣ حروف على الأقل',
+              message: 'الاسم الأخير يجب أن يتكون من ٣ حروف على الأقل',
               control: formGroup.controls['lastName']
             }"></ng-container>
           <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
               validation: 'maxLength',
-              message: 'الإسم الأخير يجب أن لا يكون أكثر من ١٠٠ حرف',
+              message: 'الاسم الأخير يجب أن لا يكون أكثر من ١٠٠ حرف',
               control: formGroup.controls['lastName']
             }"></ng-container>
         </div>
         <div class="form-group ">
           <label class="font-size-h6 font-weight-bolder text-dark pt-5">
             الجنس* <br>
-            <input type="radio" id="male" name="gender" value="male" autocomplete="off" formControlName="gender"
+            <input type="radio" id="male" name="gender" value="MALE" autocomplete="off" formControlName="gender"
               [ngClass]="{
              'is-invalid': formGroup.controls['gender'].invalid
            }">
             <label class="font-size-h5 font-weight-bold text-dark" for="male"> ذكر </label>
             &nbsp;&nbsp;&nbsp;
-            <input type="radio" id="female" name="gender" value="female" autocomplete="off" formControlName="gender"
+            <input type="radio" id="female" name="gender" value="FEMALE" autocomplete="off" formControlName="gender"
               [ngClass]="{
              'is-invalid': formGroup.controls['gender'].invalid
            }">

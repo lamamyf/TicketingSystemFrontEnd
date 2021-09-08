@@ -2,11 +2,8 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService, UserModel } from '../../auth';
-import { ApiService } from '../../../services/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Location } from '@angular/common';
-import { RouterExtService } from '../../../services/RouterExtService.service';
 import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog/confirmation-dialog';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AvatarsDialogComponent } from '../../shared/avatars/avatarsDialog';
@@ -93,6 +90,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
   save() {
     const saveSubscr = this.userManagentService
       .editUser(this.formGroup.value).subscribe(response => {
+        console.log(response);
         if (response.success) {
           this.router.navigate([this.url]).then(r =>
             this.snackBar.open('تم تعديل المستخدم بنجاح', '', {
@@ -115,6 +113,22 @@ export class EditUserComponent implements OnInit, OnDestroy {
     return EditUserComponent.avatarId;
   }
 
+  get avatar(): number{
+    return this.authService.currentUserValue.avatar; 
+  }
+
+  get firstName(): string{
+    console.log(this.authService.currentUserValue.firstName);
+    return this.authService.currentUserValue.firstName; 
+  }
+
+  get lastName(): string{
+    return this.authService.currentUserValue.lastName; 
+  }
+
+  get gender(): string{
+    return this.authService.currentUserValue.gender; 
+  }
 
   static setUser(user: number) {
 
