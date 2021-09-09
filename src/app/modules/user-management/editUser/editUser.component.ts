@@ -1,5 +1,6 @@
+import { UpdateUserDto } from './../../../models/updateUser.dto';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormGroupDirective } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService, UserModel } from '../../auth';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -78,16 +79,10 @@ export class EditUserComponent implements OnInit, OnDestroy {
   loadForm() {
     this.hasError = false;
     this.formGroup = this.fb.group({
-<<<<<<< Updated upstream
       firstName: [this.firstName, Validators.compose([
-=======
-      firstName: ['', Validators.compose([
         Validators.required,
         Validators.minLength(3),])],
-      lastName: ['', Validators.compose([
->>>>>>> Stashed changes
-        Validators.required,
-        Validators.minLength(3),])],
+     
       lastName: [this.lastName, Validators.compose([
         Validators.required,
         Validators.minLength(3),])],
@@ -101,7 +96,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
 
   save() {
     const saveSubscr = this.userManagentService
-      .editUser(this.formGroup.value).subscribe(response => {
+      .editUser(new UpdateUserDto(this.formGroup.value, EditUserComponent.avatarId)).subscribe(response => {
         console.log(response);
         if (response.success) {
           this.router.navigate([this.url]).then(r =>
@@ -125,23 +120,21 @@ export class EditUserComponent implements OnInit, OnDestroy {
     return EditUserComponent.avatarId;
   }
 
-
-
-  get avatar(): number{
-    return this.authService.currentUserValue.avatar; 
+  get avatar(): number {
+    return this.authService.currentUserValue.avatar;
   }
 
-  get firstName(): string{
+  get firstName(): string {
     console.log(this.authService.currentUserValue.firstName);
-    return this.authService.currentUserValue.firstName; 
+    return this.authService.currentUserValue.firstName;
   }
 
-  get lastName(): string{
-    return this.authService.currentUserValue.lastName; 
+  get lastName(): string {
+    return this.authService.currentUserValue.lastName;
   }
 
-  get gender(): string{
-    return this.authService.currentUserValue.gender; 
+  get gender(): string {
+    return this.authService.currentUserValue.gender;
   }
 
 
