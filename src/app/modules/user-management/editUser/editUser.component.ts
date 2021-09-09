@@ -77,7 +77,9 @@ export class EditUserComponent implements OnInit, OnDestroy {
   loadForm() {
     this.hasError = false;
     this.formGroup = this.fb.group({
-      firstName: [this.firstName, Validators.required],
+      firstName: [this.firstName, Validators.compose([
+        Validators.required,
+        Validators.minLength(3),])],
       lastName: [this.lastName, Validators.compose([
         Validators.required,
         Validators.minLength(3),])],
@@ -86,6 +88,8 @@ export class EditUserComponent implements OnInit, OnDestroy {
 
     });
   }
+
+  
 
   save() {
     const saveSubscr = this.userManagentService
