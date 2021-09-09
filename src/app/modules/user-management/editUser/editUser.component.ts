@@ -1,6 +1,6 @@
 import { UpdateUserDto } from './../../../models/updateUser.dto';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormGroupDirective } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService, UserModel } from '../../auth';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,7 +16,7 @@ import { UserManagentService } from '../services/user-managent.service';
   styleUrls: ['./editUser.component.scss']
 })
 export class EditUserComponent implements OnInit, OnDestroy {
-
+  currentUserInfo: UpdateUserDto = new UpdateUserDto();
   formGroup: FormGroup;
   firstUserState: UserModel;
   subscriptions: Subscription[] = [];
@@ -43,6 +43,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
     this.isLoading$ = this.userManagentService.isLoadingSubject.asObservable();
     this.activatedRoute.queryParams.subscribe(params => {
       this.cdr = cdr;
+      this.authService.currentUser$.subscribe(user => this.updateUser(user));
       //change later
      
       EditUserComponent.avatarId = authService.currentUserValue.avatar;
@@ -58,7 +59,9 @@ export class EditUserComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(sb => sb.unsubscribe());
   }
 
-
+  updateUser(user){
+    user = this.currentUserInfo.setUpdateUserDto(user.firstName, user.lastName, user.gender, user.avatar);
+  }
 
   editAvatar() {
     this.dialogRefAvatar = this.dialog.open(AvatarsDialogComponent, {
@@ -79,24 +82,19 @@ export class EditUserComponent implements OnInit, OnDestroy {
   loadForm() {
     this.hasError = false;
     this.formGroup = this.fb.group({
-      firstName: [this.firstName, Validators.compose([
+      firstName: [this.currentUserInfo.firstName, Validators.compose([
         Validators.required,
         Validators.minLength(3),])],
-     
-      lastName: [this.lastName, Validators.compose([
+      lastName: [this.currentUserInfo.lastName, Validators.compose([
         Validators.required,
         Validators.minLength(3),])],
-      gender: [this.gender, Validators.required],
-
-
+      gender: [this.currentUserInfo.gender, Validators.required],
     });
   }
 
-  
-
   save() {
     const saveSubscr = this.userManagentService
-      .editUser(new UpdateUserDto(this.formGroup.value, EditUserComponent.avatarId)).subscribe(response => {
+      .editUser(UpdateUserDto.construct(this.formGroup.value, EditUserComponent.avatarId)).subscribe(response => {
         console.log(response);
         if (response.success) {
           this.router.navigate([this.url]).then(r =>
@@ -119,25 +117,6 @@ export class EditUserComponent implements OnInit, OnDestroy {
   getUserAvatar(): number {
     return EditUserComponent.avatarId;
   }
-
-  get avatar(): number {
-    return this.authService.currentUserValue.avatar;
-  }
-
-  get firstName(): string {
-    console.log(this.authService.currentUserValue.firstName);
-    return this.authService.currentUserValue.firstName;
-  }
-
-  get lastName(): string {
-    return this.authService.currentUserValue.lastName;
-  }
-
-  get gender(): string {
-    return this.authService.currentUserValue.gender;
-  }
-
-
 
   static setUser(user: number) {
 
