@@ -77,11 +77,11 @@ export class EditUserComponent implements OnInit, OnDestroy {
   loadForm() {
     this.hasError = false;
     this.formGroup = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.compose([
+      firstName: [this.firstName, Validators.required],
+      lastName: [this.lastName, Validators.compose([
         Validators.required,
         Validators.minLength(3),])],
-      gender: ['', Validators.required],
+      gender: [this.gender, Validators.required],
 
 
     });
