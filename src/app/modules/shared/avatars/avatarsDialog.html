@@ -1,6 +1,6 @@
 
 <button  md-button type="button" class="close" aria-label="Close" 
-(click)="dialogRef.close(false)" >
+(click)="dialogRef.close(true)" >
     <span  style="size: 29px;" aria-hidden="true">
     <a style="font-size: 25px;">X</a>
     </span>
@@ -25,20 +25,18 @@ style="font-size: 25px;"
      
     <div 
     class="grid-container"
-    *ngFor="let item of getAvatars(); index as i">
+    *ngFor="let item of getAvatars();">
      
-
-
-    <span 
+ <span 
  (click)="changeAvater(item)"
  (click)="dialogRef.close(true)"
   > 
 
-        <img
-       style="height: 150px;
-       width: 150px;"
+        <img style="height: 150px; width: 150px;"
          src="./assets/avatars-new/{{item}}.png" alt="{{item}}"/>
    
+
+         
         </span>
     </div>
 

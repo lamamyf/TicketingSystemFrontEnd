@@ -32,6 +32,7 @@ export class AuthService implements OnDestroy {
   }
 
   get currentUserValue(): UserModel {
+    console.log(this.currentUserSubject.value);
     return this.currentUserSubject.value;
   }
 

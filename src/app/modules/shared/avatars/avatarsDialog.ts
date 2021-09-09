@@ -4,6 +4,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { EditUserComponent } from '../../user-management/editUser/editUser.component';
+import { AuthService, UserModel } from '../../auth';
+import { NgZone } from '@angular/core';
 
 @Component({
     selector: 'app-avatar',
@@ -14,18 +16,17 @@ import { EditUserComponent } from '../../user-management/editUser/editUser.compo
 
 
 
-//changed
 export class AvatarsDialogComponent {
 
     static currentAvatar: number;
-
-  //changed
-    constructor(public dialogRef: MatDialogRef<AvatarsDialogComponent> ,  private fb: FormBuilder, private router: Router
+  
+    constructor(public dialogRef: MatDialogRef<AvatarsDialogComponent> ,     private authService: AuthService,private ngZone: NgZone,
+       private fb: FormBuilder, private router: Router
         ) {
 
             let avatars = [-1, 0, 1, 2,3,4,5,6,7,8,9,10];
             //change later based on
-          AvatarsDialogComponent.currentAvatar = -1;
+        
 
     }
     
@@ -35,10 +36,7 @@ export class AvatarsDialogComponent {
    avatarComponent: AvatarsDialogComponent;
     private unsubscribe: Subscription[] = []; 
 
-    lang;
-    dir;
-    id: any;
-
+    
   
 
     getAvatars(): number[]{
@@ -47,8 +45,7 @@ export class AvatarsDialogComponent {
         return avatars;
     }
    
-    
-
+  
 
     changeAvater(id :number){
 

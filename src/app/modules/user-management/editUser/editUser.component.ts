@@ -43,7 +43,8 @@ export class EditUserComponent implements OnInit, OnDestroy {
     this.activatedRoute.queryParams.subscribe(params => {
       this.cdr = cdr;
       //change later
-      EditUserComponent.avatarId = -1;
+     
+      EditUserComponent.avatarId = authService.currentUserValue.avatar;
     });
   }
 
@@ -77,7 +78,14 @@ export class EditUserComponent implements OnInit, OnDestroy {
   loadForm() {
     this.hasError = false;
     this.formGroup = this.fb.group({
+<<<<<<< Updated upstream
       firstName: [this.firstName, Validators.compose([
+=======
+      firstName: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),])],
+      lastName: ['', Validators.compose([
+>>>>>>> Stashed changes
         Validators.required,
         Validators.minLength(3),])],
       lastName: [this.lastName, Validators.compose([
@@ -113,9 +121,11 @@ export class EditUserComponent implements OnInit, OnDestroy {
     this.router.navigate([this.url]);
   }
 
-  getUser(): number {
+  getUserAvatar(): number {
     return EditUserComponent.avatarId;
   }
+
+
 
   get avatar(): number{
     return this.authService.currentUserValue.avatar; 
@@ -133,6 +143,8 @@ export class EditUserComponent implements OnInit, OnDestroy {
   get gender(): string{
     return this.authService.currentUserValue.gender; 
   }
+
+
 
   static setUser(user: number) {
 

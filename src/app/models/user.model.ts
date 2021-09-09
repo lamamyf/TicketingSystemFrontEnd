@@ -1,6 +1,8 @@
 import { UserRole } from './userRole';
 
 export class UserModel{
+
+
   id: number;
   firstName: string;
   lastName: string;
@@ -13,6 +15,7 @@ export class UserModel{
   constructor()
 
   constructor(user?: any){
+   
     if(user){
       this.id = user.id;
       this.firstName = user.firstName;
@@ -20,6 +23,7 @@ export class UserModel{
       this.email = user.email;
       this.gender = user.gender;
       this.role = user.userRole;
+      this.avatar = user.avatar;
     }
   }
   
@@ -34,6 +38,9 @@ export class UserModel{
     this.role = UserRole.CLIENT;
 
   }
+
+
+  
 
   
 }
