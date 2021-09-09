@@ -135,7 +135,7 @@ bottom: -50px; " xml:space="preserve">
               [ngClass]="{
              'is-invalid': formGroup.controls['gender'].invalid
            }"
-           [checked]= "currentUserInfo.gender == 'MALE'"
+           [checked]= "gender == 'MALE'"
 
           >
             <label class="font-size-h5 font-weight-bold text-dark" for="male"> ذكر </label>
@@ -145,7 +145,7 @@ bottom: -50px; " xml:space="preserve">
              'is-invalid': formGroup.controls['gender'].invalid
            }"
            
-           [checked]= "currentUserInfo.gender == 'FEMALE'"
+           [checked]= "gender == 'FEMALE'"
            >
           
 
