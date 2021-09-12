@@ -116,6 +116,8 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         }
       });
     this.unsubscribe.push(registrationSubscr);
+
+    location.reload();
   }
 
   ngOnDestroy() {

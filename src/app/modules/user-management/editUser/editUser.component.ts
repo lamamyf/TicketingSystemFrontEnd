@@ -77,6 +77,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
 
 
   loadForm() {
+
     this.hasError = false;
     this.formGroup = this.fb.group({
       firstName: [this.firstName, Validators.compose([
@@ -99,17 +100,26 @@ export class EditUserComponent implements OnInit, OnDestroy {
       .editUser(new UpdateUserDto(this.formGroup.value, EditUserComponent.avatarId)).subscribe(response => {
         console.log(response);
         if (response.success) {
-          this.router.navigate([this.url]).then(r =>
             this.snackBar.open('تم تعديل المستخدم بنجاح', '', {
-              duration: 2000
+              duration: 2500
             })
-          );
+          location.reload();
+       
+         
+        
+
+          // this.router.navigate([this.url]).then(r =>
+          //   this.snackBar.open('تم تعديل المستخدم بنجاح', '', {
+          //     duration: 2000
+          //   })
+          // );
         } else {
           this.hasError = !response.success;
           this.cdr.markForCheck();
         }
       });
     this.subscriptions.push(saveSubscr);
+
   }
 
   cancel() {
