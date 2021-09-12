@@ -31,13 +31,13 @@
 
     <div class="form-group">
 
-      <label class="font-size-h6 font-weight-bolder text-dark">الإسم الأول*</label>
+      <label class="font-size-h6 font-weight-bolder text-dark">الاسم الأول*</label>
       <input
         class="form-control form-control-solid h-auto py-4 px-5 rounded-lg font-size-h6"
         type="text"
         name="firstName"
         formControlName="firstName"
-        placeholder="الإسم الأول"
+        placeholder="الاسم الأول"
         autocomplete="off"
         [ngClass]="{
           'is-invalid': registrationForm.controls['firstName'].invalid
@@ -48,7 +48,7 @@
         [ngTemplateOutlet]="formError"
         [ngTemplateOutletContext]="{
           validation: 'required',
-          message: 'الإسم الأول مطلوب',
+          message: 'الاسم الأول مطلوب',
           control: registrationForm.controls['firstName']
         }"
       ></ng-container>
@@ -56,7 +56,7 @@
         [ngTemplateOutlet]="formError"
         [ngTemplateOutletContext]="{
           validation: 'minlength',
-          message: 'الإسم الأول يجب أن يتكون من ٣ حروف على الأقل',
+          message: 'الاسم الأول يجب أن يتكون من ٣ حروف على الأقل',
           control: registrationForm.controls['firstName']
         }"
       ></ng-container>
@@ -64,7 +64,7 @@
         [ngTemplateOutlet]="formError"
         [ngTemplateOutletContext]="{
           validation: 'maxLength',
-          message: 'الإسم الأول يجب أن لا يكون أكثر من ١٠٠ حرف',
+          message: 'الاسم الأول يجب أن لا يكون أكثر من ١٠٠ حرف',
           control: registrationForm.controls['firstName']
         }"
       ></ng-container>
@@ -75,13 +75,13 @@
     <!--begin::Form group-->
     <div class="form-group">
      
-      <label class="font-size-h6 font-weight-bolder text-dark">الإسم الأخير*</label>
+      <label class="font-size-h6 font-weight-bolder text-dark">الاسم الأخير*</label>
       <input
         class="form-control form-control-solid h-auto py-4 px-5 rounded-lg font-size-h6"
         type="text"
         name="lastName"
         formControlName="lastName"
-        placeholder="الإسم الأخير"
+        placeholder="الاسم الأخير"
         autocomplete="off"
         [ngClass]="{
           'is-invalid': registrationForm.controls['lastName'].invalid
@@ -92,7 +92,7 @@
         [ngTemplateOutlet]="formError"
         [ngTemplateOutletContext]="{
           validation: 'required',
-          message: 'الإسم الأخير مطلوب',
+          message: 'الاسم الأخير مطلوب',
           control: registrationForm.controls['lastName']
         }"
       ></ng-container>
@@ -100,7 +100,7 @@
         [ngTemplateOutlet]="formError"
         [ngTemplateOutletContext]="{
           validation: 'minlength',
-          message: 'الإسم الأخير يجب أن يتكون من ٣ حروف على الأقل',
+          message: 'الاسم الأخير يجب أن يتكون من ٣ حروف على الأقل',
           control: registrationForm.controls['lastName']
         }"
       ></ng-container>
@@ -108,7 +108,7 @@
         [ngTemplateOutlet]="formError"
         [ngTemplateOutletContext]="{
           validation: 'maxLength',
-          message: 'الإسم الأخير يجب أن لا يكون أكثر من ١٠٠ حرف',
+          message: 'الاسم الأخير يجب أن لا يكون أكثر من ١٠٠ حرف',
           control: registrationForm.controls['lastName']
         }"
       ></ng-container>
