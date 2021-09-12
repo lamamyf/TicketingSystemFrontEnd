@@ -91,15 +91,14 @@
         }"
       ></ng-container>
       <ng-container
-              [ngTemplateOutlet]="formError"
-              [ngTemplateOutletContext]="{
-          validation: 'minlength',
-          message: 'كلمة المرور أقل من 8 خانات',
-          control: loginForm.controls['password']
-        }"
-      ></ng-container>
-
-
+      [ngTemplateOutlet]="formError"
+      [ngTemplateOutletContext]="{ 
+      validation: 'pattern',
+      message: 'خطأ في كلمة المرور',
+      control: loginForm.controls['password']
+    }"
+    ></ng-container>
+     
 <div style="margin-top: 1cm; margin-right: 2.5mm;">
   لا يوجد لديك حساب؟
   <a  routerLink="/auth/register" routerLinkActive="active">سجل الأن</a>
