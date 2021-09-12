@@ -87,7 +87,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
         Validators.required,
         Validators.minLength(3),])],
       gender: [this.gender, Validators.required],
-
+      avatar:[this.getUserAvatar]
 
     });
   }
