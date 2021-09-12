@@ -19,6 +19,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
   // private fields
   private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
+  returnUrl: string;
 
   constructor(
     private fb: FormBuilder,
@@ -76,16 +77,13 @@ export class RegistrationComponent implements OnInit, OnDestroy {
             Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&].{3,}')
           ]),
         ],
-        confirmPassword: [
-          '',
-          Validators.compose([
-            Validators.required,
-          ]),{
-            validator: ConfirmPasswordValidator.MatchPassword
-        }
-        ],
+      
        gender: [false, Validators.compose([Validators.required])],
+       confirmPassword: ['', Validators.required]
       },
+      {
+        validator: ConfirmPasswordValidator.MatchPassword
+    }
      
       
     );
@@ -110,7 +108,8 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       .pipe(first())
       .subscribe((user: UserModel) => {
         if (user) {
-          this.router.navigate(['/']);
+          this.returnUrl = this.authService.currentAuthValue.userRole === "ADMIN" ? 'pages/agent' : 'pages/client';
+          this.router.navigate([this.returnUrl]);
         } else {
                     this.hasError = true;
         }
