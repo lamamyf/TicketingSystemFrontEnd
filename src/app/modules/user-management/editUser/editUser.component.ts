@@ -103,16 +103,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
             this.snackBar.open('تم تعديل المستخدم بنجاح', '', {
               duration: 2500
             })
-          location.reload();
-       
-         
-        
-
-          // this.router.navigate([this.url]).then(r =>
-          //   this.snackBar.open('تم تعديل المستخدم بنجاح', '', {
-          //     duration: 2000
-          //   })
-          // );
+         location.reload();
         } else {
           this.hasError = !response.success;
           this.cdr.markForCheck();
