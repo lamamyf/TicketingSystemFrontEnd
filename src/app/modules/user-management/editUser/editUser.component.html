@@ -167,7 +167,7 @@ bottom: -50px; " xml:space="preserve">
     <!-- </div> -->
   </div>
   <ng-template #formError let-control="control" let-message="message" let-validation="validation">
-    <ng-container *ngIf="control.hasError(validation) && (control.touched)">
+    <ng-container *ngIf="control.hasError(validation)">
       <div class="fv-plugins-message-container">
         <div class="fv-help-block text-danger">
           {{ message }}
