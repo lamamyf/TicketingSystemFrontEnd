@@ -49,10 +49,22 @@ style="font-size: 25px;"
             <br>
 
             
+        <div *ngIf="getUserType()=='ADMIN'">
+
+          <select 
+          class="form-control form-control-solid h-auto py-24 px-6 rounded-lg"
+            name="status"
         
+      >
+              <option selected="selected" value="Received">تم الإستلام</option>
+              <option value="Pending">معلقة</option>
+              <option value="Closed">مغلقة</option>
+              </select>
+  
+        </div>
        
            
-       
+       <div *ngIf="getUserType()=='CLIENT'">
             
             
 <div *ngIf="getTicket().status == 'Pending'"
@@ -72,7 +84,8 @@ class="ticketTextStatus" style="color: #EE9105;">
             مغلقة </div>
 
 
-            <br>
+          </div>
+
             <label class="font-size-h8 font-weight-bolder text-dark pt-5"> التصنيف:</label>
 
 
@@ -87,6 +100,22 @@ class="ticketTextStatus" style="color: #EE9105;">
                     {{getTicket().createdDate}} </p>
            
              
+
+
+
+
+                    <div *ngIf="getUserType()=='ADMIN'">
+
+
+                      <button type="submit"  
+                      style="justify-self: center;"
+                      class="btn btn-success confirmBtn mr-2" (click)="save()">
+
+تحديث الحالة
+                   
+                      </button>
+
+                    </div>
             
             </div>
             

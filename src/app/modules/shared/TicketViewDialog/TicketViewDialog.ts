@@ -5,6 +5,8 @@ import { Subscription } from 'rxjs';
 import { TicketModel } from 'src/app/models/ticket.model';
 import { ActivatedRoute } from '@angular/router';
 import { DashboardComponent } from '../../client/dashboard/dashboard.component';
+import { AuthService } from '../../auth';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-TicketViewdialog',
   templateUrl: './TicketViewDialog.html',
@@ -48,6 +50,8 @@ export class TicketViewDialogComponent {
     MatDialogRef<TicketViewDialogComponent>,
     private Router: ActivatedRoute,
     public dialog: MatDialog,
+    private authService: AuthService,
+    private snackBar: MatSnackBar,
 
   ) {
 
@@ -77,7 +81,10 @@ export class TicketViewDialogComponent {
   }
 
 
+getUserType(): string{
+  return this.authService.currentAuthValue.userRole;
 
+}
 
   getTicket(): TicketModel {
 
@@ -97,6 +104,15 @@ export class TicketViewDialogComponent {
 
   }
 
+
+
+  save(){
+   
+          this.snackBar.open('تم تحديث حالة الطلب بنجاح', '', {
+            duration: 2500
+          })
+     
+        }
 
 
 

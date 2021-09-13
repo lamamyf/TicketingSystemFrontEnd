@@ -4,26 +4,32 @@
     <div class="row pt-6 col-xl-12">
 
       
-        <div 
+        <div class="border" 
        
         >
 
 
-            <ul 
-
+            <div 
+            class="grid-container"
             *ngFor="let ticket of  getAllTickets();">
+
+
+
             
             <span
             (click)="ViewTicket()"
+
+
+           
+
             >
-                <li class="grid-item">
+                <div class="grid-item">
+                 <p class="ticketTextSubject" >
+                {{ticket.subject}} </p>
 
 
-
-                 <p class="ticketTextSubject" >{{ticket.subject}} </p> <p *ngIf = "ticket.status == 'Pending'" class="ticketTextStatus" style="color: #EE9105;">معلقة </p>
-
-
-
+    <p *ngIf = "ticket.status == 'Pending'" class="ticketTextStatus" style="color: #EE9105;">
+          معلقة </p>
                  
           <p *ngIf = "ticket.status == 'Received'" class="ticketTextStatus" style="color: #46693E;">
             تم الإستلام </p>
@@ -39,15 +45,17 @@
                
               
                 
-                </li>
+                </div>
                 
             </span>
                
                 
-                </ul>
+                </div>
 
        
 
+
+    
 
          </div>
 
