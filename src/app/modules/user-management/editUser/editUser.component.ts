@@ -127,7 +127,6 @@ export class EditUserComponent implements OnInit, OnDestroy {
   }
 
   get firstName(): string {
-    console.log(this.authService.currentUserValue.firstName);
     return this.authService.currentUserValue.firstName;
   }
 
@@ -165,7 +164,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
     return this.authService.currentAuthValue.userRole === "ADMIN" ? 'pages/agent' : 'pages/client';
   }
 
-    deleteUser(user: UserModel) {
+    deleteUser() {
       this.dialogRef = this.dialog.open(ConfirmationDialogComponent, {
           disableClose: false,
           width: '500px',
@@ -175,7 +174,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
       this.dialogRef.afterClosed().subscribe(result => {
           if (result) {
               this.userManagentService
-                  .deleteUser(user.id).pipe()
+                  .deleteUser().pipe()
                   .subscribe((response) => {
                       if (response.success){
                           this.snackBar.open('تم حذف المستخدم بنجاح', '', {
