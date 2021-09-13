@@ -28,6 +28,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
   dialogRefAvatar: MatDialogRef<AvatarsDialogComponent>;
 
   dialogRef: MatDialogRef<ConfirmationDialogComponent>;
+  
 
   constructor(
     private userManagentService: UserManagentService,
@@ -146,49 +147,46 @@ export class EditUserComponent implements OnInit, OnDestroy {
 
   }
 
-  deleteUser() {
-    this.dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      disableClose: false,
-      width: '500px',
-      height: '170px'
-    });
-    this.dialogRef.componentInstance.confirmMessage = 'هل أنت متآكد من حذف الحساب';
-    this.dialogRef.afterClosed().subscribe(result => {
+  // deleteUser() {
+  //   this.dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+  //     disableClose: false,
+  //     width: '500px',
+  //     height: '170px'
+  //   });
+  //   this.dialogRef.componentInstance.confirmMessage = 'هل أنت متآكد من حذف الحساب';
+  //   this.dialogRef.afterClosed().subscribe(result => {
 
-      this.dialogRef = null;
-    });
+  //     this.dialogRef = null;
+  //   });
 
-  }
+  // }
 
   private get url() {
     return this.authService.currentAuthValue.userRole === "ADMIN" ? 'pages/agent' : 'pages/client';
   }
 
-  //   deleteUser(user: UserModel) {
-  //     this.dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-  //         disableClose: false,
-  //         width: '500px',
-  //         height: '170px'
-  //     });
-  //     this.dialogRef.componentInstance.confirmMessage = 'هل آنت متآكد من حذف الحساب ' + user.firstName+" "+user.lastName + ' ؟';
-  //     this.dialogRef.afterClosed().subscribe(result => {
-  //         if (result) {
-  //             this.apiService
-  //                 .deleteUser(user.id).pipe()
-  //                 .subscribe((data: Response) => {
-  //                     const resStr = JSON.stringify(data);
-  //                     const resJSON = JSON.parse(resStr);
-  //                     if (resJSON.statusCodeValue === 200){
-  //                         this.loadUsers();
-  //                         this.snackBar.open('تم حذف المستخدم بنجاح', '', {
-  //                             duration: 2000,
-  //                         });
-  //                     }
-  //                 });
-  //         }
-  //         this.dialogRef = null;
-  //     });
-  // }
+    deleteUser(user: UserModel) {
+      this.dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+          disableClose: false,
+          width: '500px',
+          height: '170px'
+      });
+      this.dialogRef.componentInstance.confirmMessage = 'هل آنت متآكد من حذف الحساب ' + this.firstName+" "+this.lastName + ' ؟';
+      this.dialogRef.afterClosed().subscribe(result => {
+          if (result) {
+              this.userManagentService
+                  .deleteUser(user.id).pipe()
+                  .subscribe((response) => {
+                      if (response.success){
+                          this.snackBar.open('تم حذف المستخدم بنجاح', '', {
+                              duration: 2000,
+                          });
+                      }
+                  });
+          }
+          this.dialogRef = null;
+      });
+  }
 
   // getUser() : UserModel []  {
 
