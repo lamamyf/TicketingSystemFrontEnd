@@ -42,6 +42,20 @@ export class UserManagentService {
       finalize(() => {
         this.isLoadingSubject.next(false);
       })
+    );
+  }
+
+  deleteUser(): Observable<any> {
+    this.isLoadingSubject.next(true);
+    return this.userManagementHttpService.deleteUser().pipe(
+      catchError((err) => {
+        console.log(err);
+        console.error('err', err.error);
+        return of(err.error);
+      }),
+      finalize(() => {
+        this.isLoadingSubject.next(false);
+      })
 
     );
   }
