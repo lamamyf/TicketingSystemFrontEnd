@@ -1,3 +1,4 @@
+import { switchMap, tap } from 'rxjs/operators';
 import { AuthService } from './../../auth/services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -24,6 +25,8 @@ export class UserManagementHttpService {
   }
 
   deleteUser(): Observable<any> {
-    return this.http.delete<any>(`${API_URL}/${this.authService.currentAuthValue.id}`);
+    return this.http.delete<any>(`${API_URL}/${this.authService.currentAuthValue.id}`).pipe(
+      tap(()=>this.authService.clean())
+    );
   }
 }

@@ -166,7 +166,7 @@ export class AuthService implements OnDestroy {
       finalize(() => this.isLoadingSubject.next(false))
     );
   }
-  private clean() {
+  clean() {
     this.currentUserSubject = new BehaviorSubject<UserModel>(undefined);
     this.currentAuthSubject = new BehaviorSubject<AuthModel>(undefined);
 
