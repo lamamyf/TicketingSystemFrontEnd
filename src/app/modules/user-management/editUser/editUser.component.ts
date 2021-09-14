@@ -152,7 +152,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
       height: '170px'
     });
 
-    this.dialogRef.componentInstance.confirmMessage = `هل أنت متأكد من حذف الحساب؟ ${this.lastName} ${this.firstName}`;
+    this.dialogRef.componentInstance.confirmMessage = this.firstName+" "+ this.lastName +" "+' هل أنت متأكد من حذف الحساب؟';
     this.dialogRef.componentInstance.doSomthing = () => {
       console.log(this.userManagentService);
       this.userManagentService

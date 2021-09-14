@@ -74,6 +74,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
           Validators.compose([
             Validators.required,
             Validators.minLength(8),
+            Validators.maxLength(100),
             Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&].{3,}')
           ]),
         ],

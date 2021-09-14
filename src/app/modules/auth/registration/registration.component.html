@@ -236,9 +236,7 @@
           'is-invalid': registrationForm.controls['confirmPassword'].invalid
         }"
       />
-      <div class="fv-help-block"><ng-container *ngIf="registrationForm.hasError('notSame')">
-        كلمة المرور غير متطابقة
-      </ng-container></div>
+    
       
       <ng-container
         [ngTemplateOutlet]="formError"
@@ -248,6 +246,10 @@
           control: registrationForm.controls['confirmPassword']
         }"
       ></ng-container>
+
+      <div class="fv-help-block"><ng-container *ngIf="registrationForm.hasError('notSame')">
+        كلمة المرور غير متطابقة
+      </ng-container></div>
       <!-- <ng-container
         *ngIf="
           registrationForm.controls['confirmPassword'].errors &&
