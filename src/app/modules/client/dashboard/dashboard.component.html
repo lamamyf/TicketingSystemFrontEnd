@@ -1,80 +1,68 @@
-
-
 <div class="card card-custom gutter-b p-6">
     <div class="row pt-6 col-xl-12">
 
-      
-        <div class="border" 
-       
-        >
+
+        <div class="border">
 
 
-            <div 
-            class="grid-container"
-            *ngFor="let ticket of  getTicketByUser();">
+            <div class="grid-container" *ngFor="let ticket of getTicketByUser();">
 
 
 
-            
-            <span
-            (click)="ViewTicket()"
+
+                <span (click)="ViewTicket()">
+                    <div class="grid-item">
+                        <p class="ticketTextSubject">
+                            {{ticket.subject}} </p>
 
 
-           
+                        <p *ngIf="ticket.status === 'PENDING'" class="ticketTextStatus" style="color: #EE9105;">
+                            معلقة </p>
 
-            >
-                <div class="grid-item">
-                 <p class="ticketTextSubject" >
-                {{ticket.subject}} </p>
-
-
-    <p *ngIf = "ticket.status == 'Pending'" class="ticketTextStatus" style="color: #EE9105;">
-          معلقة </p>
-                 
-          <p *ngIf = "ticket.status == 'Received'" class="ticketTextStatus" style="color: #46693E;">
-            تم الإستلام </p>
+                        <p *ngIf="ticket.status === 'RECEIVED'" class="ticketTextStatus" style="color: #46693E;">
+                            تم الإستلام </p>
 
 
-            <p *ngIf = "ticket.status == 'Closed'" class="ticketTextStatus" style="color: #1111F5;">
-                مغلقة </p>
+                        <p *ngIf="ticket.status === 'CLOSED'" class="ticketTextStatus" style="color: #1111F5;">
+                            مغلقة </p>
 
 
 
-                    <p class="ticketTextCreatedDate" >
-                        {{ticket.createdDate}} </p>
-               
-              
-                
-                </div>
-                
-            </span>
-               
-                
-                </div>
-
-       
+                        <p class="ticketTextCreatedDate">
+                            {{ticket.createdDate}} </p>
 
 
-        <span>
-                <span
-                (click)="addTicket()"
-                class= "addTicketButton">
-                    <svg 
-                    style="margin-top: 50%;"
-                    width="90" height="90" viewBox="0 0 136 139" fill="transparent" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M68.0002 127.417C99.2963 127.417 124.667 101.487 124.667 69.5C124.667 37.5135 99.2963 11.5834 68.0002 11.5834C36.704 11.5834 11.3335 37.5135 11.3335 69.5C11.3335 101.487 36.704 127.417 68.0002 127.417Z" 
-                        stroke="#707074" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M68 46.3334V92.6667" stroke="#707074" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M45.3335 69.5H90.6668" stroke="#707074" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>                 
-            
-                  </span>
-                  
-               
+
+                    </div>
 
                 </span>
 
-         </div>
+
+            </div>
+
+
+
+
+            <span>
+                <span (click)="addTicket()" class="addTicketButton">
+                    <svg style="margin-top: 50%;" width="90" height="90" viewBox="0 0 136 139" fill="transparent"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M68.0002 127.417C99.2963 127.417 124.667 101.487 124.667 69.5C124.667 37.5135 99.2963 11.5834 68.0002 11.5834C36.704 11.5834 11.3335 37.5135 11.3335 69.5C11.3335 101.487 36.704 127.417 68.0002 127.417Z"
+                            stroke="#707074" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M68 46.3334V92.6667" stroke="#707074" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M45.3335 69.5H90.6668" stroke="#707074" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+
+                </span>
+
+
+
+            </span>
+
+        </div>
 
 
 

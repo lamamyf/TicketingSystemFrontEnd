@@ -3,108 +3,72 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Observable, Subscription } from 'rxjs';
 import { TicketModel } from 'src/app/models/ticket.model';
-import { Router } from '@angular/router';
 
 @Component({
-    selector: 'app-confirmdialog',
-    templateUrl: './TicketAddDialog.html',
-    styleUrls: ['./TicketAddDialog.scss'],
+  selector: 'app-confirmdialog',
+  templateUrl: './TicketAddDialog.html',
+  styleUrls: ['./TicketAddDialog.scss'],
 
 })
 
-
-
-//changed
 export class TicketAddDialogComponent {
 
-  //changed
-    constructor(public dialogRef: MatDialogRef<TicketAddDialogComponent> ,  private fb: FormBuilder, private router: Router
-        ) {
+  constructor(public dialogRef: MatDialogRef<TicketAddDialogComponent>, private fb: FormBuilder,
+  ) { }
 
+  addTicketForm: FormGroup;
 
+  hasError: boolean;
+  returnUrl: string;
+  isLoading$: Observable<boolean>;
+  isWrong: boolean;
+  errorMessage: any;
 
-    }
-    
-    addTicketForm : FormGroup;
+  private unsubscribe: Subscription[] = [];
+  ticket: TicketModel;
+ 
 
-    
+  ngOnInit() {
+    this.initForm();
+  }
 
-    defaultAuth: any = {
-        subject: '',
-        description: '',
-        cat: '',
-      };
+  ngOnDestroy() {
+    this.unsubscribe.forEach((sb) => sb.unsubscribe());
+  }
 
+  initForm() {
+    this.addTicketForm = this.fb.group({
+      subject: [
+        '',
+        Validators.compose([
+          Validators.required,
+        ]),
+      ],
+      description: [
+        '',
+        Validators.compose([
+          Validators.required,
+        ]),
+      ],
 
-    hasError: boolean;
-    returnUrl: string;
-    isLoading$: Observable<boolean>;
-    isWrong: boolean;
-    errorMessage: any;
-  
-    private unsubscribe: Subscription[] = []; 
-    ticket: TicketModel;
+      category: [
+      '',
+        Validators.compose([
+          Validators.required,
+        ]),
+      ],
+    });
+  }
 
-    lang;
-    dir;
-    id: any;
-
-  
-   
-    
-
-
-    ngOnInit() {
-        this.initForm();
-        
-    }
-
-  
-  
-    ngOnDestroy() {
-      this.unsubscribe.forEach((sb) => sb.unsubscribe());
-    }
-
-
-
-    initForm() {
-
-        this.addTicketForm = this.fb.group({
-          subject: [
-            this.defaultAuth.subject,
-            Validators.compose([
-              Validators.required,
-                
-            ]),
-          ],
-          description: [
-            this.defaultAuth.description,
-            Validators.compose([
-              Validators.required,
-             
-              
-            ]),
-          ],
-
-          cat: [
-            this.defaultAuth.cat,
-            Validators.compose([
-              Validators.required,
-              
-            ]),
-          ],
-        });
-      }
-    
   submit() {
     this.errorMessage = '';
     this.isWrong = false;
     this.hasError = false;
-   
-  window.alert("تم رفع الطلب بنجاح");
+
+    window.alert("تم رفع الطلب بنجاح");
 
 
 
   }
-    public confirmMessage: string;
+  public confirmMessage: string;
 }
