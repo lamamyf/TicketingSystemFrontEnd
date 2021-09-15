@@ -30,19 +30,44 @@
       justify-content: right;">
 
         العنوان: </label>
-      <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg" type="text" name="subject"
-        formControlName="subject" [ngClass]="{'is-invalid': addTicketForm.controls['subject'].invalid }" />
-      <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
-            validation: 'required',
-            message: 'حقل العنوان مطلوب',
-            control: addTicketForm.controls['subject']
-          }"></ng-container>
+      <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg"
+       type="text" 
+       name="subject"
+        formControlName="subject" 
+        [ngClass]="{'is-invalid': addTicketForm.controls['subject'].invalid }" />
 
-      <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
-            validation: 'pattern',
-            message: 'خطأ في العنوان ',
-            control: addTicketForm.controls['subject']
-          }"></ng-container>
+        <ng-container
+        [ngTemplateOutlet]="formError"
+        [ngTemplateOutletContext]="{
+          validation: 'required',
+          message: 'حقل العنوان مطلوب',
+          control: addTicketForm.controls['subject']
+        }"
+      ></ng-container>
+      <ng-container
+      [ngTemplateOutlet]="formError"
+      [ngTemplateOutletContext]="{
+        validation: 'maxlength',
+        message: 'العنوان يجب أن لا يكون أكثر من ٣٠ حرف',
+        control: addTicketForm.controls['subject']
+      }"
+    ></ng-container>
+      <ng-container
+        [ngTemplateOutlet]="formError"
+        [ngTemplateOutletContext]="{
+          validation: 'minlength',
+          message: 'العنوان يجب أن يتكون من حرفين على الأقل',
+          control: addTicketForm.controls['subject']
+        }"
+      ></ng-container>
+
+
+
+
+
+
+
+     
 
     </div>
     <!--end::Form group-->
@@ -68,6 +93,11 @@
       <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
             validation: 'required',
             message: 'حقل الوصف مطلوب',
+            control: addTicketForm.controls['description']
+          }"></ng-container>
+          <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+            validation: 'minlength',
+            message: 'حقل الوصف يجب أن لا يقل عن ١٠ أحرف',
             control: addTicketForm.controls['description']
           }"></ng-container>
     </div>

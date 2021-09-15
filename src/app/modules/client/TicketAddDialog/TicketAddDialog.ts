@@ -44,17 +44,21 @@ export class TicketAddDialogComponent implements OnDestroy {
   }
 
   initForm() {
+
     this.addTicketForm = this.fb.group({
       subject: [
         '',
         Validators.compose([
           Validators.required,
+          Validators.maxLength(30),
+          Validators.minLength(2),
         ]),
       ],
       description: [
         '',
         Validators.compose([
           Validators.required,
+          Validators.minLength(10),
         ]),
       ],
 
@@ -66,16 +70,7 @@ export class TicketAddDialogComponent implements OnDestroy {
       ],
     });
 
-    this.addTicketForm = this.fb.group({
-      subject: ['', Validators.compose([
-        Validators.required,
-        Validators.minLength(3),])],
 
-      description: ['', Validators.compose([
-        Validators.required,
-        Validators.minLength(3),])],
-      category: ['', Validators.required],
-    });
   }
 
   submit() {
