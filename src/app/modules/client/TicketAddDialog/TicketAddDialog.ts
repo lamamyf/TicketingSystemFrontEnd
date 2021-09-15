@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, Subscription } from 'rxjs';
 import { TicketModel } from 'src/app/models/ticket.model';
+import { ClientService } from '../services/client.service';
 
 @Component({
   selector: 'app-confirmdialog',
@@ -11,10 +13,19 @@ import { TicketModel } from 'src/app/models/ticket.model';
 
 })
 
-export class TicketAddDialogComponent {
+export class TicketAddDialogComponent implements OnDestroy {
+  public confirmMessage: string;
+  private subscriptions: Subscription[] = [];
 
-  constructor(public dialogRef: MatDialogRef<TicketAddDialogComponent>, private fb: FormBuilder,
-  ) { }
+  constructor(
+    public dialogRef: MatDialogRef<TicketAddDialogComponent>,
+    private fb: FormBuilder,
+    private clientService: ClientService,
+    private snackBar: MatSnackBar,
+    private cdr: ChangeDetectorRef,
+  ) {
+    this.isLoading$ = this.clientService.isLoadingSubject.asObservable();
+  }
 
   addTicketForm: FormGroup;
 
@@ -24,16 +35,12 @@ export class TicketAddDialogComponent {
   isWrong: boolean;
   errorMessage: any;
 
-  private unsubscribe: Subscription[] = [];
   ticket: TicketModel;
- 
+
 
   ngOnInit() {
+    this.hasError = false;
     this.initForm();
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe.forEach((sb) => sb.unsubscribe());
   }
 
   initForm() {
@@ -52,11 +59,22 @@ export class TicketAddDialogComponent {
       ],
 
       category: [
-      '',
+        '',
         Validators.compose([
           Validators.required,
         ]),
       ],
+    });
+
+    this.addTicketForm = this.fb.group({
+      subject: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),])],
+
+      description: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),])],
+      category: ['', Validators.required],
     });
   }
 
@@ -65,10 +83,23 @@ export class TicketAddDialogComponent {
     this.isWrong = false;
     this.hasError = false;
 
-    window.alert("تم رفع الطلب بنجاح");
-
-
-
+    const saveSubscr = this.clientService
+      .addTicket(this.addTicketForm.value).subscribe(result => {
+        if (result.success) {
+          this.snackBar.open('تم رفع الطلب بنجاح', '', {
+            duration: 2500
+          })
+        } else {
+          this.hasError = !result.success;
+          if (result.response.errorMessage[0].message)
+            this.errorMessage = result.response.errorMessage[0].message;
+          this.cdr.markForCheck();
+        }
+      });
+    this.subscriptions.push(saveSubscr);
   }
-  public confirmMessage: string;
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sb => sb.unsubscribe());
+  }
 }

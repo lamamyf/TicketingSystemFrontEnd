@@ -1,7 +1,7 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ClientService } from './../services/client.service';
+import { ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
 
 import { AuthService, UserModel } from '../../auth';
-import { ApiService } from '../../../services/api.service';
 import { TicketModel } from 'src/app/models/ticket.model';
 
 
@@ -9,6 +9,7 @@ import { TicketAddDialogComponent } from '../TicketAddDialog/TicketAddDialog';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { TicketViewDialogComponent } from '../../shared/TicketViewDialog/TicketViewDialog';
+import { Observable, Subscription } from 'rxjs';
 
 
 @Component({
@@ -16,11 +17,12 @@ import { TicketViewDialogComponent } from '../../shared/TicketViewDialog/TicketV
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnDestroy {
 
   dialogRef: MatDialogRef<TicketAddDialogComponent>;
   dialogRefView: MatDialogRef<TicketViewDialogComponent>;
-
+  subscriptions: Subscription[] = [];
+  isLoading$: Observable<boolean>;
   ticket: TicketModel;
   @Input() widgetHeight = '150px';
   @Input() widgetWidth = '400px';
@@ -29,20 +31,22 @@ export class DashboardComponent {
   constructor(
     public dialog: MatDialog,
     private authenticationService: AuthService,
-    private apiService: ApiService,
+    private clientService: ClientService,
     private cdr: ChangeDetectorRef,
   ) {
+    this.isLoading$ = this.clientService.isLoadingSubject.asObservable();
     //  this.loadData();
     this.authenticationService.currentUser$.subscribe(x => this.currentUser = x);
 
   }
+ 
 
   loadData(): void {
-    this.apiService
-      .getDashboardData()
-      .subscribe((results: any) => {
-        this.cdr.markForCheck();
-      });
+    // this.apiService
+    //   .getDashboardData()
+    //   .subscribe((results: any) => {
+    //     this.cdr.markForCheck();
+    //   });
 
   }
 
@@ -135,7 +139,6 @@ export class DashboardComponent {
 
 
   addTicket() {
-
     this.dialogRef = this.dialog.open(TicketAddDialogComponent, {
       disableClose: false,
       width: '700px',
@@ -163,4 +166,7 @@ export class DashboardComponent {
     });
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sb => sb.unsubscribe());
+  }
 }

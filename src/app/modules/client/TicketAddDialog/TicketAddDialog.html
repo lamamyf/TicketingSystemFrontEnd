@@ -1,152 +1,110 @@
 <h3 md-dialog-title>طلب مساعدة</h3>
 
 
- <div mat-dialog-content class="mt-4 font-size-h6">
-  
-     
-<form
+<div mat-dialog-content class="mt-4 font-size-h6">
 
-   
-      class="form"
-      [formGroup]="addTicketForm"
-      novalidate="novalidate"
-      id="kt_login_signin_form"
-      (ngSubmit)="submit()"
->
+
+  <form class="form" [formGroup]="addTicketForm" novalidate="novalidate" id="kt_login_signin_form"
+    (ngSubmit)="submit()">
 
 
 
-<!-- begin::Alert error-->
-<ng-container *ngIf="hasError">
-    <div
-      class="mb-10 alert alert-custom alert-danger alert-dismissible"
-    >
-      <div class="alert-text"  >خطأ في البيانات المدخلة</div>
-    </div>
-  </ng-container>
-  <!-- end::Alert error-->
+    <!-- begin::Alert error-->
+    <ng-container *ngIf="hasError">
+      <div class="mb-10 alert alert-custom alert-danger alert-dismissible">
+        <div class="alert-text">خطأ في البيانات المدخلة</div>
+      </div>
+    </ng-container>
+    <!-- end::Alert error-->
 
 
 
     <!--begin::Form group-->
     <div class="form-group">
-        <label class="font-size-h22 font-weight-normal text-darkGray"
-        style="
+      <label class="font-size-h22 font-weight-normal text-darkGray" style="
       text-align: right;
       font-size: large;
       font-weight: normal;
       color: #707074;
       text-justify: right;
-      justify-content: right;" >
-        
-       العنوان: </label>
-        <input
-          class="form-control form-control-solid h-auto py-7 px-6 rounded-lg"
-          type="text"
-          name="subject"
-          formControlName="subject"
-         
-          [ngClass]="{'is-invalid': addTicketForm.controls['subject'].invalid }"
-        />
-        <ng-container
-          [ngTemplateOutlet]="formError"
-          [ngTemplateOutletContext]="{
+      justify-content: right;">
+
+        العنوان: </label>
+      <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg" type="text" name="subject"
+        formControlName="subject" [ngClass]="{'is-invalid': addTicketForm.controls['subject'].invalid }" />
+      <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
             validation: 'required',
             message: 'حقل العنوان مطلوب',
             control: addTicketForm.controls['subject']
-          }"
-        ></ng-container>     
+          }"></ng-container>
 
-        <ng-container
-          [ngTemplateOutlet]="formError"
-          [ngTemplateOutletContext]="{
+      <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
             validation: 'pattern',
             message: 'خطأ في العنوان ',
             control: addTicketForm.controls['subject']
-          }"
-        ></ng-container>
+          }"></ng-container>
 
-      </div>
-      <!--end::Form group-->
+    </div>
+    <!--end::Form group-->
 
 
-      <!--begin::Form group-->
-      <div class="form-group">
-        <div class="d-flex justify-content-between mt-n5">
-          <label class="font-size-h22 font-weight-normal text-darkGray"
-          style="
+    <!--begin::Form group-->
+    <div class="form-group">
+      <div class="d-flex justify-content-between mt-n5">
+        <label class="font-size-h22 font-weight-normal text-darkGray" style="
         text-align: right;
         font-size: large;
         font-weight: normal;
         color: #707074;
         text-justify: right;
-        justify-content: right;"
-            >الوصف: </label>
-        </div>
-  
+        justify-content: right;">الوصف: </label>
+      </div>
 
-        <textarea 
-        class="form-control form-control-solid h-auto py-14 px-6 rounded-lg"
-          type="text"
-          name="description"
-          formControlName="description"
-          [ngClass]="{ 'is-invalid': addTicketForm.controls['description'].invalid }"
-        
-        ></textarea>
-        
-        <ng-container
-          [ngTemplateOutlet]="formError"
-          [ngTemplateOutletContext]="{
+
+      <textarea class="form-control form-control-solid h-auto py-14 px-6 rounded-lg" type="text" name="description"
+        formControlName="description"
+        [ngClass]="{ 'is-invalid': addTicketForm.controls['description'].invalid }"></textarea>
+
+      <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
             validation: 'required',
             message: 'حقل الوصف مطلوب',
             control: addTicketForm.controls['description']
-          }"
-        ></ng-container>
-       </div>
-      <!--end::Form group-->
-  
-  
-  
-      <!--begin::Form group-->
-      <div class="form-group">
-        <div class="d-flex justify-content-between mt-n5">
-          <label class="font-size-h22 font-weight-normal text-darkGray"
-          style="
+          }"></ng-container>
+    </div>
+    <!--end::Form group-->
+
+
+
+    <!--begin::Form group-->
+    <div class="form-group">
+      <div class="d-flex justify-content-between mt-n5">
+        <label class="font-size-h22 font-weight-normal text-darkGray" style="
         text-align: right;
         font-size: large;
         font-weight: normal;
         color: #707074;
         text-justify: right;
-        justify-content: right;"
-            >التصنيف:  </label>
-        </div>
+        justify-content: right;">التصنيف: </label>
+      </div>
 
 
-        <select 
-        class="form-control form-control-solid h-auto py-24 px-6 rounded-lg"
-          name="catgory"
-          formControlName="cat"
-          [ngClass]="{ 'is-invalid': addTicketForm.controls['cat'].invalid }"
-        
-    >
-            <option selected="selected" value="Complaint">شكوى</option>
-            <option value="Suggestion">اقتراح</option>
-            <option value="Other">اخرى</option>
-            </select>
+      <select class="form-control form-control-solid h-auto py-24 px-6 rounded-lg" name="category"
+        formControlName="category" [ngClass]="{ 'is-invalid': addTicketForm.controls['category'].invalid }">
+        <option selected="selected" value="COMPLAINT">شكوى</option>
+        <option value="SUGGESTION">اقتراح</option>
+        <option value="OTHER">اخرى</option>
+      </select>
 
 
-      
-        
-        <ng-container
-          [ngTemplateOutlet]="formError"
-          [ngTemplateOutletContext]="{
+
+
+      <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
             validation: 'required',
             message: 'حقل التصنيف مطلوب',
-            control: addTicketForm.controls['catgory']
-          }"
-        ></ng-container>
-       </div>
-      <!--end::Form group-->
+            control: addTicketForm.controls['category']
+          }"></ng-container>
+    </div>
+    <!--end::Form group-->
 
 
 
@@ -155,7 +113,7 @@
 
 
 
-</form>
+  </form>
 
 
 
@@ -163,40 +121,25 @@
 
 
 
-      
-      <ng-template
-        #formError
-        let-control="control"
-        let-message="message"
-        let-validation="validation"
-      >
-        <ng-container
-          *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
-        >
-          <div class="fv-plugins-message-container">
-            <div class="fv-help-block">
-              {{ message }}
-            </div>
-          </div>
-        </ng-container>
-      </ng-template>
-      
- </div>
 
- <div mat-dialog-actions  class="btnActions pl-0 mt-5">
-    <button md-button 
-    
-    type="submit"
-    id="kt_login_signin_submit"
-   
-    
-    [disabled]="addTicketForm.invalid"
-    
-    class="confirmBtn btn btn-success font-weight-bolder font-size-sm pr-4"
-    (click)="submit()" (click)="dialogRef.close(true)">رفع الطلب </button>
-<button md-button class="cancelBtn btn btn-success font-weight-bolder font-size-sm mr-2"
+  <ng-template #formError let-control="control" let-message="message" let-validation="validation">
+    <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
+      <div class="fv-plugins-message-container">
+        <div class="fv-help-block">
+          {{ message }}
+        </div>
+      </div>
+    </ng-container>
+  </ng-template>
+
+</div>
+
+<div mat-dialog-actions class="btnActions pl-0 mt-5">
+  <button md-button type="submit" id="kt_login_signin_submit" [disabled]="addTicketForm.invalid"
+    class="confirmBtn btn btn-success font-weight-bolder font-size-sm pr-4" (click)="submit()"
+    (click)="dialogRef.close(true)">رفع الطلب </button>
+  <button md-button class="cancelBtn btn btn-success font-weight-bolder font-size-sm mr-2"
     (click)="dialogRef.close(false)">إلغاء</button>
 
 
- </div>
-
+</div>
