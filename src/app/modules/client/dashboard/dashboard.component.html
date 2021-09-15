@@ -5,12 +5,12 @@
         <div class="border">
 
 
-            <div class="grid-container" *ngFor="let ticket of getTicketByUser();">
+            <div class="grid-container" *ngFor="let ticket of tickets;">
 
 
 
 
-                <span (click)="ViewTicket()">
+                <span (click)="ViewTicket(ticket)">
                     <div class="grid-item">
                         <p class="ticketTextSubject">
                             {{ticket.subject}} </p>
@@ -20,7 +20,7 @@
                             معلقة </p>
 
                         <p *ngIf="ticket.status === 'RECEIVED'" class="ticketTextStatus" style="color: #46693E;">
-                            تم الإستلام </p>
+                            تم الاستلام </p>
 
 
                         <p *ngIf="ticket.status === 'CLOSED'" class="ticketTextStatus" style="color: #1111F5;">

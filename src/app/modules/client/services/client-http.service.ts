@@ -13,9 +13,15 @@ export class ClientHttpService {
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
+  getTicket(id): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/tickets/${id}`);
+  }
 
+  getTickets(): Observable<any> {
+    return this.http.get<any>(`${API_URL}/${this.authService.currentAuthValue.id}`);
+  }
   addTicket(body: any): Observable<any> {
-    return this.http.post<any>(API_URL,
+    return this.http.post<any>(`${API_URL}/${this.authService.currentAuthValue.id}`,
       {
         "userId": this.authService.currentAuthValue.id,
         "subject": body.subject,

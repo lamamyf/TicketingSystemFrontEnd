@@ -15,6 +15,34 @@ export class ClientService {
     this.isLoading$ = this.isLoadingSubject.asObservable();
   }
 
+  getTicket(id): Observable<any> {
+    this.isLoadingSubject.next(true);
+    return this.clientHttpService.getTicket(id).pipe(
+      catchError((err) => {
+        console.log(err);
+        console.error('err', err.error);
+        return of(err.error);
+      }),
+      finalize(() => {
+        this.isLoadingSubject.next(false);
+      })
+    );
+  }
+
+  getTickets(): Observable<any> {
+    this.isLoadingSubject.next(true);
+    return this.clientHttpService.getTickets().pipe(
+      catchError((err) => {
+        console.log(err);
+        console.error('err', err.error);
+        return of(err.error);
+      }),
+      finalize(() => {
+        this.isLoadingSubject.next(false);
+      })
+    );
+  }
+
   addTicket(body: any): Observable<any> {
     this.isLoadingSubject.next(true);
     return this.clientHttpService.addTicket(body).pipe(
