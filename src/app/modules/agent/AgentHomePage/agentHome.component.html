@@ -5,10 +5,19 @@
 
       
         <div class="border" 
-       
         >
 
-
+<div
+*ngIf="getAllTickets().length==0"
+style="font-size: x-large;
+text-align: center;
+justify-self: center;
+justify-items: center;
+text-justify: center;    
+"
+>
+لايوجد تذاكر
+</div>
             <div 
             class="grid-container"
             *ngFor="let ticket of  getAllTickets();">

@@ -68,7 +68,6 @@ export class AgentHomePageComponent implements OnInit {
 
   ) {
   //  this.loadData();
-
     this.chartOptions = {
       colors: ['#84DCC6', '#FF686B'],
       series: [],
@@ -148,87 +147,90 @@ export class AgentHomePageComponent implements OnInit {
 
 
   getAllTickets() : TicketModel []  {
-
-  
-    //dummy data
-    let tickets: TicketModel[] = [
-
-      {
-      id: 1,
-      userId: 1,
-      userFirstName: "wwww",
-      userLastName: "xx",
-      subject: "١طلب",
-      description: "احتياج ادوات ونقص وطلب",
-      status: "Received",
-      category: "شكوى",
-      createdDate: "11-11-2021",
-
-    },
-    {
-      id: 1,
-      userId: 1,
-      userFirstName: "nouf",
-      userLastName: "aljufair",
-      subject: "٢طلب",
-      description: "وصف للمشكلة",
-      status: "Closed",
-      category: "شكوى",
-      createdDate: "11-11-2021",
-
-    },
-    {
-      id: 1,
-      userId: 1,
-      userFirstName: "qqqq",
-      userLastName: "sss",
-      subject: "٣طلب",
-      description: "مدري",
-      status: "Pending",
-      category: "شكوى",
-      createdDate: "11-11-2021",
-
-    },
-    {
-      id: 1,
-      userId: 1,
-      userFirstName: "nouf",
-      userLastName: "sslslsl",
-      subject: "٤طلب",
-      description: "سيكيورتي بريتش",
-      status: "Received",
-      category: "اقتراح",
-      createdDate: "11-11-2021",
-
-    },  {
-      id: 1,
-      userId: 1,
-      userFirstName: "slslls",
-      userLastName: "aljufair",
-      subject: "٥طلب",
-      description: "نقص ادوات",
-      status: "Pending",
-      category: "اخرى",
-      createdDate: "11-11-2021",
-
-    },
-    {
-      id: 2,
-      userId: 2,
-      userFirstName: "aaaaa",
-
-      userLastName: "aljufair",
-      subject: "٦طلب",
-      description: "اسستم خربان",
-      status: "Closed",
-      category: "اقتراح",
-      createdDate: "11-11-2021",
-
-    }
-   ];
-
-
+    let tickets: TicketModel[] = [];
+    console.log(tickets);
     return tickets;
+
+ 
+    //dummy data
+  // let tickets: TicketModel[] = [
+
+  //     {
+  //     id: 1,
+  //     userId: 1,
+  //     userFirstName: "wwww",
+  //     userLastName: "xx",
+  //     subject: "١طلب",
+  //     description: "احتياج ادوات ونقص وطلب",
+  //     status: "Received",
+  //     category: "شكوى",
+  //     createdDate: "11-11-2021",
+
+  //   },
+  //   {
+  //     id: 1,
+  //     userId: 1,
+  //     userFirstName: "nouf",
+  //     userLastName: "aljufair",
+  //     subject: "٢طلب",
+  //     description: "وصف للمشكلة",
+  //     status: "Closed",
+  //     category: "شكوى",
+  //     createdDate: "11-11-2021",
+
+  //   },
+  //   {
+  //     id: 1,
+  //     userId: 1,
+  //     userFirstName: "qqqq",
+  //     userLastName: "sss",
+  //     subject: "٣طلب",
+  //     description: "مدري",
+  //     status: "Pending",
+  //     category: "شكوى",
+  //     createdDate: "11-11-2021",
+
+  //   },
+  //   {
+  //     id: 1,
+  //     userId: 1,
+  //     userFirstName: "nouf",
+  //     userLastName: "sslslsl",
+  //     subject: "٤طلب",
+  //     description: "سيكيورتي بريتش",
+  //     status: "Received",
+  //     category: "اقتراح",
+  //     createdDate: "11-11-2021",
+
+  //   },  {
+  //     id: 1,
+  //     userId: 1,
+  //     userFirstName: "slslls",
+  //     userLastName: "aljufair",
+  //     subject: "٥طلب",
+  //     description: "نقص ادوات",
+  //     status: "Pending",
+  //     category: "اخرى",
+  //     createdDate: "11-11-2021",
+
+  //   },
+  //   {
+  //     id: 2,
+  //     userId: 2,
+  //     userFirstName: "aaaaa",
+
+  //     userLastName: "aljufair",
+  //     subject: "٦طلب",
+  //     description: "اسستم خربان",
+  //     status: "Closed",
+  //     category: "اقتراح",
+  //     createdDate: "11-11-2021",
+
+  //   }
+  //  ];
+
+
+   //return tickets;
 }
 
 
