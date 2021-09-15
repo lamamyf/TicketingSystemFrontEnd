@@ -21,7 +21,7 @@ export class ClientHttpService {
     return this.http.get<any>(`${API_URL}/${this.authService.currentAuthValue.id}`);
   }
   addTicket(body: any): Observable<any> {
-    return this.http.post<any>(`${API_URL}/${this.authService.currentAuthValue.id}`,
+    return this.http.post<any>(API_URL,
       {
         "userId": this.authService.currentAuthValue.id,
         "subject": body.subject,
