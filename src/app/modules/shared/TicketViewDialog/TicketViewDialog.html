@@ -77,7 +77,15 @@
 
 
 
-        <p class="ticketCategory">{{ ticket.category}}</p>
+        <p class="ticketCategory"
+        *ngIf="ticket.category=='COMPLAINT'"
+        >شكوى</p>
+        <p class="ticketCategory"
+        *ngIf="ticket.category=='SUGGESTION'"
+        >اقتراح</p>
+        <p class="ticketCategory"
+        *ngIf="ticket.category=='OTHER'"
+        >اخرى</p>
 
 
         <label class="font-size-h8 font-weight-bolder text-dark pt-5">تاريخ الإنشاء:</label>
