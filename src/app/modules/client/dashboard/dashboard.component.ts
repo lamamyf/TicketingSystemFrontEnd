@@ -1,5 +1,6 @@
+import { switchMap } from 'rxjs/operators';
 import { ClientService } from './../services/client.service';
-import { ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { AuthService, UserModel } from '../../auth';
 import { TicketModel } from 'src/app/models/ticket.model';
@@ -9,7 +10,7 @@ import { TicketAddDialogComponent } from '../TicketAddDialog/TicketAddDialog';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { TicketViewDialogComponent } from '../../shared/TicketViewDialog/TicketViewDialog';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, BehaviorSubject } from 'rxjs';
 
 
 @Component({
@@ -17,13 +18,14 @@ import { Observable, Subscription } from 'rxjs';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnDestroy {
+export class DashboardComponent implements OnInit, OnDestroy {
 
   dialogRef: MatDialogRef<TicketAddDialogComponent>;
   dialogRefView: MatDialogRef<TicketViewDialogComponent>;
   subscriptions: Subscription[] = [];
-  tickets: TicketModel[];
+  tickets$: Observable<TicketModel>;
   isLoading$: Observable<boolean>;
+  refetchTickets$: BehaviorSubject<boolean> = new BehaviorSubject(true);
   //ticket: TicketModel;
   @Input() widgetHeight = '150px';
   @Input() widgetWidth = '400px';
@@ -36,9 +38,16 @@ export class DashboardComponent implements OnDestroy {
     private cdr: ChangeDetectorRef,
   ) {
     this.isLoading$ = this.clientService.isLoadingSubject.asObservable();
-    this.loadTickets();
     this.authenticationService.currentUser$.subscribe(x => this.currentUser = x);
 
+  }
+  ngOnInit(): void {
+    this.tickets$ = this.refetchTickets$.pipe(
+      switchMap(
+        _ => this.clientService
+          .getTickets()
+      )
+    );
   }
 
 
@@ -46,7 +55,7 @@ export class DashboardComponent implements OnDestroy {
     this.clientService
       .getTickets()
       .subscribe((result: any) => {
-        this.tickets = result;
+        this.tickets$ = result;
         this.cdr.markForCheck();
       });
 
@@ -60,6 +69,7 @@ export class DashboardComponent implements OnDestroy {
       height: '600px'
     });
     this.dialogRef.afterClosed().subscribe(result => {
+      this.refetchTickets$.next(true);
       this.dialogRef = null;
 
     });
@@ -71,7 +81,7 @@ export class DashboardComponent implements OnDestroy {
       disableClose: false,
       width: '400px',
       height: '550px',
-      data: {id: ticket.id}
+      data: { id: ticket.id }
     });
 
 
