@@ -3,80 +3,39 @@
     <a style="font-size: 25px;">X</a>
   </span>
 </button>
-
-
-
 <div>
-
-
-
   <h3 md-dialog-title style="font-size: 25px;">
-
     {{ticket.subject}}
   </h3>
-
   <div mat-dialog-content class="mt-4 font-size-h6">
-
-
     <div>
       <div>
-
-
-
-
         <label class="font-size-h8 font-weight-bolder text-dark pt-5"> الوصف:</label>
         <div>
-
-
-
-
-
           <textarea class="ticketTextDescription" disabled [scrollTop]
             style="width: 350px; height: 150px">{{ticket.description}} </textarea>
-
-
-
-
         </div>
 
         <label class="font-size-h8 font-weight-bolder text-dark pt-5"> حالة التذكرة:</label>
         <br>
-
-
         <div *ngIf="getUserType()==='ADMIN'">
-
-          <select class="form-control form-control-solid h-auto py-24 px-6 rounded-lg" name="status">
-            <option selected="selected" value="RECEIVED">تم الإستلام</option>
+          <select  [(ngModel)]="updatedTicketStatus"  class="form-control form-control-solid h-auto py-24 px-6 rounded-lg" name="status">
+            <option selected="selected" value="RECEIVED">تم الاستلام</option>
             <option value="PENDING">معلقة</option>
-            <option value="CLOSED">مغلقة</option>
+            <option value="CLOSED" >مغلقة</option>
           </select>
-
         </div>
-
-
         <div *ngIf="getUserType()=='CLIENT'">
-
-
           <div *ngIf="ticket.status === 'PENDING'" class="ticketTextStatus" style="color: #EE9105;">
             معلقة </div>
-
-
-
-
           <div *ngIf="ticket.status === 'RECEIVED'" class="ticketTextStatus" style="color: #46693E;">
             تم الاستلام </div>
 
 
           <div *ngIf="ticket.status === 'CLOSED'" class="ticketTextStatus" style="color: #1111F5;">
             مغلقة </div>
-
-
         </div>
-
         <label class="font-size-h8 font-weight-bolder text-dark pt-5"> التصنيف:</label>
-
-
-
         <p class="ticketCategory"
         *ngIf="ticket.category=='COMPLAINT'"
         >شكوى</p>
@@ -85,39 +44,18 @@
         >اقتراح</p>
         <p class="ticketCategory"
         *ngIf="ticket.category=='OTHER'"
-        >اخرى</p>
-
-
+        >أخرى</p>
         <label class="font-size-h8 font-weight-bolder text-dark pt-5">تاريخ الإنشاء:</label>
 
         <p class="ticketCategory">
           {{ticket.createdDate}} </p>
 
-
-
-
-
-
         <div *ngIf="getUserType()=='ADMIN'">
-
-
-          <button type="submit" style="justify-self: center;" class="btn btn-success confirmBtn mr-2" (click)="save()">
-
+          <button type="submit" style="justify-self: center;" class="btn btn-success confirmBtn mr-2" (click)="updateTicketStatus()">
             تحديث الحالة
-
           </button>
-
         </div>
-
       </div>
-
-
-
-
     </div>
-
-
-
   </div>
-
 </div>

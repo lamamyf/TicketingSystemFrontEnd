@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   tickets$: Observable<TicketModel>;
   isLoading$: Observable<boolean>;
   refetchTickets$: BehaviorSubject<boolean> = new BehaviorSubject(true);
-  //ticket: TicketModel;
+
   @Input() widgetHeight = '150px';
   @Input() widgetWidth = '400px';
   currentUser: UserModel;
@@ -49,19 +49,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       )
     );
   }
-
-
-  loadTickets(): void {
-    this.clientService
-      .getTickets()
-      .subscribe((result: any) => {
-        this.tickets$ = result;
-        this.cdr.markForCheck();
-      });
-
-  }
-
-
+    
   addTicket() {
     this.dialogRef = this.dialog.open(TicketAddDialogComponent, {
       disableClose: false,
@@ -86,8 +74,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 
     this.dialogRefView.afterClosed().subscribe(result => {
-
-
+      this.dialogRefView = null;
+      this.cdr.detectChanges();
     });
   }
 

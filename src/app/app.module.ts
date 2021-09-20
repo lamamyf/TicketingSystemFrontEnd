@@ -24,7 +24,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatRadioModule} from '@angular/material/radio';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {RouterExtService} from './services/RouterExtService.service';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
@@ -64,7 +64,9 @@ function appInitializer(authService: AuthService) {
     MatRadioModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatSliderModule, MatSlideToggleModule
+    MatSliderModule, 
+    MatSlideToggleModule,
+    FormsModule
   ],
   providers: [
     {

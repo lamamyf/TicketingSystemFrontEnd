@@ -69,7 +69,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
     this.dialogRefAvatar.afterClosed().subscribe(result => {
       this.dialogRefAvatar = null;
 
-      this.cdr.detectChanges()
+      this.cdr.detectChanges();
 
       //location.reload();
     });

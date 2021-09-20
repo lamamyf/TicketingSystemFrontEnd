@@ -6,10 +6,6 @@
 
 
             <div class="grid-container" *ngFor="let ticket of tickets$ | async">
-
-
-
-
                 <span (click)="ViewTicket(ticket)">
                     <div class="grid-item">
                         <p class="ticketTextSubject">
@@ -25,19 +21,11 @@
 
                         <p *ngIf="ticket.status === 'CLOSED'" class="ticketTextStatus" style="color: #1111F5;">
                             مغلقة </p>
-
-
-
                         <p class="ticketTextCreatedDate">
                             {{ticket.createdDate}} </p>
-
-
-
                     </div>
 
                 </span>
-
-
             </div>
 
 

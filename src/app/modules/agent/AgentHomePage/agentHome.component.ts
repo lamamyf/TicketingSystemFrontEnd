@@ -1,28 +1,15 @@
-import {ChangeDetectorRef, Component, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
-import {ChartComponent} from 'ng-apexcharts';
-
-import {
-  ApexNonAxisChartSeries,
-  ApexResponsive,
-  ApexChart
-} from 'ng-apexcharts';
-import {ActivatedRoute, Router} from '@angular/router';
-import {AuthService, UserModel} from '../../auth';
-import {ApiService} from '../../../services/api.service';
-import { TicketModel } from 'src/app/models/ticket.model';
-
-//changed
+import { DetailedTicket } from './../../../models/detailedTicket';
+import { AgentService } from './../services/agent.service';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { AuthService, UserModel } from '../../auth';
 import { MatDialogRef } from '@angular/material/dialog';
-import { MatDialog, MatDialogModule, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { TicketViewDialogComponent } from '../../shared/TicketViewDialog/TicketViewDialog';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { TicketModel } from 'src/app/models/ticket.model';
+import { switchMap } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
-export type ChartOptions = {
-  series: ApexNonAxisChartSeries;
-  chart: ApexChart;
-  responsive: ApexResponsive[];
-  colors: any;
-  labels: any;
-};
 
 @Component({
   selector: 'app-dashboard',
@@ -30,260 +17,49 @@ export type ChartOptions = {
   styleUrls: ['./agentHome.component.scss']
 })
 export class AgentHomePageComponent implements OnInit {
-
   dialogRefView: MatDialogRef<TicketViewDialogComponent>;
-
-  ticket: TicketModel;
   @Input() widgetHeight = '150px';
   @Input() widgetWidth = '400px';
-  public chartOptions: Partial<ChartOptions>;
-  @ViewChild('chart', { static: false }) chart: ChartComponent;
   currentUser: UserModel;
-  activeTabId:
-      | 'topbar_systemStatus'
-      | 'topbar_systemType'
-      | 'topbar_lockStatus' = 'topbar_systemStatus';
-  totalUsers;
-  totalResults;
-  totalAndroid;
-  totalIOS;
-  totalSecured;
-  totalUnsecured;
-  totalLocked;
-  totalUnlocked;
-  id: any;
-
-
-
-
-
+  tickets$: Observable<DetailedTicket>;
+  refetchTickets$: BehaviorSubject<boolean> = new BehaviorSubject(true);
   constructor(
-      private router: Router,
-      public dialog: MatDialog,
-
-      private authenticationService: AuthService,
-      private apiService: ApiService,
-      private cdr: ChangeDetectorRef,
-      private Router: ActivatedRoute,
-
+    public dialog: MatDialog,
+    private authenticationService: AuthService,
+    private agentService: AgentService,
+    private cdr: ChangeDetectorRef,
+    private snackBar: MatSnackBar,
   ) {
-  //  this.loadData();
-    this.chartOptions = {
-      colors: ['#84DCC6', '#FF686B'],
-      series: [],
-      chart: {
-        width: 550,
-        type: 'pie',
-      },
-      labels: [],
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200
-            },
-            legend: {
-              position: 'bottom'
-            },
-          }
-        }
-      ],
-    };
-    this.chartOpt([12, 22], [' آمن', ' غير آمن']);
-
     this.authenticationService.currentUser$.subscribe(x => this.currentUser = x);
-
   }
 
   ngOnInit(): void {
-
-
-  
-
-
-  }
-
-  setActiveTabId(tabId) {
-    this.activeTabId = tabId;
-    if (tabId === 'topbar_systemStatus') {
-      this.chartOpt([12, 22], [' آمن', ' غير آمن']);
-    }
-    else if (tabId === 'topbar_systemType') {
-      this.chartOpt([33, 44], [' جهاز Android', ' جهاز IOS']);
-    }
-    else {
-      this.chartOpt([12, 42], [' يوجد قفل', ' لا يوجد قفل']);
-    }
-
-  }
-
-  getActiveCSSClasses(tabId) {
-    if (tabId !== this.activeTabId) {
-      return '';
-    }
-    return 'active show';
-  }
-
-  loadData(): void {
-    this.apiService
-        .getDashboardData()
-        .subscribe((results: any) => {
-          this.totalResults = results.totalResults;
-          this.totalUsers = results.totalUsers;
-          this.totalAndroid = results.totalAndroid;
-          this.totalIOS = results.totalIOS;
-          this.totalSecured = results.totalSecuredDevice;
-          this.totalUnsecured = results.totalUnsecuredDevice;
-          this.totalLocked = results.totalLocked;
-          this.totalUnlocked = results.totalUnlocked;
-          this.chartOpt([this.totalSecured, this.totalUnsecured], [' آمن', ' غير آمن']);
-          this.cdr.markForCheck();
-        });
-
+    this.tickets$ = this.refetchTickets$.pipe(
+      switchMap(
+        _ => this.agentService
+          .getTickets()
+      )
+    );
   }
 
 
-
-
-  getAllTickets() : TicketModel []  {
-    let tickets: TicketModel[] = [];
-    console.log(tickets);
-    return tickets;
-
- 
-    //dummy data
-  // let tickets: TicketModel[] = [
-
-  //     {
-  //     id: 1,
-  //     userId: 1,
-  //     userFirstName: "wwww",
-  //     userLastName: "xx",
-  //     subject: "١طلب",
-  //     description: "احتياج ادوات ونقص وطلب",
-  //     status: "Received",
-  //     category: "شكوى",
-  //     createdDate: "11-11-2021",
-
-  //   },
-  //   {
-  //     id: 1,
-  //     userId: 1,
-  //     userFirstName: "nouf",
-  //     userLastName: "aljufair",
-  //     subject: "٢طلب",
-  //     description: "وصف للمشكلة",
-  //     status: "Closed",
-  //     category: "شكوى",
-  //     createdDate: "11-11-2021",
-
-  //   },
-  //   {
-  //     id: 1,
-  //     userId: 1,
-  //     userFirstName: "qqqq",
-  //     userLastName: "sss",
-  //     subject: "٣طلب",
-  //     description: "مدري",
-  //     status: "Pending",
-  //     category: "شكوى",
-  //     createdDate: "11-11-2021",
-
-  //   },
-  //   {
-  //     id: 1,
-  //     userId: 1,
-  //     userFirstName: "nouf",
-  //     userLastName: "sslslsl",
-  //     subject: "٤طلب",
-  //     description: "سيكيورتي بريتش",
-  //     status: "Received",
-  //     category: "اقتراح",
-  //     createdDate: "11-11-2021",
-
-  //   },  {
-  //     id: 1,
-  //     userId: 1,
-  //     userFirstName: "slslls",
-  //     userLastName: "aljufair",
-  //     subject: "٥طلب",
-  //     description: "نقص ادوات",
-  //     status: "Pending",
-  //     category: "اخرى",
-  //     createdDate: "11-11-2021",
-
-  //   },
-  //   {
-  //     id: 2,
-  //     userId: 2,
-  //     userFirstName: "aaaaa",
-
-  //     userLastName: "aljufair",
-  //     subject: "٦طلب",
-  //     description: "اسستم خربان",
-  //     status: "Closed",
-  //     category: "اقتراح",
-  //     createdDate: "11-11-2021",
-
-  //   }
-  //  ];
-
-
-   //return tickets;
-}
-
-
-
-
-
-
-ViewTicket(){
-
-  this.dialogRefView = this.dialog.open(TicketViewDialogComponent, {
-    disableClose: false,
-    width: '400px',
-    height: '550px'
-});
-
-
- this.dialogRefView.afterClosed().subscribe(result => {
- 
-   
-});
-}
-
-
-
-
-
-
-  chartOpt(chartSeries, chartLabels): void {
-
-    this.chartOptions = {
-      colors: ['#84DCC6', '#FF686B'],
-      series: chartSeries,
-      chart: {
-        width: 550,
-        type: 'pie',
-      },
-      labels: chartLabels,
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200
-            },
-            legend: {
-              position: 'bottom'
-            },
-          }
-        }
-      ],
-    };
+  ViewTicket(ticket: TicketModel) {
+    this.dialogRefView = this.dialog.open(TicketViewDialogComponent, {
+      disableClose: false,
+      width: '400px',
+      height: '550px',
+      data: { id: ticket.id }
+    });
+    this.dialogRefView.afterClosed().subscribe(result => {
+      if(result){
+        this.refetchTickets$.next(true);
+        this.snackBar.open('تم تحديث حالة الطلب بنجاح', '', {
+          duration: 2500
+        })
+      }
+      
+      this.dialogRefView = null;
+      this.cdr.detectChanges();
+    });
   }
-
-
-
 }
