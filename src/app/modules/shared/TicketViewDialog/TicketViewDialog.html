@@ -19,6 +19,13 @@
         <label class="font-size-h8 font-weight-bolder text-dark pt-5"> حالة التذكرة:</label>
         <br>
         <div *ngIf="getUserType()==='ADMIN'">
+<p>اسم المستخدم:</p>
+          <p class="userName">
+            {{ticket.userFirstName}} </p> 
+            <p class="userName">
+                {{ticket.userLastName}} </p> 
+
+
           <select  [(ngModel)]="updatedTicketStatus"  class="form-control form-control-solid h-auto py-24 px-6 rounded-lg" name="status">
             <option selected="selected" value="RECEIVED">تم الاستلام</option>
             <option value="PENDING">معلقة</option>
