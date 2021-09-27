@@ -4,7 +4,6 @@ import { map, catchError, switchMap, finalize, tap } from 'rxjs/operators';
 import { UserModel } from '../../../models/user.model';
 import { AuthModel } from '../../../models/auth.model';
 import { AuthHTTPService } from './auth-http';
-import { } from '../../../services/api.service';
 import { environment } from 'src/environments/environment';
 
 

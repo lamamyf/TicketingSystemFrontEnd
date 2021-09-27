@@ -17,7 +17,9 @@ export class AuthorizationGuard implements CanActivate {
     if(currentUser){
       if(currentUser.userRole === route.data.role)
         return true;
-      return false; //redircte to frbbden or do sth
+
+      this.router.navigateByUrl(this.router.url);
+      return false;
     }
 
     this.router.navigate(['/auth']);
