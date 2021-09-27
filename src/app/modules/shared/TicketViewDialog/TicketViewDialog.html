@@ -7,6 +7,17 @@
   <h3 md-dialog-title style="font-size: 25px;">
     {{ticket.subject}}
   </h3>
+
+
+  <div *ngIf="getUserType()==='ADMIN'">
+    <h3 md-dialog-title style="font-size: 25px;">اسم المستخدم:</h3>
+              <p md-dialog-title style="font-size: 25px;">
+                {{ticket.userFirstName}} </p> 
+                <p md-dialog-title style="font-size: 25px;" >
+                    {{ticket.userLastName}} </p> 
+                  </div>
+
+
   <div mat-dialog-content class="mt-4 font-size-h6">
     <div>
       <div>
@@ -19,11 +30,7 @@
         <label class="font-size-h8 font-weight-bolder text-dark pt-5"> حالة التذكرة:</label>
         <br>
         <div *ngIf="getUserType()==='ADMIN'">
-<p>اسم المستخدم:</p>
-          <p class="userName">
-            {{ticket.userFirstName}} </p> 
-            <p class="userName">
-                {{ticket.userLastName}} </p> 
+
 
 
           <select  [(ngModel)]="updatedTicketStatus"  class="form-control form-control-solid h-auto py-24 px-6 rounded-lg" name="status">
