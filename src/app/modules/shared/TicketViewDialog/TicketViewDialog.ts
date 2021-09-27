@@ -7,6 +7,7 @@ import { TicketModel } from 'src/app/models/ticket.model';
 import { AuthService } from '../../auth';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AgentService } from '../../agent/services/agent.service';
+import { DetailedTicket } from 'src/app/models/detailedTicket';
 @Component({
   selector: 'app-TicketViewdialog',
   templateUrl: './TicketViewDialog.html',
@@ -14,7 +15,7 @@ import { AgentService } from '../../agent/services/agent.service';
 })
 export class TicketViewDialogComponent implements OnInit, OnDestroy {
   private unsubscribe: Subscription[] = [];
-  ticket: TicketModel;
+  ticket: DetailedTicket;
   updatedTicketStatus;
   constructor(public dialogRef:
     MatDialogRef<TicketViewDialogComponent>,
