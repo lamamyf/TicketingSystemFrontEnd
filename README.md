@@ -1,5 +1,8 @@
 # Ticketing System Front-end
+This is a **RESTful Clinet** for a **Ticketing System** developed using **Angular*. It enables clients to submit various types of tickets and allows agents to receive those tickets and resolve them.
 
+[**RESTful Web Service (Back-end)**](https://github.com/lamamyf/TicketingSystem)
+---
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
