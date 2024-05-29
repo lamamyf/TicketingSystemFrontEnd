@@ -1,5 +1,5 @@
 # Ticketing System Front-end
-This is a **REST Clinet** for a **Ticketing System** developed using **Angular*. It enables clients to submit various types of tickets and allows agents to receive those tickets and resolve them.
+This is a **REST Clinet** for a **Ticketing System** developed using **Angular**. It enables clients to submit various types of tickets and allows agents to receive those tickets and resolve them.
 
 [**RESTful Web Service (Back-end)**](https://github.com/lamamyf/TicketingSystem)
 ---
